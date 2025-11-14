@@ -5,5 +5,8 @@
     "imports": {
         "#lib/*": "./lib/*",
         "#src/*": "./src/*"
+    },
+    "dependencies": {
+        "jsdom": "^27.2.0"
     }
 }
