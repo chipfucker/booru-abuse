@@ -1,7 +1,9 @@
 {
     "name": "booru-abuse",
     "description": "An expansive class API for boorus",
+    "version": "0.0.1",
     "types": "./doc/index.d.ts",
+    "type": "module",
     "imports": {
         "#lib/*": "./lib/*",
         "#src/*": "./src/*"
