@@ -76,27 +76,26 @@ import { Rule34 } from "booru-abuse";
 ### Syntax
 
 ```js
-new Rule34(config)
+new Rule34({ user_id, api_key })
+new Rule34({ user_id, api_key, pass_hash })
+new Rule34({ user_id, api_key, config })
+new Rule34({ user_id, api_key, pass_hash, config })
 ```
 
 #### Parameters
+  
+- `user_id`
+
+  The numeric [`user_id`](#rule34prototypeuser_id) link parameter and header to use with API and POST requests respectively. This is currently mandatory.
+
+- `api_key`
+  
+  The string [`api_key`](#rule34prototypeapi_key) link parameter to use with API requests. This is currently mandatory.
+
+- `pass_hash`
+
+  The `pass_hash` header to use with POST requests. This property is optional.
 
 - `config`
   
-  An object containing credentials and configuration.
-  
-  - `user_id`
-
-    The numeric [`user_id`](#rule34prototypeuser_id) link parameter and header to use with API and POST requests respectively. This is currently mandatory.
-
-  - `api_key`
-    
-    The string [`api_key`](#rule34prototypeapi_key) link parameter to use with API requests. This is currently mandatory.
-  
-  - `pass_hash`
-
-    The `pass_hash` header to use with POST requests. This property is optional.
-  
-  - `config`
-    
-    
+  An object that sets up custom configurations
