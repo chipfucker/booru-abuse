@@ -12,42 +12,63 @@ This package's namesake comes from the usage of Rule34's APIs and frontends&mdas
 
 ### Static properties
 
-- [`Rule34.PostRating`](./PostRating)
+- [`Rule34.PostRating`](#rule34postrating)
 
   Enum for post content ratings.
 
-- [`Rule34.PostStatus`](./PostStatus)
+- [`Rule34.PostStatus`](#rule34poststatus)
   
   Enum for post publicity statuses.
 
-- [`Rule34.TagType`](./TagType)
+- [`Rule34.TagType`](#rule34tagtype)
 
   Enum for tag categories.
 
 ### Instance properties
 
-- [`Rule34.api_key`](./api_key)
+- [`Rule34.api_key`](#rule34prototypeapi_key)
 
   The `api_key` property initialized for this instance, or `undefined` if unset.
 
-- [`Rule34.user_id`](./user_id)
+- [`Rule34.user_id`](#rule34prototypeuser_id)
   
   The `user_id` property initialized for this instance, or `undefined` if unset.
 
-- [`Rule34.pass_hash`](./pass_hash)
+- [`Rule34.pass_hash`](#rule34prototypepass_hash)
 
   The `pass_hash` property initialized for this instance, or `undefined` if unset.
 
 ### Instance methods
 
-- [`Rule34.getPost()`](./getPost)
+- [`Rule34.getPost()`](#rule34prototypegetPost)
 
   Fetches a post by its ID or by the first result of a query.
 
-- [`Rule34.search()`](./search)
+- [`Rule34.search()`](#rule34prototypesearch)
 
   Fetches multiple results of a query and/or conditions.
 
-## Rule34 Constructor
+### Examples
 
-test
+<!-- examples -->
+
+## Rule34() constructor
+
+The `Rule34()` constructor creates a [`Rule34`](#) instance that allows accessing the content of rule34.xxx.
+
+### Import
+
+```js
+import { Rule34 } from "booru-abuse";
+```
+
+### Syntax
+
+```js
+new Rule34(config)
+```
+
+#### Parameters
+
+- `config`
+  An object with three optional properties: [`api_key`](#rule34prototypeapi_key), [`user_id`](#rule34prototypeuser_id), and [`pass_hash`](#rule34prototypepass_hash).
