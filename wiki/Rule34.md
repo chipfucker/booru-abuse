@@ -4,13 +4,13 @@ This package's namesake comes from the usage of Rule34's APIs and frontends&mdas
 
 ## Table of contents
 
-### Constructor
+#### Constructor
 
 - [`Rule34()`](#rule34-constructor)
   
   Creates a new `Rule34` object.
 
-### Static properties
+#### Static properties
 
 - [`Rule34.PostRating`](#rule34postrating)
 
@@ -24,7 +24,7 @@ This package's namesake comes from the usage of Rule34's APIs and frontends&mdas
 
   Enum for tag categories.
 
-### Instance properties
+#### Instance properties
 
 - [`Rule34.api_key`](#rule34prototypeapi_key)
 
@@ -38,7 +38,7 @@ This package's namesake comes from the usage of Rule34's APIs and frontends&mdas
 
   The `pass_hash` property initialized for this instance, or `undefined` if unset.
 
-### Instance methods
+#### Instance methods
 
 - [`Rule34.getPost()`](#rule34prototypegetPost)
 
