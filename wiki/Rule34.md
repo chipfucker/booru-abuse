@@ -26,13 +26,13 @@ This package's namesake comes from the usage of Rule34's APIs and frontends&mdas
 
 ### Instance properties
 
-- [`Rule34.api_key`](#rule34prototypeapi_key)
-
-  The `api_key` property initialized for this instance, or `undefined` if unset.
-
 - [`Rule34.user_id`](#rule34prototypeuser_id)
   
   The `user_id` property initialized for this instance, or `undefined` if unset.
+
+- [`Rule34.api_key`](#rule34prototypeapi_key)
+
+  The `api_key` property initialized for this instance, or `undefined` if unset.
 
 - [`Rule34.pass_hash`](#rule34prototypepass_hash)
 
@@ -82,4 +82,21 @@ new Rule34(config)
 #### Parameters
 
 - `config`
-  An object with three optional properties: [`api_key`](#rule34prototypeapi_key), [`user_id`](#rule34prototypeuser_id), and [`pass_hash`](#rule34prototypepass_hash).
+  
+  An object containing credentials and configuration.
+  
+  - `user_id`
+
+    The numeric [`user_id`](#rule34prototypeuser_id) link parameter and header to use with API and POST requests respectively. This is currently mandatory.
+
+  - `api_key`
+    
+    The string [`api_key`](#rule34prototypeapi_key) link parameter to use with API requests. This is currently mandatory.
+  
+  - `pass_hash`
+
+    The `pass_hash` header to use with POST requests. This property is optional.
+  
+  - `config`
+    
+    
