@@ -1,1 +1,1 @@
-export * as Rule34 from "./booru/rule34.xxx/index.d.mts";
+export * as Rule34 from "./booru/rule34/index.d.mts";
