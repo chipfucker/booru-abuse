@@ -130,9 +130,4 @@ Rule34.setCredentials({ user_id, api_key, pass_hash?, config? })
 
 #### Return value
 
-When called via `new`, the `Rule34` constructor returns a Rule34 client with methods to access data from rule34.xxx.
-
-### Description
-
-> [!NOTE]
-> description go here
+None ([`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
