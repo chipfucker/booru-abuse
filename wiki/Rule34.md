@@ -46,7 +46,7 @@ const post = await Rule34.getPost(5823623);
 
 - [`setCredentials()`](#rule34setcredentials)
 
-  Sets the cretentials to use with requests.
+  Sets the cretentials to use for requests.
 
 - [`getPost()`](#rule34getpost)
 
