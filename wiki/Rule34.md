@@ -2,6 +2,37 @@ Rule34 has a very stubborn API, as it doesn't provide all the info a developer m
 
 This package's namesake comes from the usage of Rule34's APIs and frontends&mdash;a lot of requests (usually about 2&ndash;4) are made when most of the functions are used.
 
+### Description
+
+Traditionally, one would simply fetch from Rule34 using its API URLs.
+
+```js
+const post = await fetch(
+  "https://api.rule34.xxx/"
+  + "?page=dapi&s=post&q=index&json=1&api_key=123abc&user_id=123456"
+  + "&id=5823623"
+);
+console.log(post[0].creator);
+```
+
+All the info, even credentials, is to be provided in the URL's search parameters. There are usually _many_ keys, some with lengthy values, some unnecessary&mdash;static, but mandatory for the request&mdash;which makes organizing request info difficult.
+
+Each key has a different function. To name the few in the above example:
+
+- `page`: Whether the response is from the API.
+- `s`: What kind of data to return.
+- `q`: Always `index`.
+- `json`: Whether to return results as JSON.
+- `api_key`: Allows access to the API.
+- `user_id`: Associates the request with a user on the site.
+- `id`: The ID of the requested post.
+
+The reliance on URLs for requests, especially credentials, make request organization difficult. The common solution is to dynamically create links with a function.
+
+Even with the length of the URLs, the API isn't reliable; each of the different return types have some exclusive info, and none return some additional info the frontend displays.
+
+This package intends to solve that, simplifying request parameters and allowing initialization of other consistent parameters.
+
 ## Table of contents
 
 ### Constructor
@@ -77,10 +108,13 @@ import { Rule34 } from "booru-abuse";
 
 ```js
 new Rule34({ user_id, api_key })
-new Rule34({ user_id, api_key, pass_hash })
 new Rule34({ user_id, api_key, config })
+new Rule34({ user_id, api_key, pass_hash })
 new Rule34({ user_id, api_key, pass_hash, config })
 ```
+
+> [!NOTE]
+> `Rule34()` can only be called with [`new`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new). Attempting to call it without `new` throws a [`TypeError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError).
 
 #### Parameters
 
@@ -94,8 +128,17 @@ new Rule34({ user_id, api_key, pass_hash, config })
 
 - `pass_hash`
 
-  The `pass_hash` header to use with POST requests. This property is optional.
+  The [`pass_hash`](#rule34prototypepass_hash) header to use with POST requests. This property is optional.
 
 - `config`
   
   An object that sets up custom configurations applied when sending requests.
+
+#### Return value
+
+When called via `new`, the `Rule34` constructor returns a Rule34 client with methods to access data from rule34.xxx.
+
+### Description
+
+> [!NOTE]
+> description go here

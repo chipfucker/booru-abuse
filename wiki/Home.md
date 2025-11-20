@@ -1,7 +1,9 @@
 Booru Abuse _(abbreviation suggestions requested&mdash;my personal submission is 'BBUSE')_ is an NPM package intent on fleshing out what could be the REST API of each applied booru or imageboard.
 
 > [!NOTE]
-> Currently, anything and probably everything on this wiki is merely conceptualized. Things you find may be inaccurate or yet to be tangible.
+> This is currently my form of 'concept art.' I'm only writing down how I want things to work here, not necessarily how they _do_ work _now._
+> 
+> That means currently, anything and probably everything on this wiki is merely conceptualized. Things you find may be inaccurate or yet to be tangible.
 
 ## Features
 
