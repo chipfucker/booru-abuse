@@ -56,7 +56,7 @@ const post = await Rule34.getPost(5823623);
 
 Because APIs and frontends have very differing info, multiple requests are made&mdash;typically 2&ndash;4&mdash;per function to resolve all possible info. This makes the package's namesake.
 
-This can have network and API usage limit implications.
+This can have network and API usage limit implications. Each documented function that uses requests will clarify its request usage.
 
 <!-- TODO: display average data size of multiple requests -->
 <!-- TODO: display default API key usage allowance -->
@@ -105,7 +105,7 @@ console.log(post.creator.name);
 // Logs "grovyleslut"
 ```
 
-This example fetches multiple results, selects the fourth one, and logs whether its explicit.
+This example fetches multiple results, selects the fourth one, and logs whether it's explicit.
 
 ```js
 Rule34.search("zoologist_(terraria)")
