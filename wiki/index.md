@@ -3,7 +3,7 @@ Booru Abuse _(abbreviation suggestions requested&mdash;my personal submission is
 > [!NOTE]
 > This is currently my form of 'concept art.' I'm only writing down how I want things to work here, not necessarily how they _do_ work _now._
 > 
-> That means currently, anything and probably everything on this wiki is merely conceptualized. Things you find may be inaccurate or yet to be tangible.
+> That means currently, anything and probably everything on this wiki is merely conceptualized. Things you find may be inaccurate or yet to be tangible. It will be announced when a release is available.
 
 ## Features
 
