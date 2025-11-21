@@ -1,6 +1,6 @@
 ---
 title: Rule34
-description: booru-abuse module
+description: booru-abuse
 tagline: If it exists, there is porn of it.
 ---
 
@@ -9,42 +9,10 @@ Rule34 is a module for accessing content from [rule34.xxx](https://rule34.xxx/).
 # Table of contents
 
 - [Description](#description)
-
 - [Examples](#examples)
-
-## Functions
-
-- [`setCredentials()`](#rule34setcredentials)
-
-  Sets the cretentials to use for requests.
-
-- [`getPost()`](#rule34getpost)
-
-  Fetches a post by its ID or by the first result of a query.
-
-- [`search()`](#rule34search)
-
-  Fetches multiple results of a query and/or conditions.
-
-## Enumerables
-
-- [`PostRating`](#rule34postrating)
-
-  Enum for post content ratings.
-
-- [`PostStatus`](#rule34poststatus)
-  
-  Enum for post publicity statuses.
-
-- [`TagType`](#rule34tagtype)
-
-  Enum for tag categories.
-
-## Objects
-
-- [`Rule34Post`](#rule34post)
-  
-  Post from rule34.xxx.
+- [Functions](#functions)
+- [Enumerables](#enumerables)
+- [Objects](#objects)
 
 # Description
 
@@ -93,12 +61,46 @@ This can have network and API usage limit implications.
 <!-- TODO: display average data size of multiple requests -->
 <!-- TODO: display default API key usage allowance -->
 
+## Functions
+
+- [`setCredentials()`](./setCredentials)
+
+  Sets the cretentials to use for requests.
+
+- [`getPost()`](./getPost)
+
+  Fetches a post by its ID or by the first result of a query.
+
+- [`search()`](./search)
+
+  Fetches multiple results of a query and/or conditions.
+
+## Enumerables
+
+- [`PostRating`](./PostRating)
+
+  Enum for post content ratings.
+
+- [`PostStatus`](./PostStatus)
+  
+  Enum for post publicity statuses.
+
+- [`TagType`](./TagType)
+
+  Enum for tag categories.
+
+## Objects
+
+- [`Rule34Post`](./Rule34Post)
+  
+  Post from rule34.xxx.
+
 # Examples
 
 In this example, the post at ID '5823623' is fetched and the username of its creator is logged.
 
 ```js
-const post = Rule34.getPost(5823623);
+const post = await Rule34.getPost(5823623);
 console.log(post.creator.name);
 // Logs "grovyleslut"
 ```
@@ -114,37 +116,3 @@ Rule34.search("zoologist_(terraria)")
   }
 });
 ```
-
-# Functions
-
-## Rule34.setCredentials()
-
-The `setCredentials()` function applies the configured credentials to future requests.
-
-### Syntax
-
-```ts
-Rule34.setCredentials({ user_id, api_key, pass_hash?, config? })
-```
-
-#### Parameters
-
-- `user_id`
-
-  The numeric [`user_id`](#rule34prototypeuser_id) link parameter and header to use with API and POST requests respectively. This is currently mandatory.
-
-- `api_key`
-  
-  The string [`api_key`](#rule34prototypeapi_key) link parameter to use with API requests. This is currently mandatory.
-
-- `pass_hash`
-
-  The [`pass_hash`](#rule34prototypepass_hash) header to use with POST requests. This property is optional.
-
-- `config`
-  
-  An object that sets up custom configurations applied when sending requests.
-
-#### Return value
-
-None ([`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
