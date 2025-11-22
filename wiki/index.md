@@ -1,3 +1,8 @@
+---
+title: Home
+description: booru-abuse description
+---
+
 Booru Abuse _(abbreviation suggestions requested&mdash;my personal submission is 'BBUSE')_ is an NPM package intent on fleshing out what could be the REST API of each applied booru or imageboard.
 
 > [!NOTE]
