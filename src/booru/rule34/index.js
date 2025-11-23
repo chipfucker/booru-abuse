@@ -1,5 +1,4 @@
 import { JSDOM } from "jsdom";
-import { url } from "#lib/url.js";
 
 export * from "./enum.js";
 
