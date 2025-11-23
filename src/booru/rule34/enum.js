@@ -1,16 +1,24 @@
 import Enum from "#lib/enum.js";
 
-export let PostRating = Enum([ "Safe", "Questionable", "Explicit" ])
+export let PostRating = Enum([
+    "SAFE",
+    "QUESTIONABLE",
+    "EXPLICIT"
+])
     .freeze();
-export let PostStatus = Enum([ "Active", "Flagged", "Deleted" ])
+export let PostStatus = Enum([
+    "ACTIVE",
+    "FLAGGED",
+    "DELETED"
+])
     .freeze();
 
 export let TagType = Enum([
-    "Copyright",
-    "Character",
-    "Artist",
-    "General",
-    "Metadata",
-    "Null"
+    "COPYRIGHT",
+    "CHARACTER",
+    "ARTIST",
+    "GENERAL",
+    "METADATA",
+    "NULL"
 ])
     .freeze();
