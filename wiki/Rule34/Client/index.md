@@ -3,7 +3,7 @@ title: Rule34.Client
 description: booru-abuse Rule34 client
 ---
 
-The `Client` object allows access to content on the site. It must be initialized with the proper credentials to function.
+The `Client` object allows access to content on the site. It must be created with the proper credentials to function.
 
 # Description
 
@@ -13,21 +13,21 @@ The `Client` object allows access to content on the site. It must be initialized
 
 # Constructor
 
-```ts
-new Rule34.Client({
-    auth: {}
-})
-```
-<!-- TODO -->
-
 ## Syntax
 
 ```ts
-Rule34.setCredentials({
-  user_id: number | string,
-  api_key: string,
-  pass_hash?: string,
-  config?: {}
+new Rule34.Client({
+  auth: {
+    username: string,
+    password: string
+  } | {
+    user_id: number | string,
+    pass_hash: string,
+    api_key: string
+  },
+  config?: {
+    exposeCredentials: boolean
+  }
 })
 ```
 
