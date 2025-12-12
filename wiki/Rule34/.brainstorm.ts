@@ -1,4 +1,5 @@
-//#region class Client
+//#region class
+
 declare class Client {
     async constructor({ auth, config }: {
         auth: Authentication
@@ -11,9 +12,10 @@ declare class Client {
         username: string
         password: string
     }): Authentication
+    
+    getPost(id: number | string): Promise<Post|null> // TODO: https://reddit.com/r/typescript/comments/1h7g91b
+    search(options: SearchOptions): Promise<Post[]>
 }
-
-//#region class
 
 declare class Post {
     file: PostFile & {
@@ -33,10 +35,7 @@ declare class Post {
     rating: PostRating
     status: PostStatus
 
-    creator: { // TODO: better property name?
-        name: string
-        id: number
-    }
+    author: User // TODO: better property name?
     updatedAt: Date
     createdAt: Date
 
@@ -44,11 +43,17 @@ declare class Post {
     notes?: PostNote[]
 
     getComments(): Promise<PostComment[]>
-    tags: PostTag[] & { pre: string } // TODO: better property name (pre)?
+    tags: PostTag[] & { getText(): string } // TODO: better property name (text)?
 
     // The following should throw an error if post's owner isn't client
-    comment(options: { auth?: Authentication, body: string }): Promise<PostComment>
-    edit(options: { auth?: Authentication }): Promise<Post> // TODO
+    comment({ auth, body }: { auth?: Authentication, body: string }): Promise<PostComment>
+    edit({ auth, options }: { auth?: Authentication, options: any }): Promise<Post> // TODO
+    delete({ auth }: { auth?: Authentication }): Promise<void>
+}
+
+declare class User {
+    name: string
+    id: number
 }
 
 //#endregion
@@ -63,16 +68,37 @@ declare interface Authentication {
 
 declare interface PostFile {
     url: string
-    width: number
-    height: number
+    size: [ number, number ]
 }
 
+// TODO
 declare interface PostNote {
-
+    area: [[ number, number ], [ number, number ]]
+    content: string
 }
 
+// TODO
 declare interface PostComment {
+    author: User
+    content: string
+    id: number
+}
 
+declare interface PostTag {
+    name: string
+    posts: number
+    type: TagType
+}
+
+//#endregion
+
+//#region type
+
+declare type PostTags = string | string[] | PostTag | PostTag[]
+
+declare type PostOptions = PostTags | {
+    query: PostTags
+    vanilla: boolean
 }
 
 //#endregion
@@ -91,7 +117,7 @@ declare enum PostStatus {
     Deleted
 }
 
-declare enum TagType {
+declare enum PostTagType {
     Copyright,
     Character,
     Artist,
