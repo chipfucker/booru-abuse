@@ -4,7 +4,7 @@ declare class Client {
     async constructor({ auth, config }: {
         auth: Authentication
         config?: {
-            coorsVirtue: boolean // browser compatibility?
+            coorsVirtue: boolean
         }
     })
 
@@ -13,8 +13,10 @@ declare class Client {
         password: string
     }): Authentication
     
-    getPost(id: number | string): Promise<Post|null> // TODO: https://reddit.com/r/typescript/comments/1h7g91b
-    search(options: SearchOptions): Promise<Post[]>
+    getPost(id: ID): Promise<Post|null>
+    search(query: string): Promise<Post[]>
+    relevantTags(query: string)
+    autocomplete(query: string): Promise<PostTag[] | Omit<PostTag, "type">[]>
 }
 
 declare class Post {
@@ -25,7 +27,7 @@ declare class Post {
         thumbnail: PostFile
         directory: number
         hash: string
-        mimetype: string
+        extension: string
     }
 
     id: number
@@ -36,14 +38,14 @@ declare class Post {
     status: PostStatus
 
     author: User // TODO: better property name?
-    updatedAt: Date
     createdAt: Date
+    updatedAt: Date
 
     source: string
-    notes?: PostNote[]
+    notes: PostNote[]
 
     getComments(): Promise<PostComment[]>
-    tags: PostTag[] & { getText(): string } // TODO: better property name (text)?
+    tags: PostTag[] & { getText(): string }
 
     // The following should throw an error if post's owner isn't client
     comment({ auth, body }: { auth?: Authentication, body: string }): Promise<PostComment>
@@ -68,12 +70,15 @@ declare interface Authentication {
 
 declare interface PostFile {
     url: string
-    size: [ number, number ]
+    size: [ width: number, height: number ]
 }
 
 // TODO
 declare interface PostNote {
-    area: [[ number, number ], [ number, number ]]
+    area: [
+        position: [ x: number, y: number ],
+        size: [ width: number, height: number ]
+    ]
     content: string
 }
 
@@ -94,12 +99,7 @@ declare interface PostTag {
 
 //#region type
 
-declare type PostTags = string | string[] | PostTag | PostTag[]
-
-declare type PostOptions = PostTags | {
-    query: PostTags
-    vanilla: boolean
-}
+declare type ID = number | `${number}`
 
 //#endregion
 
