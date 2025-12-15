@@ -13,10 +13,13 @@ declare class Client {
         password: string
     }): Authentication
     
-    getPost(id: ID): Promise<Post|null>
-    search(query: string): Promise<Post[]>
-    relevantTags(query: string)
     autocomplete(query: string): Promise<PostTag[] | Omit<PostTag, "type">[]>
+    getPost(id: ID): Promise<Post | null> // TODO: what is a 'change id'
+    search(options: string | SearchOptions): Promise<Post[]>
+    getRelevantTags(options: Omit<SearchOptions, "perPage">): Promise<PostTag[]>
+    getTags(options: any): Promise<PostTag[]> // TODO
+    getTag(id: ID): Promise<PostTag | null>
+    getComments(postId?: ID): Promise<PostComment[]>
 }
 
 declare class Post {
@@ -32,6 +35,7 @@ declare class Post {
 
     id: number
     parent?: number
+    children: number[]
     score: number
 
     rating: PostRating
@@ -40,6 +44,7 @@ declare class Post {
     author: User // TODO: better property name?
     createdAt: Date
     updatedAt: Date
+    getChanges(): Promise<PostChange[]>
 
     source: string
     notes: PostNote[]
@@ -68,6 +73,15 @@ declare interface Authentication {
     api_key: string
 }
 
+declare interface SearchOptions {
+    query?: string
+    perPage?: number
+    page?: number
+    offset?: number
+    deleted?: boolean
+    earliestDeletedID?: ID
+}
+
 declare interface PostFile {
     url: string
     size: [ width: number, height: number ]
@@ -87,12 +101,24 @@ declare interface PostComment {
     author: User
     content: string
     id: number
+    postId: number
 }
 
 declare interface PostTag {
     name: string
     posts: number
-    type: TagType
+    type: PostTagType
+}
+
+declare interface PostChange {
+    date: Date
+    diff: {
+        tags: {
+            add: string[]
+            remove: string[]
+        }
+    }
+    state: Post
 }
 
 //#endregion
