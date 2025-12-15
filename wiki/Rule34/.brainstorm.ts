@@ -7,15 +7,10 @@ declare class Client {
             coorsVirtue: boolean
         }
     })
-
-    static getAuth(credentials: {
-        username: string
-        password: string
-    }): Authentication
     
     autocomplete(query: string): Promise<PostTag[] | Omit<PostTag, "type">[]>
-    getPost(id: ID): Promise<Post | null> // TODO: what is a 'change id'
-    search(options: string | SearchOptions): Promise<Post[]>
+    getPost(id: ID): Promise<Post | null>
+    search(options: string | SearchOptions): Promise<Post[]> // TODO: what is a 'change id'
     getRelevantTags(options: Omit<SearchOptions, "perPage">): Promise<PostTag[]>
     getTags(options: any): Promise<PostTag[]> // TODO
     getTag(id: ID): Promise<PostTag | null>
