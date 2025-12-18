@@ -15,14 +15,13 @@ export interface SearchQueryObject {
     or?: SearchParameter[] | SearchQuery[]
 }
 
-export interface SearchQueryValue {
-    name: SearchValueName
-    comparison?: SearchValueComparison
-    value: string | ID
-}
-
 export interface SearchOptions {
-    query?: string | TagParameter | SearchQuery
+    query?: SearchQuery
+    perPage?: number
+    page?: number
+    offset?: number
+    deleted?: boolean
+    earliestDeletedId?: ID
 }
 
 //#endregion
@@ -34,6 +33,12 @@ export type ID = number | `${number}`
 export type UserAuth = Pick<Auth, "pass_hash" | "user_id">
 
 export type TagParameter = string | Pick<PostTag, "name">
+
+export type SearchQueryValue = {
+    name: SearchValueName,
+    comparison?: SearchValueComparison,
+    value: string | ID
+} | `${string}:${"" | "<" | ">"}${string}`
 
 export type SearchParameter = string | TagParameter | TagParameter[]
 
