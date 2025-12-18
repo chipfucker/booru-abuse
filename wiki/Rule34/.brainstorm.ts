@@ -105,6 +105,7 @@ declare interface PostTag {
     type: PostTagType
 }
 
+// TODO
 declare interface PostChange {
     date: Date
     diff: {
