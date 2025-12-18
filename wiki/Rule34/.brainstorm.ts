@@ -2,7 +2,7 @@
 
 declare class Client {
     async constructor({ auth, config }: {
-        auth: Authentication
+        auth: Auth
         config?: {
             coorsVirtue: boolean
         }
@@ -48,9 +48,9 @@ declare class Post {
     tags: PostTag[] & { getText(): string }
 
     // The following should throw an error if post's owner isn't client
-    comment({ auth, body }: { auth?: Authentication, body: string }): Promise<PostComment>
-    edit({ auth, options }: { auth?: Authentication, options: any }): Promise<Post> // TODO
-    delete({ auth }: { auth?: Authentication }): Promise<void>
+    comment({ auth, body }: { auth?: UserAuth, body: string }): Promise<PostComment>
+    edit({ auth, options }: { auth?: UserAuth, options: any }): Promise<Post> // TODO
+    delete({ auth }: { auth?: UserAuth }): Promise<void>
 }
 
 declare class User {
@@ -62,14 +62,14 @@ declare class User {
 
 //#region interface
 
-declare interface Authentication {
+declare interface Auth {
     user_id: string
     pass_hash: string
     api_key: string
 }
 
 declare interface SearchOptions {
-    query?: string
+    query?: string | SearchQuery
     perPage?: number
     page?: number
     offset?: number
@@ -101,6 +101,7 @@ declare interface PostComment {
 
 declare interface PostTag {
     name: string
+    id?: number
     posts: number
     type: PostTagType
 }
@@ -121,7 +122,13 @@ declare interface PostChange {
 
 //#region type
 
+declare type UserAuth = Pick<Auth, "pass_hash" | "user_id">
+
 declare type ID = number | `${number}`
+
+declare type TagParameter = string | Pick<PostTag, "name">
+
+declare type SearchQuery = string | TagParameter[]
 
 //#endregion
 
