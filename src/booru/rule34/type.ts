@@ -7,11 +7,18 @@ export interface Auth {
 }
 
 // TODO
-export interface SearchQuery {
+export interface SearchQueryObject {
     include?: SearchParameter
     exclude?: SearchParameter
     fuzzy?: SearchParameter
-    or: SearchParameter | SearchParameter[] | SearchQuery[]
+    value?: SearchQueryValue[]
+    or?: SearchParameter[] | SearchQuery[]
+}
+
+export interface SearchQueryValue {
+    name: SearchValueName
+    comparison?: SearchValueComparison
+    value: string | ID
 }
 
 export interface SearchOptions {
@@ -29,5 +36,42 @@ export type UserAuth = Pick<Auth, "pass_hash" | "user_id">
 export type TagParameter = string | Pick<PostTag, "name">
 
 export type SearchParameter = string | TagParameter | TagParameter[]
+
+export type SearchQuery = SearchParameter | SearchQueryObject
+
+//#endregion
+
+//#region enum
+
+export enum SearchValueName {
+
+}
+
+export enum SearchValueComparison {
+    EqualTo,
+    LessThan,
+    GreaterThan
+}
+
+export enum PostRating {
+    Safe,
+    Questionable,
+    Explicit
+}
+
+export enum PostStatus {
+    Active,
+    Flagged,
+    Deleted
+}
+
+export enum PostTagType {
+    Copyright,
+    Character,
+    Artist,
+    General,
+    Metadata,
+    Ambiguous
+}
 
 //#endregion
