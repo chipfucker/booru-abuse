@@ -1,4 +1,8 @@
-import type * as type from "./type"
+import type {
+    Auth,
+    ID,
+    PostTag,
+} from "./type" // TODO: https://www.reddit.com/r/typescript/comments/gwofcn
 import { Post } from "./post"
 
 export class Client {
@@ -9,11 +13,11 @@ export class Client {
 
     }
 
-    async autocomplete(query: string): Promise<type.PostTag[] | Omit<type.PostTag, "type">[]> {
+    async autocomplete(query: string): Promise<PostTag[] | Omit<PostTag, "type">[]> {
 
     }
 
-    async getPost(id: type.ID): Promise<Post | null> {
+    async getPost(id: ID): Promise<Post | null> {
         
     }
 }
