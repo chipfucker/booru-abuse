@@ -8,18 +8,17 @@ export interface Auth {
 
 // TODO
 export interface SearchQueryObject {
-    include?: SearchParameter
-    exclude?: SearchParameter
-    fuzzy?: SearchParameter
-    value?: SearchQueryValue[]
-    or?: SearchParameter[] | SearchQuery[]
+    include?: SearchParam
+    exclude?: SearchParam
+    fuzzy?: SearchParam
+    or?: SearchParam[]
 }
 
 export interface SearchOptions {
     query?: SearchQuery
     perPage?: number
     page?: number
-    offset?: number
+    offset?: number // TODO
     deleted?: boolean
     earliestDeletedId?: ID
 }
@@ -32,17 +31,19 @@ export type ID = number | `${number}`
 
 export type UserAuth = Pick<Auth, "pass_hash" | "user_id">
 
-export type TagParameter = string | Pick<PostTag, "name">
+export type ApiAuth = Pick<Auth, "api_key" | "user_id">
 
-export type SearchQueryValue = {
-    name: SearchValueName,
+export type ValueQuery = {
+    key: SearchValueName,
     comparison?: SearchValueComparison,
     value: string | ID
 } | `${string}:${"" | "<" | ">"}${string}`
 
-export type SearchParameter = string | TagParameter | TagParameter[]
+export type TagQuery = string | PostTag | ValueQuery
 
-export type SearchQuery = SearchParameter | SearchQueryObject
+export type SearchParam = string | TagQuery | TagQuery[]
+
+export type SearchQuery = SearchParam | SearchQueryObject
 
 //#endregion
 
