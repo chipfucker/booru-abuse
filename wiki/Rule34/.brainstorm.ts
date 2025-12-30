@@ -1,7 +1,7 @@
 //#region class
 
 declare class Client {
-    async constructor({ auth, config }: {
+    constructor({ auth, config }: {
         auth: Auth
         config?: {
             coorsVirtue: boolean
@@ -84,10 +84,10 @@ declare interface PostFile {
 
 // TODO
 declare interface PostNote {
-    area: [
-        position: [ x: number, y: number ],
+    area: {
+        position: [ x: number, y: number ]
         size: [ width: number, height: number ]
-    ]
+    }
     content: string
 }
 
