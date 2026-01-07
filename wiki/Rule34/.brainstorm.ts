@@ -4,11 +4,10 @@ declare class Client {
     constructor({ auth, config }: {
         auth: Auth
         config?: {
-            coorsVirtue: boolean
         }
     })
     
-    autocomplete(query: string): Promise<PostTag[] | Omit<PostTag, "type">[]>
+    autocomplete(query: string): Promise<Omit<PostTag, "type">[]>
     getPost(id: ID): Promise<Post | null>
     search(options: string | SearchOptions): Promise<Post[]> // TODO: what is a 'change id'
     getRelevantTags(options: Omit<SearchOptions, "perPage">): Promise<PostTag[]>
@@ -39,18 +38,12 @@ declare class Post {
     author: User // TODO: better property name?
     createdAt: Date
     updatedAt: Date
-    getChanges(): Promise<PostChange[]>
 
     source: string
     notes: PostNote[]
 
     getComments(): Promise<PostComment[]>
     tags: PostTag[] & { getText(): string }
-
-    // The following should throw an error if post's owner isn't client
-    comment({ auth, body }: { auth?: UserAuth, body: string }): Promise<PostComment>
-    edit({ auth, options }: { auth?: UserAuth, options: any }): Promise<Post> // TODO
-    delete({ auth }: { auth?: UserAuth }): Promise<void>
 }
 
 declare class User {
@@ -64,7 +57,6 @@ declare class User {
 
 declare interface Auth {
     user_id: string
-    pass_hash: string
     api_key: string
 }
 
