@@ -19,24 +19,24 @@ declare class Client {
 
 declare class Post {
     file: PostFile & {
-        sample: PostFile & {
-            isAppropriate(): boolean // TODO: better method name?
-        }
+        sample: PostFile
+        isResampled(): boolean // TODO: better method name?
         thumbnail: PostFile
+
         directory: number
         hash: string
         extension: string
     }
 
     id: number
-    parent?: number
+    parent: number | null
     children: number[]
     score: number
 
     rating: PostRating
     status: PostStatus
 
-    author: User // TODO: better property name?
+    author: User & { bot: boolean } // TODO: better property name?
     createdAt: Date
     updatedAt: Date
     getChanges(): Promise<PostChange[]>
@@ -44,8 +44,8 @@ declare class Post {
     source: string
     notes: PostNote[]
 
-    getComments(): Promise<PostComment[]>
-    tags: PostTag[] & { getText(): string }
+    comments: PostComment[]
+    tags: PostTag[] & { toString(): string }
 
     // The following should throw an error if post's owner isn't client
     comment({ auth, body }: { auth?: UserAuth, body: string }): Promise<PostComment>
@@ -93,7 +93,7 @@ declare interface PostNote {
 
 // TODO
 declare interface PostComment {
-    author: User
+    author: User & { anonymous: boolean } // TODO: better property name?
     content: string
     id: number
     postId: number
@@ -102,7 +102,7 @@ declare interface PostComment {
 declare interface PostTag {
     name: string
     id?: number
-    posts: number
+    postCount: number
     type: PostTagType
 }
 
