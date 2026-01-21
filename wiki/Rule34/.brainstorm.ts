@@ -18,7 +18,7 @@ declare class Client {
 
 declare class Post {
     file: PostFile & {
-        sample: PostFile & {
+        resampled: PostFile & {
             isAppropriate(): boolean // TODO: better method name?
         }
         thumbnail: PostFile
