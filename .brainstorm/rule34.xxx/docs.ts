@@ -1,5 +1,7 @@
 //#region class
 
+import { SearchParam } from "#src/booru/rule34/type.ts"
+
 /**
  * A client to retrieve and parse Rule34 data.
  */
@@ -11,7 +13,10 @@ declare class Client {
         config?: {
         }
     })
-    
+
+    /** Info regarding the user of the client. */
+    self: Pick<User, "id">
+
     /**
      * Returns autocomplete suggestions for a given search.
      * @param query Search to get autocomplete suggestions for.
@@ -93,7 +98,7 @@ declare class Post {
 
     /** The unique Id of the post. */
     id: number
-    /** * The parent post's Id. */
+    /** The parent post's Id. */
     parent?: number
     /** The Ids of this post's children. */
     children: number[]
@@ -136,6 +141,9 @@ declare class Post {
     getComments(): Promise<PostComment[]>
     /** Returns the tags associated with the post. */
     tags: PostTags
+
+    /** Returns a URL to this post on rule34.xxx. */
+    getURL(): string
 }
 
 /**
@@ -151,10 +159,12 @@ declare class PseudoPost {
     valid?: boolean
 
     /** Returns the commments under the post. */
-    getComments(): Promise<PostComment[]>
+    // getComments(): Promise<PostComment[]>
     /** Returns the tags associated with the post. */
     getTags(): Promise<PostTags>
 
+    /** Returns a URL to this post on rule34.xxx. */
+    getURL(): string
     /** Returns the full original post. */
     fetch(): Promise<Post|null>
 }
@@ -175,15 +185,10 @@ declare class User {
     name: string
     /** The unique Id of the user. */
     id: number
+
+    /** Returns a URL to this user's profile on rule34.xxx. */
+    getURL(): string
 }
-
-//#endregion
-
-//#region function
-
-//#endregion
-
-//#region variable
 
 //#endregion
 
@@ -199,6 +204,30 @@ declare interface Authentication {
     api_key: string
 }
 
+/** An interface for specific value queries. */
+declare interface QueryValueOptions {
+    key: QueryValueKey,
+    comparison?: QueryValueComparison.EqualTo,
+    value: string | number
+}
+
+/** An interface for value comparison queries. */
+declare interface QueryValueComparisonOptions extends QueryValueOptions {
+    comparison: QueryValueComparison
+}
+
+// TODO: what all do searches support?
+/**
+ * An object to better visualize and modify advanced tag searches.  
+ * This does not provide extra functionality over simply using a string. It is only purposed to make searches more legible.
+ */
+declare interface QueryOptions {
+    include?: SearchParam
+    exclude?: SearchParam
+    fuzzy?: SearchParam
+    or?: TagParameter[]
+}
+
 /**
  * The base interface used for search objects.
  */
@@ -208,7 +237,7 @@ declare interface BaseSearchOptions {
     /** The offset to use when getting results multiplied by `perPage`. */
     page?: number
     /** The offset to use when getting results. */
-    offset?: number
+    offset?: number // TODO: is this available?
 }
 
 /**
@@ -216,10 +245,12 @@ declare interface BaseSearchOptions {
  */
 declare interface ActiveSearchOptions extends BaseSearchOptions {
     /** The search query to use. */
-    query?: string | SearchQuery
+    query?: SearchQuery
     /**
      * Whether to show deleted posts.
-     * @deprecated It is uncertain how exactly this is used. My attempts to fetch from any URL with the `deleted=show` parameter have refused to yield anything.
+     * @deprecated
+     * It is uncertain how exactly this is used.  
+     * My attempts to fetch from any URL with the `deleted=show` parameter have refused to yield anything.
      */
     deleted?: boolean
 }
@@ -230,7 +261,9 @@ declare interface ActiveSearchOptions extends BaseSearchOptions {
 declare interface DeletedSearchOptions extends BaseSearchOptions {
     /**
      * Whether to show deleted posts.
-     * @deprecated It is uncertain how exactly this is used. My attempts to fetch from any URL with the `deleted=show` parameter have refused to yield anything.
+     * @deprecated
+     * It is uncertain how exactly this is used.  
+     * My attempts to fetch from any URL with the `deleted=show` parameter have refused to yield anything.
      */
     deleted: true
     /** @deprecated It is uncertain how exactly this affects deleted post searches. */
@@ -272,9 +305,14 @@ declare interface PostComment {
     postId: Id
     /**
      * The date this post was created.
-     * @deprecated This value is almost guaranteed to be inaccurate. This always, presumably by mistake, returns the date (specific to the timezone of Rule34's servers) that the comment was fetched.
+     * @deprecated
+     * This value is almost guaranteed to be inaccurate.  
+     * This always, presumably by mistake, returns the date (specific to the timezone of Rule34's servers) that the comment was fetched.
      */
     createdAt: Date
+
+    /** Returns an anchor URL to this comment on rule34.xxx. */
+    getURL(): string
 }
 
 /**
@@ -291,6 +329,11 @@ declare interface BaseTag<T extends TagType = TagType> {
     type: T
     /** @warning It is uncertain what this property labels. */
     ambiguous: boolean
+
+    /** Returns a URL to this tag's wiki page on rule34.xxx. */
+    getWikiURL(): string
+    /** Returns a URL to a search with this tag on rule34.xxx. */
+    getSearchURL(): string
 }
 
 //#endregion
@@ -306,8 +349,14 @@ declare type SearchOptions = ActiveSearchOptions | DeletedSearchOptions
 /** Tag used when searching for posts. */
 declare type TagParameter = string | Pick<BaseTag, "name">
 
+/** Value query used when searching for posts. */
+declare type ValueParameter = string | QueryValueOptions | QueryValueComparisonOptions
+
+/** A search parameter used when searching for posts. */
+declare type SearchParameter = TagParameter | ValueParameter
+
 /** Query used when searching for posts. */
-declare type SearchQuery = string | TagParameter[]
+declare type SearchQuery = string | SearchParameter[]
 
 // TODO
 /** Possible file extensions for a post's media. */
@@ -324,6 +373,27 @@ declare type PostTag<T extends TagType = TagType> = Pick<BaseTag<T>, "name" | "c
 //#endregion
 
 //#region enum
+
+/** The possible properties to query post values. */
+declare enum QueryValueKey {
+    Hash = "md5",
+    User = "user",
+    Rating = "rating",
+    Width = "width",
+    Height = "height",
+    Id = "id",
+    Parent = "parent",
+    Score = "score"
+}
+
+/** The possible comparisons to query post values. */
+declare enum QueryValueComparison {
+    EqualTo = "=",
+    GreaterThan = ">",
+    GreaterThanOrEqualTo = ">=",
+    LessThan = "<",
+    LessThanOrEqualTo = "<=",
+}
 
 // TODO: missing properties
 /**
