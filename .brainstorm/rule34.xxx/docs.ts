@@ -227,7 +227,7 @@ declare interface ActiveSearchOptions extends BaseSearchOptions {
 /**
  * The additional properties used for searching deleted posts.
  */
-interface DeletedSearchOptions extends BaseSearchOptions {
+declare interface DeletedSearchOptions extends BaseSearchOptions {
     /**
      * Whether to show deleted posts.
      * @deprecated It is uncertain how exactly this is used. My attempts to fetch from any URL with the `deleted=show` parameter have refused to yield anything.
