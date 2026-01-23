@@ -1,5 +1,5 @@
-import { Post     } from "./Post"
-import { PostTags } from "../tag/PostTags"
+import { Post     } from "./post"
+import { PostTags } from "../tag/post-tags"
 
 /**
  * A class with methods that return particular parts of post data.

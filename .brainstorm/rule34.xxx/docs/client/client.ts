@@ -1,7 +1,7 @@
-import { Authentication } from "./Authentication"
-import { User           } from "../site/User"
-import { Post           } from "../site/post/Post"
-import { PseudoPost     } from "../site/post/PseudoPost"
+import { Authentication } from "./authentication"
+import { User           } from "../site/user"
+import { Post           } from "../site/post/post"
+import { PseudoPost     } from "../site/post/pseudo-post"
 import { SearchOptions  } from "../site/search/type"
 import { BaseTag        } from "../site/tag/interface"
 import { Tag,

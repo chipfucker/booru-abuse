@@ -1,11 +1,11 @@
 import { PostRating,
          PostStatus        } from "./enum"
-import { PostComment       } from "./PostComment"
+import { PostComment       } from "./post-comment"
 import { PostFile          } from "./file/interface"
 import { PostFileExtension } from "./file/type"
 import { PostFileType      } from "./file/enum"
-import { User              } from "../User"
-import { PostTags          } from "../tag/PostTags"
+import { User              } from "../user"
+import { PostTags          } from "../tag/post-tags"
 
 /**
  * A post from Rule34.
