@@ -1,31 +1,5 @@
-import { SearchQuery,
-         SearchParameter,
-         TagParameter         } from "./type"
-import { QueryValueKey,
-         QueryValueComparison } from "./enum"
-import { Id                   } from "../../util/type"
-
-/** The base interface for query value interfaces. */
-export declare interface BaseQueryValueOptions {
-    key: QueryValueKey
-    comparison?: QueryValueComparison
-    value: string | number
-}
-
-/** An interface for specific value queries. */
-export declare interface QueryValueOptions extends BaseQueryValueOptions {
-    comparison?: QueryValueComparison.EqualTo,
-}
-
-/** An interface for value comparison queries. */
-export declare interface QueryValueComparisonOptions extends BaseQueryValueOptions {
-    key:
-        | QueryValueKey.Width
-        | QueryValueKey.Height
-        | QueryValueKey.Id
-        | QueryValueKey.Score
-    comparison: QueryValueComparison
-}
+import { SearchQuery } from "../type/search-query"
+import { Id          } from "../../../util/type/id"
 
 /**
  * The base interface used for search objects.
@@ -67,16 +41,4 @@ export declare interface DeletedSearchOptions extends BaseSearchOptions {
     deleted: true
     /** @deprecated It is uncertain how exactly this affects deleted post searches. */
     lastId?: Id
-}
-
-// TODO: what all do searches support?
-/**
- * An object to better visualize and modify advanced tag searches.  
- * This does not provide extra functionality over simply using a string. It is only purposed to make searches more legible.
- */
-export declare interface QueryOptions {
-    include?: SearchParameter[]
-    exclude?: SearchParameter[]
-    fuzzy?: TagParameter[]
-    or?: TagParameter[]
 }

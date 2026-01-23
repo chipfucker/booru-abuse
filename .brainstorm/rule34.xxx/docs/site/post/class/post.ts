@@ -1,11 +1,11 @@
-import { PostRating,
-         PostStatus        } from "./enum"
-import { PostComment       } from "./post-comment"
-import { PostFile          } from "./file/interface"
-import { PostFileExtension } from "./file/type"
-import { PostFileType      } from "./file/enum"
-import { User              } from "../user"
-import { PostTags          } from "../tag/post-tags"
+import { PostRating        } from "../enum/post-rating"
+import { PostStatus        } from "../enum/post-status"
+import { PostComment       } from "../interface/post-comment"
+import { PostFile          } from "../file/interface/post-file"
+import { PostFileExtension } from "../file/type/post-file-extension"
+import { PostFileType      } from "../file/enum/post-file-type"
+import { User              } from "../../class/user"
+import { PostTags          } from "../../tag/class/post-tags"
 
 /**
  * A post from Rule34.

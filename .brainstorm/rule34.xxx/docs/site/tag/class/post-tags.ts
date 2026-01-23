@@ -1,5 +1,5 @@
-import { PostTag } from "./type"
-import { TagType } from "./enum"
+import { PostTag } from "../type/post-tag"
+import { TagType } from "../enum/tag-type"
 
 /**
  * Tags retrieved from a post.

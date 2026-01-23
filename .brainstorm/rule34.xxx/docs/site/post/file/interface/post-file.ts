@@ -1,4 +1,4 @@
-import { CDNServer } from "./enum"
+import { CDNServer } from "../enum/cdn-server"
 
 /**
  * A post media file.

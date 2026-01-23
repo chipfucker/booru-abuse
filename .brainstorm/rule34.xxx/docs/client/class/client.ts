@@ -1,12 +1,12 @@
-import { Authentication } from "./authentication"
-import { User           } from "../site/user"
-import { Post           } from "../site/post/post"
-import { PseudoPost     } from "../site/post/pseudo-post"
-import { SearchOptions  } from "../site/search/type"
-import { BaseTag        } from "../site/tag/interface"
-import { Tag,
-         PostTag        } from "../site/tag/type"
-import { Id             } from "../util/type"
+import { Authentication } from "../interface/authentication"
+import { User           } from "../../site/class/user"
+import { Post           } from "../../site/post/class/post"
+import { PseudoPost     } from "../../site/post/class/pseudo-post"
+import { SearchOptions  } from "../../site/search/type/search-options"
+import { BaseTag        } from "../../site/tag/interface/base-tag"
+import { Tag            } from "../../site/tag/type/tag"
+import { PostTag        } from "../../site/tag/type/post-tag"
+import { Id             } from "../../util/type/id"
 
 /**
  * A client to retrieve and parse Rule34 data.
