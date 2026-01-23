@@ -1,5 +1,5 @@
-import { SearchParameter,
-         TagParameter    } from "../type/parameter"
+import { TagParameter,
+         SearchParameter } from "../type/parameter"
 
 // TODO: what all do searches support?
 /**
