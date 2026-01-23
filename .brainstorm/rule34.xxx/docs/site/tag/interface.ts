@@ -1,5 +1,5 @@
 import { TagType } from "./enum"
-import { Id } from "../../types/generic"
+import { Id      } from "../../util/type"
 
 /**
  * The base interface for Rule34 tags.

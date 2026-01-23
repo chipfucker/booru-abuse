@@ -1,4 +1,4 @@
-import { Id } from "../types/generic"
+import { Id } from "../util/type"
 
 /**
  * An object used for authenticating Rule34 API requests.

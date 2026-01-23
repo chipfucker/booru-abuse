@@ -1,6 +1,9 @@
-import { QueryValueKey, QueryValueComparison } from "./enum"
-import { SearchQuery, SearchParameter, TagParameter } from "./type"
-import { Id } from "../../types/generic"
+import { SearchQuery,
+         SearchParameter,
+         TagParameter         } from "./type"
+import { QueryValueKey,
+         QueryValueComparison } from "./enum"
+import { Id                   } from "../../util/type"
 
 /** The base interface for query value interfaces. */
 export declare interface BaseQueryValueOptions {

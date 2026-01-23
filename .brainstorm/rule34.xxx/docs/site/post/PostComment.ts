@@ -1,5 +1,5 @@
 import { User } from "../User"
-import { Id } from "../../types/generic"
+import { Id   } from "../../util/type"
 
 /**
  * A comment under a post.

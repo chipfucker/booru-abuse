@@ -1,11 +1,12 @@
 import { Authentication } from "./Authentication"
-import { User } from "../site/User"
-import { BaseTag } from "../site/tag/interface"
-import { Id } from "../types/generic"
-import { Post } from "../site/post/Post"
-import { PseudoPost } from "../site/post/PseudoPost"
-import { SearchOptions } from "../site/search/type"
-import { Tag, PostTag } from "../site/tag/type"
+import { User           } from "../site/User"
+import { Post           } from "../site/post/Post"
+import { PseudoPost     } from "../site/post/PseudoPost"
+import { SearchOptions  } from "../site/search/type"
+import { BaseTag        } from "../site/tag/interface"
+import { Tag,
+         PostTag        } from "../site/tag/type"
+import { Id             } from "../util/type"
 
 /**
  * A client to retrieve and parse Rule34 data.
@@ -26,12 +27,12 @@ export declare class Client {
      * Returns autocomplete suggestions for a given search.
      * @param query Search to get autocomplete suggestions for.
      */
-    autocomplete(query: string): Promise<Pick<BaseTag, "name" | "count">[]>
+    autocomplete(query: string): Promise<Pick<BaseTag, "name"|"count">[]>
     /**
      * Returns the post at a given Id.
      * @param id The Id of the post.
      */
-    getPost(id: Id): Promise<Post | null>
+    getPost(id: Id): Promise<Post|null>
     /**
      * Returns a class with methods for accessing each part of a post rather than most of the details at once.  
      * This can be preferred over {@linkcode Client.getPost} for cases such as API limits or when you only need to retrieve certain properties of a post.
@@ -54,5 +55,5 @@ export declare class Client {
      * Returns the tag at a given Id.
      * @param id The Id of the tag.
      */
-    getTag(id: Id): Promise<Tag | null>
+    getTag(id: Id): Promise<Tag|null>
 }

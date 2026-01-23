@@ -1,6 +1,8 @@
-import { BaseTag } from "../tag/interface"
-import { QueryValueOptions, QueryValueComparisonOptions } from "./interface"
-import { ActiveSearchOptions, DeletedSearchOptions } from "./interface"
+import { QueryValueOptions,
+         QueryValueComparisonOptions,
+         ActiveSearchOptions,
+         DeletedSearchOptions         } from "./interface"
+import { BaseTag                      } from "../tag/interface"
 
 /** Tag used when searching for posts. */
 export declare type TagParameter = string | Pick<BaseTag, "name">
