@@ -1,1 +1,0 @@
-/// <reference path="./generic.ts" />
