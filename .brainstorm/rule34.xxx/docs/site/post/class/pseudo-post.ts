@@ -2,7 +2,7 @@ import {
     Post,
     PostComment,
     PostTags
-} from "../../.."
+} from "root"
 
 /** A class with methods that return particular parts of post data. */
 export declare class PseudoPost {

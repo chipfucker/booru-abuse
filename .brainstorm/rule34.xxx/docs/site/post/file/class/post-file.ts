@@ -3,7 +3,7 @@ import {
     PostFileExtension,
     CDNServer,
     PostFileType
-} from "../../../.."
+} from "root"
 
 /** A post's media files. */
 export declare class PostFile extends PostFileURL {

@@ -1,7 +1,7 @@
 import {
     QueryValueKey,
     QueryValueComparison
-} from "../../.."
+} from "root"
 
 /** The base interface for query value interfaces. */
 export declare interface BaseQueryValueOptions {
