@@ -1,6 +1,7 @@
-import { PostFileExtension } from "../type/post-file-extension"
-import { CDNServer         } from "../enum/cdn-server"
-import { PostFileType      } from "../enum/post-file-type"
+import { PostDownsampleFile } from "../interface/post-file-url"
+import { PostFileExtension  } from "../type/post-file-extension"
+import { CDNServer          } from "../enum/cdn-server"
+import { PostFileType       } from "../enum/post-file-type"
 
 /**
  * A post's media files.
@@ -34,8 +35,8 @@ export declare class PostFile extends PostFileURL {
  * 
  * ```plain text
  * https://api-cdn.rule34.xxx/images/1234/1234567890abcdef.jpg
- *         ├─────┘            ├────┘ ├──┘ ├──────────────┘
- *         Server reg.        Var.   Dir  Hash
+ *         ├─────┘            ├────┘ ├──┘ ├──────────────┘ ├─┘
+ *         Server reg.        Var.   Dir  Hash             Extension
  * ```
  */
 export declare class PostFileURL extends URL {
@@ -47,17 +48,4 @@ export declare class PostFileURL extends URL {
      * @param region The region to use.
      */
     withServerRegion(region: CDNServer): PostFileURL
-}
-
-/**
- * A post's downsampled media file.
- */
-export declare class PostDownsampleFile extends PostFileURL {
-    /**
-     * Whether the downsample should be used instead of the original for bandwidth purposes.  
-     * This is judged by whether Rule34 displays the downsample by default when a post is viewed.
-     * 
-     * It's suggested to check both `file.type` and `downsample.default` before using this by default, as this file is always a static image&mdash;it is never animated, regardless of the original file.
-     */
-    default: boolean
 }
