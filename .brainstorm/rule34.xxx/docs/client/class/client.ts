@@ -3,6 +3,7 @@ import { User           } from "../../site/class/user"
 import { Post           } from "../../site/post/class/post"
 import { PseudoPost     } from "../../site/post/class/pseudo-post"
 import { SearchOptions  } from "../../site/search/type/search-options"
+import { SearchQuery    } from "../../site/search/type/search-query"
 import { BaseTag        } from "../../site/tag/interface/base-tag"
 import { PostTag        } from "../../site/tag/type/post-tag"
 import { Tag            } from "../../site/tag/type/tag"
@@ -14,8 +15,7 @@ export declare class Client {
         /** Authorization for API access. */
         auth: Authentication
         /** Client configuration object. */
-        config?: {
-        }
+        config?: {}
     })
 
     /** Info regarding the user tied to the client. */
@@ -30,7 +30,7 @@ export declare class Client {
      * Returns the post at a given Id.
      * @param id The Id of the post.
      */
-    getPost(id: Id): Promise<Post|null>
+    getPost(id: Id): Promise<Post>
     /**
      * Returns a class with methods for accessing each part of a post rather than most
      * of the details at once.  
@@ -43,17 +43,18 @@ export declare class Client {
      * Returns an array of posts under a search query.
      * @param options The query used to search for posts.
      */
-    search(options: string | SearchOptions): Promise<Post[]> // TODO: what is a 'change id'
+    search(options: SearchQuery): Promise<Post[]> // TODO: what is a 'change id'
     // TODO: figure out how relevant tags are decided or see if the API supports it
     /**
      * Returns an array of tags listed as relevant to a search.
      * @param options The search query used to get relevant tags.
      */
     getRelevantTags(options: Omit<SearchOptions, "perPage">): Promise<PostTag[]>
+    // TODO
     getTags(options: { limit: number }): Promise<Tag[]>
     /**
      * Returns the tag at a given Id.
      * @param id The Id of the tag.
      */
-    getTag(id: Id): Promise<Tag|null>
+    getTag(id: Id): Promise<Tag>
 }
