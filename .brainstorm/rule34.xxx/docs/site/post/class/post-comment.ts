@@ -1,7 +1,7 @@
 import {
     User,
     Id
-} from "../../../export"
+} from "../../.."
 
 /** A comment under a post. */
 export declare class PostComment {

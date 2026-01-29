@@ -1,6 +1,6 @@
 import {
     Id
-} from "../../export"
+} from "../.."
 
 /** An interface used for authenticating Rule34 API requests. */
 export declare interface Authentication {

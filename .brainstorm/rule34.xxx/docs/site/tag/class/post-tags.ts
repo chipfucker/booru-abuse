@@ -1,7 +1,7 @@
 import {
     PostTag,
     TagType
-} from "../../../export"
+} from "../../.."
 
 /** Tags retrieved from a post. */
 export declare class PostTags extends Array<PostTag> {

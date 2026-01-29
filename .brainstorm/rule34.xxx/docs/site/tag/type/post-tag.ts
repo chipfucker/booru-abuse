@@ -1,7 +1,7 @@
 import {
     BaseTag,
     TagType
-} from "../../../export"
+} from "../../.."
 
 /** Partial tag retrieved from a post. */
 export declare type PostTag<T extends TagType = TagType>

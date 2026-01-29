@@ -8,7 +8,7 @@ import {
     PostTag,
     Tag,
     Id
-} from "../../export"
+} from "../.."
 
 /** A client to retrieve and parse Rule34 data. */
 export declare class Client {

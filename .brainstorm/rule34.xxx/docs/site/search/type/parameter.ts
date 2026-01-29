@@ -2,7 +2,7 @@ import {
     QueryValueOptions,
     QueryValueComparisonOptions,
     BaseTag
-} from "../../../export"
+} from "../../.."
 
 /** Tag used when searching for posts. */
 export declare type TagParameter = string | Pick<BaseTag, "name">

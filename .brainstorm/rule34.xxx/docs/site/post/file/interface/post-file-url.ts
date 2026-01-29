@@ -1,6 +1,6 @@
 import {
     PostFileURL
-} from "../../../../export"
+} from "../../../.."
 
 /** A post's downsampled media file. */
 export declare interface PostDownsampledFile extends PostFileURL {

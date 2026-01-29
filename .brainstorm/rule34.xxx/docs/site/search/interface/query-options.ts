@@ -1,7 +1,7 @@
 import {
     TagParameter,
     SearchParameter
-} from "../../../export"
+} from "../../.."
 
 // TODO: what all do searches support?
 /**

@@ -1,7 +1,7 @@
 import {
     ActiveSearchOptions,
     DeletedSearchOptions
-} from "../../../export"
+} from "../../.."
 
 /** Options used when searching for posts. */
 export declare type SearchOptions = ActiveSearchOptions | DeletedSearchOptions

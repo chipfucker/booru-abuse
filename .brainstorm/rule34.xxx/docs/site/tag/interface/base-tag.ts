@@ -1,7 +1,7 @@
 import {
     TagType,
     Id
-} from "../../../export"
+} from "../../.."
 
 /**
  * The base interface for Rule34 tags.
