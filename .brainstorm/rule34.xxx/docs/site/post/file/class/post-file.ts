@@ -1,11 +1,9 @@
-import { PostDownsampleFile } from "../interface/post-file-url"
-import { PostFileExtension  } from "../type/post-file-extension"
-import { CDNServer          } from "../enum/cdn-server"
-import { PostFileType       } from "../enum/post-file-type"
+import { PostDownsampledFile } from "../interface/post-file-url"
+import { PostFileExtension   } from "../type/post-file-extension"
+import { CDNServer           } from "../enum/cdn-server"
+import { PostFileType        } from "../enum/post-file-type"
 
-/**
- * A post's media files.
- */
+/** A post's media files. */
 export declare class PostFile extends PostFileURL {
     /** The file's type. */
     type: PostFileType
@@ -17,7 +15,7 @@ export declare class PostFile extends PostFileURL {
      * This file is always a static image. If the main file is animated, the downsample
      * is usually the thumbnail or first frame of the main file.
      */
-    downsample: PostDownsampleFile
+    downsample: PostDownsampledFile
     /** A much more downsampled and static version of the main file, purposed for a thumbnail. */
     thumbnail: PostFileURL
     /** The directory of the post's files. */

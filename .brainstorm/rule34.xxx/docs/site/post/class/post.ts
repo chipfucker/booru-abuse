@@ -1,13 +1,12 @@
-import { PostComment       } from "../class/post-comment"
+import { PostComment       } from "./post-comment"
 import { PostRating        } from "../enum/post-rating"
 import { PostStatus        } from "../enum/post-status"
 import { PostFile          } from "../file/class/post-file"
 import { User              } from "../../class/user"
+import { SearchQuery       } from "../../search/type/search-query"
 import { PostTags          } from "../../tag/class/post-tags"
 
-/**
- * A post from Rule34.
- */
+/** A post from Rule34. */
 export declare class Post {
     /** The media files of the post. */
     file: PostFile
@@ -31,19 +30,17 @@ export declare class Post {
     author: User & { // TODO: better property name?
         /**
          * Whether the post was uploaded by a bot.  
-         * Useful in place of checking whether the username is "bot".
+         * Useful in place of checking whether the username is "bot"; equivalent to:
+         * 
+         * ```javascript
+         * this.name == "bot"
+         * ```
          */
         bot: boolean
     }
-    /**
-     * The date this post was created.
-     * @warning This value is likely to be inaccurate.
-     */
+    /** The date this post was created. */
     createdAt: Date
-    /**
-     * The date this post was last updated.
-     * @warning This value is likely to be inaccurate.
-     */
+    /** The date this post was last updated. */
     updatedAt: Date
 
     /**
@@ -57,6 +54,9 @@ export declare class Post {
     /** Returns the tags associated with the post. */
     tags: PostTags
 
-    /** Returns a URL to this post on rule34.xxx. */
-    getURL(): string
+    /**
+     * Returns a URL to this post on rule34.xxx.
+     * @param search The search associated with the URL.
+     */
+    getURL(search?: SearchQuery): string
 }

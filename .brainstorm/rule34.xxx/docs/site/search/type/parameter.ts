@@ -1,5 +1,5 @@
 import { QueryValueOptions,
-         QueryValueComparisonOptions } from "../interface/query-value"
+         QueryValueComparisonOptions } from "../interface/query-value-options"
 import { BaseTag                     } from "../../tag/interface/base-tag"
 
 /** Tag used when searching for posts. */

@@ -1,8 +1,6 @@
 import { Id } from "../../util/type/id"
 
-/**
- * An object used for authenticating Rule34 API requests.
- */
+/** An interface used for authenticating Rule34 API requests. */
 export declare interface Authentication {
     /** The `user_id` parameter of the API key. */
     user_id: Id

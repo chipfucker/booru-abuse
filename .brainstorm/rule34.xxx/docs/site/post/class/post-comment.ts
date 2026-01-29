@@ -1,9 +1,7 @@
 import { User } from "../../class/user"
 import { Id   } from "../../../util/type/id"
 
-/**
- * A comment under a post.
- */
+/** A comment under a post. */
 export declare class PostComment {
     /** The author of the comment. */
     author: User
@@ -17,7 +15,8 @@ export declare class PostComment {
      * The date this post was created.
      * @deprecated
      * This value is almost guaranteed to be inaccurate.  
-     * This always, presumably by mistake, returns the date (specific to the timezone of Rule34's servers) that the comment was fetched.
+     * This always, presumably by mistake, returns the date (specific to the timezone
+     * of Rule34's servers) that the comment was fetched.
      */
     createdAt: Date
 

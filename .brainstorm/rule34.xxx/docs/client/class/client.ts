@@ -4,13 +4,11 @@ import { Post           } from "../../site/post/class/post"
 import { PseudoPost     } from "../../site/post/class/pseudo-post"
 import { SearchOptions  } from "../../site/search/type/search-options"
 import { BaseTag        } from "../../site/tag/interface/base-tag"
-import { Tag            } from "../../site/tag/type/tag"
 import { PostTag        } from "../../site/tag/type/post-tag"
+import { Tag            } from "../../site/tag/type/tag"
 import { Id             } from "../../util/type/id"
 
-/**
- * A client to retrieve and parse Rule34 data.
- */
+/** A client to retrieve and parse Rule34 data. */
 export declare class Client {
     constructor({ auth, config }: {
         /** Authorization for API access. */
@@ -20,7 +18,7 @@ export declare class Client {
         }
     })
 
-    /** Info regarding the user of the client. */
+    /** Info regarding the user tied to the client. */
     self: Pick<User, "id">
 
     /**
@@ -34,8 +32,10 @@ export declare class Client {
      */
     getPost(id: Id): Promise<Post|null>
     /**
-     * Returns a class with methods for accessing each part of a post rather than most of the details at once.  
-     * This can be preferred over {@linkcode Client.getPost} for cases such as API limits or when you only need to retrieve certain properties of a post.
+     * Returns a class with methods for accessing each part of a post rather than most
+     * of the details at once.  
+     * This can be preferred over {@linkcode Client.getPost} for cases such as API
+     * limits or when you only need to retrieve certain properties of a post.
      * @param id The Id of the post.
      */
     makePseudoPost(id: Id): PseudoPost

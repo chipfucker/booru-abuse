@@ -2,9 +2,7 @@ import { Post        } from "./post"
 import { PostComment } from "./post-comment"
 import { PostTags    } from "../../tag/class/post-tags"
 
-/**
- * A class with methods that return particular parts of post data.
- */
+/** A class with methods that return particular parts of post data. */
 export declare class PseudoPost {
     /** The unique Id of the post. */
     id: number

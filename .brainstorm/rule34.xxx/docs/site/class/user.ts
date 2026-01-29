@@ -1,6 +1,4 @@
-/**
- * A user on Rule34.
- */
+/** A user on Rule34. */
 export declare class User {
     /** The username of the user. */
     name: string
