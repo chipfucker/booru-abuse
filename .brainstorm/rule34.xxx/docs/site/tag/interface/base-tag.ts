@@ -3,10 +3,8 @@ import {
     Id
 } from "$root"
 
-/**
- * The base interface for Rule34 tags.
- */
-export declare interface BaseTag<T extends TagType = TagType> {
+/** The base interface for Rule34 tags. */
+export interface BaseTag<T extends TagType = TagType> {
     /** The name and value of the tag. */
     name: string
     /** The unique Id of the tag. */
