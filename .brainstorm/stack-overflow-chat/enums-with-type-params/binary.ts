@@ -1,13 +1,16 @@
 enum State { Zero, One }
 
-interface Digit<T extends State = State> {
+interface Value<T extends State = State> {
     purpose: string
     value: T
 }
 
-class Bin extends Array<Digit> {
-    getAllOfState<T extends State>(state: T): Digit<T>[]
+declare class Bin extends Array<Value> {
+    getAllOfState<T extends State>(state: T): Value<T>[]
 }
 
 // test
-const off = (bin as Bin).getAllOfState(State.Zero)[0].value
+const off = (new Bin()).getAllOfState(State.Zero)[0].value
+    // should display '0' or 'State.Zero' on hover
+off === 1;
+    // should give 'unintentional comparison' linting error
