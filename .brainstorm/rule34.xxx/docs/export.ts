@@ -8,9 +8,9 @@ export { User                         } from "./site/class/user"
 // ./site/post
 export { Post                         } from "./site/post/class/post"
 export { PseudoPost                   } from "./site/post/class/pseudo-post"
+export { PostComment                  } from "./site/post/class/post-comment"
 export { PostRating                   } from "./site/post/enum/post-rating"
 export { PostStatus                   } from "./site/post/enum/post-status"
-export { PostComment                  } from "./site/post/interface/post-comment"
 
 // ./site/post/file
 export { CDNServer                    } from "./site/post/file/enum/cdn-server"

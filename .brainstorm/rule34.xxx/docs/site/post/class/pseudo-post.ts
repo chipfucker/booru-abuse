@@ -1,5 +1,6 @@
-import { Post     } from "./post"
-import { PostTags } from "../../tag/class/post-tags"
+import { Post        } from "./post"
+import { PostComment } from "./post-comment"
+import { PostTags    } from "../../tag/class/post-tags"
 
 /**
  * A class with methods that return particular parts of post data.
@@ -14,7 +15,7 @@ export declare class PseudoPost {
     valid?: boolean
 
     /** Returns the commments under the post. */
-    // getComments(): Promise<PostComment[]>
+    getComments(): Promise<PostComment[]>
     /** Returns the tags associated with the post. */
     getTags(): Promise<PostTags>
 

@@ -1,4 +1,4 @@
-import { PostComment       } from "../interface/post-comment"
+import { PostComment       } from "../class/post-comment"
 import { PostRating        } from "../enum/post-rating"
 import { PostStatus        } from "../enum/post-status"
 import { PostFile          } from "../file/interface/post-file"

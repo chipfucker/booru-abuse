@@ -4,7 +4,7 @@ import { Id   } from "../../../util/type/id"
 /**
  * A comment under a post.
  */
-export declare interface PostComment {
+export declare class PostComment {
     /** The author of the comment. */
     author: User
     /** The comment's content. */
