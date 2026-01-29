@@ -1,5 +1,5 @@
 import {
-    Authentication,
+    ClientOptions,
     User,
     Post,
     PseudoPost,
@@ -12,12 +12,7 @@ import {
 
 /** A client to retrieve and parse Rule34 data. */
 export declare class Client {
-    constructor({ auth, config }: {
-        /** Authorization for API access. */
-        auth: Authentication
-        /** Client configuration object. */
-        config?: {}
-    })
+    constructor(options: ClientOptions)
 
     /** Info regarding the user tied to the client. */
     self: Pick<User, "id">
