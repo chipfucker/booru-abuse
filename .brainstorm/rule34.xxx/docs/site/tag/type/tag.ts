@@ -1,6 +1,6 @@
 import {
     BaseTag
-} from "root"
+} from "$root"
 
 /** Full tag, usually retrieved from getting a tag directly. */
 export declare type Tag = BaseTag

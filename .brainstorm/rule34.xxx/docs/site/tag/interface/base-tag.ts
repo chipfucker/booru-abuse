@@ -1,7 +1,7 @@
 import {
     TagType,
     Id
-} from "root"
+} from "$root"
 
 /**
  * The base interface for Rule34 tags.

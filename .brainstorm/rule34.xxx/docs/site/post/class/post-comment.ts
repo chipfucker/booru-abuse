@@ -1,7 +1,7 @@
 import {
     User,
     Id
-} from "root"
+} from "$root"
 
 /** A comment under a post. */
 export declare class PostComment {

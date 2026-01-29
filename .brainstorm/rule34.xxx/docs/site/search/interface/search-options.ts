@@ -1,7 +1,7 @@
 import {
     SearchQuery,
     Id
-} from "root"
+} from "$root"
 
 /** The base interface used for search objects. */
 export declare interface BaseSearchOptions {

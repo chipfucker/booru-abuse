@@ -6,7 +6,7 @@ import {
     User,
     SearchQuery,
     PostTags
-} from "root"
+} from "$root"
 
 /** A post from Rule34. */
 export declare class Post {
