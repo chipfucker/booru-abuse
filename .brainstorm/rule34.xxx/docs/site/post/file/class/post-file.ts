@@ -1,7 +1,9 @@
-import { PostDownsampledFile } from "../interface/post-file-url"
-import { PostFileExtension   } from "../type/post-file-extension"
-import { CDNServer           } from "../enum/cdn-server"
-import { PostFileType        } from "../enum/post-file-type"
+import {
+    PostDownsampledFile,
+    PostFileExtension,
+    CDNServer,
+    PostFileType
+} from "../../../../export"
 
 /** A post's media files. */
 export declare class PostFile extends PostFileURL {

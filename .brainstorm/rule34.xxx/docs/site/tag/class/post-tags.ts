@@ -1,5 +1,7 @@
-import { PostTag } from "../type/post-tag"
-import { TagType } from "../enum/tag-type"
+import {
+    PostTag,
+    TagType
+} from "../../../export"
 
 /** Tags retrieved from a post. */
 export declare class PostTags extends Array<PostTag> {

@@ -1,6 +1,8 @@
-import { QueryValueOptions,
-         QueryValueComparisonOptions } from "../interface/query-value-options"
-import { BaseTag                     } from "../../tag/interface/base-tag"
+import {
+    QueryValueOptions,
+    QueryValueComparisonOptions,
+    BaseTag
+} from "../../../export"
 
 /** Tag used when searching for posts. */
 export declare type TagParameter = string | Pick<BaseTag, "name">

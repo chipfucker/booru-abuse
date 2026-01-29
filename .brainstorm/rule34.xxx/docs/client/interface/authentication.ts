@@ -1,4 +1,6 @@
-import { Id } from "../../util/type/id"
+import {
+    Id
+} from "../../export"
 
 /** An interface used for authenticating Rule34 API requests. */
 export declare interface Authentication {

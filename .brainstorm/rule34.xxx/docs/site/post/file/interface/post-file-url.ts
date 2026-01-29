@@ -1,4 +1,6 @@
-import { PostFileURL } from "../class/post-file"
+import {
+    PostFileURL
+} from "../../../../export"
 
 /** A post's downsampled media file. */
 export declare interface PostDownsampledFile extends PostFileURL {

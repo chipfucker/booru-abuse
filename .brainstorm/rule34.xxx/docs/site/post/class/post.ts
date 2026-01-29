@@ -1,10 +1,12 @@
-import { PostComment       } from "./post-comment"
-import { PostRating        } from "../enum/post-rating"
-import { PostStatus        } from "../enum/post-status"
-import { PostFile          } from "../file/class/post-file"
-import { User              } from "../../class/user"
-import { SearchQuery       } from "../../search/type/search-query"
-import { PostTags          } from "../../tag/class/post-tags"
+import {
+    PostComment,
+    PostRating,
+    PostStatus,
+    PostFile,
+    User,
+    SearchQuery,
+    PostTags
+} from "../../../export"
 
 /** A post from Rule34. */
 export declare class Post {

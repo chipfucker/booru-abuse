@@ -1,5 +1,7 @@
-import { BaseTag } from "../interface/base-tag"
-import { TagType } from "../enum/tag-type"
+import {
+    BaseTag,
+    TagType
+} from "../../../export"
 
 /** Partial tag retrieved from a post. */
 export declare type PostTag<T extends TagType = TagType>

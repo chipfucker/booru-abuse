@@ -1,5 +1,7 @@
-import { SearchQuery } from "../type/search-query"
-import { Id          } from "../../../util/type/id"
+import {
+    SearchQuery,
+    Id
+} from "../../../export"
 
 /** The base interface used for search objects. */
 export declare interface BaseSearchOptions {

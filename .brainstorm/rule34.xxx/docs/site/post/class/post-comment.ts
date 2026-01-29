@@ -1,5 +1,7 @@
-import { User } from "../../class/user"
-import { Id   } from "../../../util/type/id"
+import {
+    User,
+    Id
+} from "../../../export"
 
 /** A comment under a post. */
 export declare class PostComment {

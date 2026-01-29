@@ -1,5 +1,7 @@
-import { TagParameter,
-         SearchParameter } from "../type/parameter"
+import {
+    TagParameter,
+    SearchParameter
+} from "../../../export"
 
 // TODO: what all do searches support?
 /**

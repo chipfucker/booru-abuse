@@ -1,5 +1,7 @@
-import { QueryValueKey,
-         QueryValueComparison } from "../enum/query-value"
+import {
+    QueryValueKey,
+    QueryValueComparison
+} from "../../../export"
 
 /** The base interface for query value interfaces. */
 export declare interface BaseQueryValueOptions {
