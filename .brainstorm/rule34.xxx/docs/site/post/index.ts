@@ -5,4 +5,4 @@ export * from "./class/pseudo-post"
 export * from "./enum/post-rating"
 export * from "./enum/post-status"
 
-export * from "./file/_export"
+export * from "./file"
