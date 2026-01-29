@@ -15,7 +15,7 @@ export { PostStatus                   } from "./site/post/enum/post-status"
 // ./site/post/file
 export { CDNServer                    } from "./site/post/file/enum/cdn-server"
 export { PostFileType                 } from "./site/post/file/enum/post-file-type"
-export { PostFile                     } from "./site/post/file/interface/post-file"
+export { PostFile                     } from "./site/post/file/class/post-file"
 export { PostFileExtension            } from "./site/post/file/type/post-file-extension"
 
 // ./site/search

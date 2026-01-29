@@ -1,0 +1,63 @@
+import { PostFileExtension } from "../type/post-file-extension"
+import { CDNServer         } from "../enum/cdn-server"
+import { PostFileType      } from "../enum/post-file-type"
+
+/**
+ * A post's media files.
+ */
+export declare class PostFile extends PostFileURL {
+    /** The file's type. */
+    type: PostFileType
+    /**
+     * If one exists, a static, downsampled version of the main file.  
+     * If one doesn't exist, this mirrors the main file.  
+     * A downsampled image will, however, always exist for animated files.
+     * 
+     * This file is always a static image. If the main file is animated, the downsample
+     * is usually the thumbnail or first frame of the main file.
+     */
+    downsample: PostDownsampleFile
+    /** A much more downsampled and static version of the main file, purposed for a thumbnail. */
+    thumbnail: PostFileURL
+    /** The directory of the post's files. */
+    directory: number
+    /** The hash name of the post's files. */
+    hash: string
+    /** The file's extension. */
+    extension: PostFileExtension
+}
+
+/**
+ * A post media file.
+ * 
+ * The URL of each image is structured like so:
+ * 
+ * ```plain text
+ * https://api-cdn.rule34.xxx/images/1234/1234567890abcdef.jpg
+ *         ├─────┘            ├────┘ ├──┘ ├──────────────┘
+ *         Server reg.        Var.   Dir  Hash
+ * ```
+ */
+export declare class PostFileURL extends URL {
+    /** The dimensions of the media file. */
+    size: [ width: number, height: number ]
+
+    /**
+     * Return the URL object with a different CDN subdomain.
+     * @param region The region to use.
+     */
+    withServerRegion(region: CDNServer): PostFileURL
+}
+
+/**
+ * A post's downsampled media file.
+ */
+export declare class PostDownsampleFile extends PostFileURL {
+    /**
+     * Whether the downsample should be used instead of the original for bandwidth purposes.  
+     * This is judged by whether Rule34 displays the downsample by default when a post is viewed.
+     * 
+     * It's suggested to check both `file.type` and `downsample.default` before using this by default, as this file is always a static image&mdash;it is never animated, regardless of the original file.
+     */
+    default: boolean
+}
