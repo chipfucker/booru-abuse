@@ -1,7 +1,7 @@
 {
     "name": "booru-abuse",
     "description": "An expansive class API for boorus",
-    "version": "0.0.1",
+    "version": "0.0.0",
     "type": "module",
     "dependencies": {
         "jsdom": "^27.2.0"

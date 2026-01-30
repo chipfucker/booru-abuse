@@ -1,1 +1,1 @@
-export * from "./rule34.xxx/export.ts";
+export * from "./rule34.xxx/export";

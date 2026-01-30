@@ -1,12 +1,10 @@
 {
-    "ts-node": {
-        "require": ["tsconfig-paths/register"]
-    },
-    "include": [ "./src/**/*" ],
+    "include": [
+        "./src/export.ts"
+    ],
     "compilerOptions": {
+        "target": "es2022",
         "rootDir": "./src/",
-        "outDir": "./dist/",
-        
-        "baseUrl": "./src/"
+        "outDir": "./dist/"
     }
 }

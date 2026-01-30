@@ -1,8 +1,8 @@
-import { TagType } from "../_enum/tag-type.js";
-import { Id      } from "../../../../../util/_type/id.js";
+import { TagType } from "../_enum/tag-type";
+import { Id      } from "../../../../../util/_type/id";
 
 /** The base interface for Rule34 tags. */
-export class BaseTag<T extends TagType = TagType> {
+export interface BaseTag<T extends TagType = TagType> {
     /** The name and value of the tag. */
     name: string;
     /** The unique Id of the tag. */
@@ -14,15 +14,8 @@ export class BaseTag<T extends TagType = TagType> {
     /** It is uncertain what this property labels. */
     ambiguous: boolean;
 
-    constructor (options: ConstructorOptions) {}
-
     /** Returns a URL to this tag's wiki page on rule34.xxx. */
-    getWikiURL(): string;
+    toWikiURL(): string;
     /** Returns a URL to a search with this tag on rule34.xxx. */
-    getSearchURL(): string;
-}
-
-interface ConstructorOptions {
-    name: string;
-    id: Id;
+    toSearchURL(): string;
 }

@@ -1,4 +1,6 @@
-export { Client } from "./_class/client.ts";
+export { Client } from "./_class/client";
 
-export type { Authentication } from "./_interface/authentication.ts";
-export type { ClientOptions } from "./_interface/client-options.ts";
+export type { ClientUser } from "./_class/client-user";
+
+export type { Authentication } from "./_interface/authentication";
+export type { ClientOptions } from "./_interface/client-options";

@@ -1,22 +1,25 @@
 import { BaseTag } from "../_interface/base-tag";
+import { TagType } from "../_enum/tag-type";
 import { getWikiURL, getSearchURL } from "../../url/_function/tag";
 
 /** Tags received from autocompletion. */
-export class AutocompleteTag implements Omit<BaseTag, "id"|"type"|"ambiguous"> {
+export class PostTag<T extends TagType = TagType> implements Omit<BaseTag<T>, "id"|"ambiguous"> {
     name: string;
+    type: T;
     count: number;
 
-    constructor (options: ConstructorOptions) {
+    constructor (options: ConstructorOptions<T>) {
         this.name = options.name;
+        this.type = options.type;
         this.count = options.count;
     }
 
-    // TODO
     toWikiURL = () => getWikiURL(this.name);
     toSearchURL = () => getSearchURL(this.name);
 }
 
-interface ConstructorOptions {
+interface ConstructorOptions<T> {
     name: string;
+    type: T;
     count: number;
 }

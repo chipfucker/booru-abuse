@@ -1,2 +1,2 @@
-export * from "./client/export.ts";
-export * from "./site/export.ts";
+export * from "./client/export";
+export * from "./site/export";

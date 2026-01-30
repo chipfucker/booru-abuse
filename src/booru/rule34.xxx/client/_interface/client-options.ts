@@ -1,6 +1,4 @@
-import {
-    Authentication
-} from "./authentication";
+import { Authentication } from "./authentication";
 
 export interface ClientOptions {
     /** Authorization for API access. */
