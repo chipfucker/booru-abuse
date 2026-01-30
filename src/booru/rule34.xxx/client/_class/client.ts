@@ -1,7 +1,10 @@
 import { ClientOptions } from "../_interface/client-options";
 import { ClientUser } from "./client-user";
 import { AutocompleteTag } from "../../site/tag/_class/autocomplete-tag";
+import { IdParameter } from "../../../../util/_type/id-parameter";
 import { Id } from "../../../../util/_type/id";
+import { Post } from "../../site/post/_class/post";
+
 /** A client to retrieve Rule34 data. */
 export class Client {
     #user_id: Id;
@@ -27,5 +30,14 @@ export class Client {
     async autocomplete(query: string): Promise<AutocompleteTag[]> {
         // TODO
         return [];
+    }
+
+    /**
+     * Returns the post at a given Id.
+     * @param id The Id of the post.
+     */
+    async getPost(id: IdParameter): Promise<Post> {
+        // TODO
+        return new Post();
     }
 }
