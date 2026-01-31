@@ -1,5 +1,5 @@
 import { User } from "./user.ts";
-import { getURL } from "../url/_function/comment.ts";
+import { getURL } from "../url/get-url/_function/comment.ts";
 import type { Id } from "../../../../util/_type/id.ts";
 import type { RawComment } from "../../raw/_interface/raw-comment.ts";
 

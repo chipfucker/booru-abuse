@@ -6,7 +6,7 @@ import { PostStatus } from "../_enum/post-status.ts";
 import { PostTag } from "../../tag/_class/post-tag.ts";
 import { PostTags } from "../../tag/_class/post-tags.ts";
 import { Comment } from "../../_class/comment.ts";
-import { getURL } from "../../url/_function/post.ts";
+import { getURL } from "../../url/get-url/_function/post.ts";
 import { parsePosts } from "../../../raw/_function/parse-posts.ts";
 import * as URL from "../../url/_function/url.ts";
 import type { RawPostJSON } from "../../../raw/_interface/raw-json-post.ts";

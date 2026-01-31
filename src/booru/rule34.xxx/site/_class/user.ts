@@ -1,5 +1,5 @@
 import { BaseUser } from "../_interface/base-user.ts";
-import { getURL } from "../url/_function/user.ts";
+import { getURL } from "../url/get-url/_function/user.ts";
 
 /** A user on Rule34. */
 export class User implements BaseUser {

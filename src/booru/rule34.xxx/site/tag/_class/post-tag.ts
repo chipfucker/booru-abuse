@@ -1,9 +1,9 @@
 import { BaseTag } from "../_interface/base-tag.ts";
 import { TagType } from "../_enum/tag-type.ts";
-import { getWikiURL, getSearchURL } from "../../url/_function/tag.ts";
+import { getSearchURL } from "../../url/get-url/_function/tag.ts";
 
 /** Tags received from autocompletion. */
-export class PostTag<T extends TagType = TagType> implements Omit<BaseTag<T>, "id"|"ambiguous"> {
+export class PostTag<T extends TagType = TagType> implements Omit<BaseTag<T>, "id"|"ambiguous"|"toWikiURL"> {
     name: string;
     type: T;
     count: number;
@@ -21,7 +21,6 @@ export class PostTag<T extends TagType = TagType> implements Omit<BaseTag<T>, "i
         this.count = options.count;
     }
 
-    toWikiURL = () => getWikiURL(this.name);
     toSearchURL = () => getSearchURL(this.name);
 }
 

@@ -1,8 +1,8 @@
 import { BaseTag } from "../_interface/base-tag.ts";
-import { getWikiURL, getSearchURL } from "../../url/_function/tag.ts";
+import { getSearchURL } from "../../url/get-url/_function/tag.ts";
 
 /** Tags received from autocompletion. */
-export class AutocompleteTag implements Omit<BaseTag, "id"|"type"|"ambiguous"> {
+export class AutocompleteTag implements Omit<BaseTag, "id"|"type"|"ambiguous"|"toWikiURL"> {
     name: string;
     count: number;
 
@@ -11,8 +11,6 @@ export class AutocompleteTag implements Omit<BaseTag, "id"|"type"|"ambiguous"> {
         this.count = options.count;
     }
 
-    // TODO
-    toWikiURL = () => getWikiURL(this.name);
     toSearchURL = () => getSearchURL(this.name);
 }
 

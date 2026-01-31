@@ -1,4 +1,4 @@
-import { DOMParser } from "xmldom.ts";
+import { DOMParser } from "xmldom";
 
 export let parseXML = (string: string) => new DOMParser().parseFromString(string).documentElement;
 
