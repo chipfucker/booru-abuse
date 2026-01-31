@@ -11,7 +11,7 @@ export class User implements BaseUser {
         this.id = options.id;
     }
 
-    toURL = () => getURL(this.id);
+    toURL = () => getURL(this.name);
 }
 
 interface ConstructorOptions {
