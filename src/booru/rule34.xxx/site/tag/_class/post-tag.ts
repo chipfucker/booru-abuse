@@ -8,9 +8,16 @@ export class PostTag<T extends TagType = TagType> implements Omit<BaseTag<T>, "i
     type: T;
     count: number;
 
-    constructor (options: ConstructorOptions<T>) {
-        this.name = options.name;
-        this.type = options.type;
+    constructor (options: ConstructorOptions) {
+        this.name = options.tag;
+        this.type = <T> (() => { switch (options.type) {
+            case "copyright": return TagType.Copyright;
+            case "character": return TagType.Character;
+            case "artist":    return TagType.Artist;
+            case "tag":       return TagType.General;
+            case "metadata":  return TagType.Metadata;
+            case null:        return TagType.Ambiguous;
+        }})();
         this.count = options.count;
     }
 
@@ -18,8 +25,8 @@ export class PostTag<T extends TagType = TagType> implements Omit<BaseTag<T>, "i
     toSearchURL = () => getSearchURL(this.name);
 }
 
-interface ConstructorOptions<T> {
-    name: string;
-    type: T;
+interface ConstructorOptions {
+    tag: string;
+    type: string;
     count: number;
 }

@@ -1,4 +1,5 @@
-<tags type="array"><tag type="3" count="2" name="kogurein" ambiguous="false" id="12668"/>
+<tags type="array">
+    <tag type="3" count="2" name="kogurein" ambiguous="false" id="12668"/>
     <tag type="4" count="1" name="noki_welkin" ambiguous="false" id="19899"/>
     <tag type="4" count="1" name="norita_mado" ambiguous="false" id="20127"/>
     <tag type="4" count="1" name="kyrie_(quilt)" ambiguous="false" id="20163"/>
@@ -98,4 +99,4 @@
     <tag type="1" count="1" name="kurubusi-kai" ambiguous="false" id="23082"/>
     <tag type="1" count="1" name="enueichi" ambiguous="false" id="23083"/>
     <tag type="4" count="1" name="hien_(ne~pon?_x_rai_pon!)" ambiguous="false" id="23122"/>
-    </tags>
+</tags>

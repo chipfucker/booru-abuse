@@ -1,4 +1,5 @@
 import { ClientOptions } from "../_interface/client-options";
+import { setCredentials } from "../_function/credentials";
 import { ClientUser } from "./client-user";
 import { AutocompleteTag } from "../../site/tag/_class/autocomplete-tag";
 import { IdParameter } from "../../../../util/_type/id-parameter";
@@ -17,6 +18,8 @@ export class Client {
         options.auth.user_id = parseInt(options.auth.user_id as string);
         this.#api_key = options.auth.api_key;
         this.#user_id = options.auth.user_id;
+
+        setCredentials(options.auth);
 
         this.self = new ClientUser({
             id: options.auth.user_id
@@ -38,6 +41,13 @@ export class Client {
      */
     async getPost(id: IdParameter): Promise<Post> {
         // TODO
-        return new Post();
+    }
+
+    /**
+     * Returns posts resulting from a search query.
+     * @param query The query to use when searching for posts.
+     */
+    async search(query: string): Promise<Posts> {
+
     }
 }

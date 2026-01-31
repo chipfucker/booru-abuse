@@ -1,4 +1,6 @@
 import { PostFileType } from "../_enum/post-file-type";
+import type { RawPostJSON } from "../../../../raw/_interface/raw-json-post";
+import type { RawPostXML } from "../../../../raw/_interface/raw-xml-post";
 
 /** A post's media files. */
 export class PostFiles implements PostFile {
@@ -28,7 +30,7 @@ export class PostFiles implements PostFile {
         default: boolean;
     };
     /** A much more downsampled and static version of the main file, purposed for a thumbnail. */
-    thumbnail: Omit<PostFile, "size">;
+    thumbnail: PostFile;
 
     /** The file's type. */
     type: PostFileType;
@@ -37,30 +39,34 @@ export class PostFiles implements PostFile {
     /** The hash name of the post's files. */
     hash: string;
 
-    constructor (options: ConstructorOptions) {
-        this.url = appendId(options.file_url, options.id);
+    constructor ({ json, xml }: ConstructorOptions) {
+        this.url = appendId(json.file_url, json.id);
         this.size = {
-            width: options.width,
-            height: options.height
+            width: json.width,
+            height: json.height
         };
 
-        if (options.sample_url != options.file_url)
+        if (json.sample_url != json.file_url)
             this.downsample = {
-                url: appendId(options.sample_url, options.id),
+                url: appendId(json.sample_url, json.id),
                 size: {
-                    width: options.sample_width,
-                    height: options.sample_height
+                    width: json.sample_width,
+                    height: json.sample_height
                 },
-                default: options.sample
+                default: json.sample
             };
         this.thumbnail = {
-            url: appendId(options.preview_url, options.id)
+            url: appendId(json.preview_url, json.id),
+            size: {
+                width: parseInt(xml.preview_width),
+                height: parseInt(xml.preview_height)
+            }
         };
 
-        this.directory = options.directory;
-        this.hash = options.hash;
+        this.directory = json.directory;
+        this.hash = json.hash;
 
-        const ext = options.image.match(/(?<=\.)[^.]+$/)[0];
+        const ext = json.image.match(/(?<=\.)[^.]+$/)[0];
         Object.entries(fileTypes).every(([key, array]) => {
             if (array.includes(ext)) {
                 this.type = PostFileType[key];
@@ -79,18 +85,8 @@ export interface PostFile {
 }
 
 interface ConstructorOptions {
-    file_url: string;
-    width: number;
-    height: number;
-    sample_url: string;
-    sample_width: number;
-    sample_height: number;
-    sample: boolean;
-    preview_url: string;
-    directory: number;
-    hash: string;
-    image: string;
-    id: number;
+    json: RawPostJSON;
+    xml: RawPostXML;
 }
 
 const appendId = <url extends string, id extends number>(url: url, id: id): `${url}?${id}` => `${url}?${id}`;
