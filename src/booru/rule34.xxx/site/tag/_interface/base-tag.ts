@@ -1,5 +1,5 @@
-import { TagType } from "../_enum/tag-type";
-import { Id      } from "../../../../../util/_type/id";
+import { TagType } from "../_enum/tag-type.ts";
+import { Id      } from "../../../../../util/_type/id.ts";
 
 /** The base interface for Rule34 tags. */
 export interface BaseTag<T extends TagType = TagType> {

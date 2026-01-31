@@ -1,4 +1,4 @@
-import { User } from "../../../site/_class/user";
+import { User } from "../../../site/_class/user.ts";
 
 export class PostAuthor extends User {
     /**

@@ -1,1 +1,1 @@
-export * from "./_type/id";
+export * from "./_type/id.ts";

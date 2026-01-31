@@ -1,7 +1,7 @@
-import { User } from "./user";
-import { getURL } from "../url/_function/comment";
-import type { Id } from "../../../../util/_type/id";
-import type { RawComment } from "../../raw/_interface/raw-comment";
+import { User } from "./user.ts";
+import { getURL } from "../url/_function/comment.ts";
+import type { Id } from "../../../../util/_type/id.ts";
+import type { RawComment } from "../../raw/_interface/raw-comment.ts";
 
 export class Comment {
     /** The Id of the post this comment is under. */

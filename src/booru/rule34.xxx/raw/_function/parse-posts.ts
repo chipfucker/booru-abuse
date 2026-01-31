@@ -1,5 +1,5 @@
-import { parseXML, type XMLDocument, type XMLNode } from "../../../../util/_function/parse-xml";
-import type { RawPostsXML, RawPostXML } from "../_interface/raw-xml-post";
+import { parseXML, type XMLDocument, type XMLNode } from "../../../../util/_function/parse-xml.ts";
+import type { RawPostsXML, RawPostXML } from "../_interface/raw-xml-post.ts";
 
 export function parsePosts(xml: string): RawPostsXML {
     const document = parseXML(xml);

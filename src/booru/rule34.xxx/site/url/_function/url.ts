@@ -1,5 +1,5 @@
-import { getCredential } from "../../../client/_function/credentials";
-import { createURL } from "../../../../../util/_function/create-url";
+import { getCredential } from "../../../client/_function/credentials.ts";
+import { createURL } from "../../../../../util/_function/create-url.ts";
 
 const base = "https://api.rule34.xxx/";
 const creds = {

@@ -1,20 +1,21 @@
-import { PostFiles } from "../file/_class/post-file";
-import { ClientConfiguration } from "../../../client/_interface/client-configuration";
-import { PostAuthor } from "../_class/post-author";
-import { PostRating } from "../_enum/post-rating";
-import { PostStatus } from "../_enum/post-status";
-import { PostTag } from "../../tag/_class/post-tag";
-import { PostTags } from "../../tag/_class/post-tags";
-import { Comment } from "../../_class/comment";
-import { getURL } from "../../url/_function/post";
-import * as URL from "../../url/_function/url";
-import type { RawPostJSON } from "../../../raw/_interface/raw-json-post";
-import type { RawPostXML } from "../../../raw/_interface/raw-xml-post";
+import { PostFiles } from "../file/_class/post-file.ts";
+import { ClientConfiguration } from "../../../client/_interface/client-configuration.ts";
+import { PostAuthor } from "../_class/post-author.ts";
+import { PostRating } from "../_enum/post-rating.ts";
+import { PostStatus } from "../_enum/post-status.ts";
+import { PostTag } from "../../tag/_class/post-tag.ts";
+import { PostTags } from "../../tag/_class/post-tags.ts";
+import { Comment } from "../../_class/comment.ts";
+import { getURL } from "../../url/_function/post.ts";
+import { parsePosts } from "../../../raw/_function/parse-posts.ts";
+import * as URL from "../../url/_function/url.ts";
+import type { RawPostJSON } from "../../../raw/_interface/raw-json-post.ts";
+import type { RawPostXML, RawPostsXML } from "../../../raw/_interface/raw-xml-post.ts";
 
 /** A post from rule34.xxx. */
 export class Post {
-    #hasChildren: boolean;
-    #commentCount: number;
+    private hasChildren: boolean;
+    private commentCount: number;
 
     /** The media files of the post. */
     file: PostFiles;
@@ -47,8 +48,8 @@ export class Post {
     tags: PostTags;
 
     constructor ({ config, post: { xml, json }}: ConstructorOptions) {
-        this.#hasChildren = xml.has_children === "true";
-        this.#commentCount = json.comment_count;
+        this.hasChildren = xml.has_children === "true";
+        this.commentCount = json.comment_count;
 
         this.file = new PostFiles({ xml, json });
 
@@ -82,8 +83,37 @@ export class Post {
 
     /** Returns all children of this post. */
     async getChildren(): Promise<Post[]> {
-        if (!this.#commentCount) return [];
-        // TODO
+        if (!this.commentCount) return [];
+        else {
+            const URLs = URL.search({
+                query: `parent:${this.id}`,
+                limit: 100,
+                page: 0
+            });
+
+            const response = await Promise.all([
+                fetch(URLs.json).then(r => r.json()),
+                fetch(URLs.xml).then(r => r.text()).then(parsePosts)
+            ]).then(promises => ({
+                json: promises[0] as RawPostJSON[],
+                xml: promises[1] as RawPostsXML
+            }));
+
+            const merged: { json: RawPostJSON, xml: RawPostXML }[] = [];
+            for (const i in response.json) {
+                merged.push({ json: response.json[i], xml: response.xml[i] });
+            }
+    
+            const posts: Post[] = [];
+            merged.forEach(item => posts.push(
+                new Post({ post: {
+                    json: item.json,
+                    xml: item.xml
+                }})
+            ));
+
+            return posts;
+        }
     }
 
     /** Returns the commments under the post. */

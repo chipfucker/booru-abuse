@@ -1,5 +1,5 @@
-import { PostTag } from "./post-tag";
-import { TagType } from "../_enum/tag-type";
+import { PostTag } from "./post-tag.ts";
+import { TagType } from "../_enum/tag-type.ts";
 
 export class PostTags extends Array<PostTag> {
     #string: string;

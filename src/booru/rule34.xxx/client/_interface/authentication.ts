@@ -1,4 +1,4 @@
-import { IdParameter } from "../../../../util/_type/id-parameter";
+import { IdParameter } from "../../../../util/_type/id-parameter.ts";
 
 /** An interface used for authenticating Rule34 API requests. */
 export interface Authentication {

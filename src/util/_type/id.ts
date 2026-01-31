@@ -1,4 +1,4 @@
-import type { IdParameter } from "./id-parameter";
+import type { IdParameter } from "./id-parameter.ts";
 
 /**
  * A number used as a unique identifier.

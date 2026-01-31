@@ -1,2 +1,2 @@
-export * from "./booru/export";
-export * from "./util/export";
+export * from "./booru/export.ts";
+export * from "./util/export.ts";

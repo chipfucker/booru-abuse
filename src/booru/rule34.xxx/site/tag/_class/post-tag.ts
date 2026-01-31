@@ -1,6 +1,6 @@
-import { BaseTag } from "../_interface/base-tag";
-import { TagType } from "../_enum/tag-type";
-import { getWikiURL, getSearchURL } from "../../url/_function/tag";
+import { BaseTag } from "../_interface/base-tag.ts";
+import { TagType } from "../_enum/tag-type.ts";
+import { getWikiURL, getSearchURL } from "../../url/_function/tag.ts";
 
 /** Tags received from autocompletion. */
 export class PostTag<T extends TagType = TagType> implements Omit<BaseTag<T>, "id"|"ambiguous"> {

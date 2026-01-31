@@ -1,5 +1,5 @@
-import { BaseTag } from "../_interface/base-tag";
-import { getWikiURL, getSearchURL } from "../../url/_function/tag";
+import { BaseTag } from "../_interface/base-tag.ts";
+import { getWikiURL, getSearchURL } from "../../url/_function/tag.ts";
 
 /** Tags received from autocompletion. */
 export class AutocompleteTag implements Omit<BaseTag, "id"|"type"|"ambiguous"> {

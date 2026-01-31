@@ -1,15 +1,15 @@
-import { ClientOptions } from "../_interface/client-options";
-import { setCredentials } from "../_function/credentials";
-import { ClientUser } from "./client-user";
-import { AutocompleteTag } from "../../site/tag/_class/autocomplete-tag";
-import { IdParameter } from "../../../../util/_type/id-parameter";
-import { Id } from "../../../../util/_type/id";
-import { Post } from "../../site/post/_class/post";
-import { Posts } from "../../site/post/_class/posts";
-import { parsePosts } from "../../raw/_function/parse-posts";
-import * as URL from "../../site/url/_function/url";
-import type { RawPostJSON } from "../../raw/_interface/raw-json-post";
-import type { RawPostsXML } from "../../raw/_interface/raw-xml-post";
+import { ClientOptions } from "../_interface/client-options.ts";
+import { setCredentials } from "../_function/credentials.ts";
+import { ClientUser } from "./client-user.ts";
+import { AutocompleteTag } from "../../site/tag/_class/autocomplete-tag.ts";
+import { IdParameter } from "../../../../util/_type/id-parameter.ts";
+import { Id } from "../../../../util/_type/id.ts";
+import { Post } from "../../site/post/_class/post.ts";
+import { Posts } from "../../site/post/_class/posts.ts";
+import { parsePosts } from "../../raw/_function/parse-posts.ts";
+import * as URL from "../../site/url/_function/url.ts";
+import type { RawPostJSON } from "../../raw/_interface/raw-json-post.ts";
+import type { RawPostsXML } from "../../raw/_interface/raw-xml-post.ts";
 
 /** A client to retrieve Rule34 data. */
 export class Client {
@@ -58,14 +58,17 @@ export class Client {
     async getPost(id: IdParameter): Promise<Post> {
         const URLs = URL.post(parseInt(id as string));
 
-        const response: [ RawPostJSON[], RawPostsXML ] = await Promise.all([
+        const response = await Promise.all([
             fetch(URLs.json).then(r => r.json()),
             fetch(URLs.xml).then(r => r.text()).then(parsePosts)
-        ]);
+        ]).then(promises => ({
+            json: promises[0] as RawPostJSON[],
+            xml: promises[1] as RawPostsXML
+        }));
 
         return new Post({ post: {
-            json: response[0][0],
-            xml: response[1].posts[0]
+            json: response.json[0],
+            xml: response.xml.posts[0]
         }});
     }
 

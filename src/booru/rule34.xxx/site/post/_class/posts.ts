@@ -1,6 +1,6 @@
-import { Post } from "./post";
-import type { RawPostJSON } from "../../../raw/_interface/raw-json-post";
-import type { RawPostXML } from "../../../raw/_interface/raw-xml-post";
+import { Post } from "./post.ts";
+import type { RawPostJSON } from "../../../raw/_interface/raw-json-post.ts";
+import type { RawPostXML } from "../../../raw/_interface/raw-xml-post.ts";
 
 export class Posts extends Array<Post> {
     count: number;
