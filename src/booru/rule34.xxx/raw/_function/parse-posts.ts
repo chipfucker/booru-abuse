@@ -1,5 +1,5 @@
-import { parseXML, type XMLDocument, type XMLNode } from "../../../../../util/_function/parse-xml";
-import type { RawPostsXML, RawPostXML } from "../../_interface/raw-xml-post";
+import { parseXML, type XMLDocument, type XMLNode } from "../../../../util/_function/parse-xml";
+import type { RawPostsXML, RawPostXML } from "../_interface/raw-xml-post";
 
 export function parsePosts(xml: string): RawPostsXML {
     const document = parseXML(xml);
@@ -12,7 +12,7 @@ function parseDocument(xml: XMLDocument): RawPostsXML {
     };
 
     let getAttribute = xml.getAttribute;
-    postsAttributes.forEach(attr => result[attr] = getAttribute(attr)!);
+    documentAttributes.forEach(attr => result[attr] = getAttribute(attr)!);
 
     Array.from(xml.children)
     .forEach(element => result.posts.push(parseElement(element)));
@@ -20,7 +20,7 @@ function parseDocument(xml: XMLDocument): RawPostsXML {
     return result;
 }
 
-const postsAttributes: (keyof Omit<RawPostsXML, "posts">)[] = [
+const documentAttributes: (keyof Omit<RawPostsXML, "posts">)[] = [
     "count", "offset"
 ];
 

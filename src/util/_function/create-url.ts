@@ -3,7 +3,7 @@ export function createURL({ base, path = [], param: query = {} }: URLObject): st
     if (Object.keys(query).length) {
         const object: Record<string, any> = {};
         Object.entries(query)
-            .filter(([key, value]: [string, any]) => value != null)
+            .filter(([_, value]: [string, any]) => value != null)
             .forEach(([key, value]: [string, any]) => object[key] = value);
         const params = new URLSearchParams(object).toString();
         url += "?" + params;

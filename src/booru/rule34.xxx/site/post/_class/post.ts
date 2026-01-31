@@ -7,6 +7,7 @@ import { PostTag } from "../../tag/_class/post-tag";
 import { PostTags } from "../../tag/_class/post-tags";
 import { Comment } from "../../_class/comment";
 import { getURL } from "../../url/_function/post";
+import * as URL from "../../url/_function/url";
 import type { RawPostJSON } from "../../../raw/_interface/raw-json-post";
 import type { RawPostXML } from "../../../raw/_interface/raw-xml-post";
 
