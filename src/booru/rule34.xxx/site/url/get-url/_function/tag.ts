@@ -1,4 +1,4 @@
-import { BaseTag } from "../../tag/_interface/base-tag";
+import { BaseTag } from "../../../tag/_interface/base-tag";
 
-export let getWikiURL = (tag: BaseTag["???"]): string => `?`;
-export let getSearchURL = (tag: BaseTag["???"]): string => `?`;
+export let getWikiURL = (tag: BaseTag["id"]): string => `?`;
+export let getSearchURL = (tag: BaseTag["name"]): string => `?`;
