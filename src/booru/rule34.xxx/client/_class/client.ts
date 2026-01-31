@@ -45,7 +45,7 @@ export class Client {
             if (tag.value.match(/\\r\\n/)) break;
             else tags.push(new AutocompleteTag({
                 name: tag.value,
-                count: parseInt(tag.label.match(/(?<=\()\d+(?=\)$)/)[0])
+                count: parseInt(tag.label.match(/(?<=\()\d+(?=\)$)/)![0])
             }));
 
         return tags;

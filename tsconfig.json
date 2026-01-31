@@ -4,7 +4,13 @@
     ],
     "compilerOptions": {
         "target": "es2022",
+        "moduleResolution": "nodenext",
+        "module": "nodenext",
+
         "rootDir": "./src/",
-        "outDir": "./dist/"
+        "outDir": "./dist/",
+
+        "rewriteRelativeImportExtensions": true,
+        "allowImportingTsExtensions": true
     }
 }
