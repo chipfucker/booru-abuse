@@ -13,7 +13,7 @@ export class PostTags extends Array<PostTag> {
      * Equivalent to using `Array.filter` with a check for each item's type.
      */
     category<T extends TagType>(category: T): PostTag<T>[] {
-        return this.filter(tag => tag.type === category) as PostTag<T>[];
+        return <PostTag<T>[]> Array.from(this).filter(tag => tag.type === category);
     }
     toString(): string { return this.#string; }
 }

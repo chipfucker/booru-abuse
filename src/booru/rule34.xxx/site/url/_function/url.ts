@@ -2,10 +2,10 @@ import { getCredential } from "../../../client/_function/credentials.ts";
 import { createURL } from "../../../../../util/_function/create-url.ts";
 
 const base = "https://api.rule34.xxx/";
-const creds = {
+const creds = () => ({
     api_key: getCredential("api_key"),
     user_id: getCredential("user_id")
-};
+});
 
 let getURL = (params: Parameters<typeof createURL>[0]["param"]) => createURL({
     base: "https://api.rule34.xxx/",
@@ -13,7 +13,7 @@ let getURL = (params: Parameters<typeof createURL>[0]["param"]) => createURL({
         page: "dapi",
         q: "index",
         ...params,
-        ...creds
+        ...creds()
     }
 });
 

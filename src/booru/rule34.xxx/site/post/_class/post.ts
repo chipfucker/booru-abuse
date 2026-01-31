@@ -83,7 +83,7 @@ export class Post {
 
     /** Returns all children of this post. */
     async getChildren(): Promise<Post[]> {
-        if (!this.commentCount) return [];
+        if (!this.hasChildren) return [];
         else {
             const URLs = URL.search({
                 query: `parent:${this.id}`,
@@ -101,7 +101,7 @@ export class Post {
 
             const merged: { json: RawPostJSON, xml: RawPostXML }[] = [];
             for (const i in response.json) {
-                merged.push({ json: response.json[i], xml: response.xml[i] });
+                merged.push({ json: response.json[i], xml: response.xml.posts[i] });
             }
     
             const posts: Post[] = [];

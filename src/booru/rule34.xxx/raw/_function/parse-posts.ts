@@ -11,12 +11,12 @@ function parseDocument(xml: XMLDocument): RawPostsXML {
         posts: [] as RawPostsXML["posts"]
     };
 
-    let getAttribute = xml.getAttribute;
+    let getAttribute = (attr: string) => xml.getAttribute(attr);
     documentAttributes.forEach(attr => result[attr] = getAttribute(attr)!);
 
-    Array.from(xml.children)
+    Array.from(xml.getElementsByTagName("post"))
     .forEach(element => result.posts.push(parseElement(element)));
-
+    
     return result;
 }
 
@@ -25,7 +25,7 @@ const documentAttributes: (keyof Omit<RawPostsXML, "posts">)[] = [
 ];
 
 function parseElement(node: XMLNode): RawPostXML {
-    let getAttribute = node.getAttribute;
+    let getAttribute = (attr: string) => node.getAttribute(attr);
 
     const post = <RawPostXML> {};
     attributes.forEach(attr => post[attr] = getAttribute(attr)!);
