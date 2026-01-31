@@ -1,2 +1,4 @@
-node_modules/
-test.js
+/node_modules/
+/dist/
+**/.test.js
+**/.test.ts

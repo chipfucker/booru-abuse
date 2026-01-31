@@ -1,0 +1,56 @@
+import { parseXML, type XMLDocument, type XMLNode } from "../../../../util/_function/parse-xml.ts";
+import type { RawPostsXML, RawPostXML } from "../_interface/raw-xml-post.ts";
+
+export function parsePosts(xml: string): RawPostsXML {
+    const document = parseXML(xml);
+    return parseDocument(document);
+}
+
+function parseDocument(xml: XMLDocument): RawPostsXML {
+    const result = <RawPostsXML> {
+        posts: [] as RawPostsXML["posts"]
+    };
+
+    let getAttribute = xml.getAttribute;
+    documentAttributes.forEach(attr => result[attr] = getAttribute(attr)!);
+
+    Array.from(xml.children)
+    .forEach(element => result.posts.push(parseElement(element)));
+
+    return result;
+}
+
+const documentAttributes: (keyof Omit<RawPostsXML, "posts">)[] = [
+    "count", "offset"
+];
+
+function parseElement(node: XMLNode): RawPostXML {
+    let getAttribute = node.getAttribute;
+
+    const post = <RawPostXML> {};
+    attributes.forEach(attr => post[attr] = getAttribute(attr)!);
+
+    return post;
+}
+
+const attributes: (keyof RawPostXML)[] = [
+    "file_url", "width", "height",
+
+    "sample_url", "sample_width", "sample_height",
+
+    "preview_url", "preview_width", "preview_height",
+    
+    "md5",
+    
+    "creator_id",
+    "id", "parent_id",
+    "source",
+    "rating",
+    
+    "created_at", "change",
+    "status",
+    
+    "score",
+    "tags",
+    "has_notes", "has_children", "has_comments"
+];

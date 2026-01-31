@@ -1,14 +1,13 @@
 {
     "name": "booru-abuse",
     "description": "An expansive class API for boorus",
-    "version": "0.0.1",
-    "types": "./doc/index.d.mts",
+    "version": "0.0.0",
     "type": "module",
-    "imports": {
-        "#lib/*": "./lib/*",
-        "#src/*": "./src/*"
-    },
     "dependencies": {
-        "jsdom": "^27.2.0"
+        "@types/xmldom": "^0.1.34",
+        "xmldom": "^0.6.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.9.3"
     }
 }
