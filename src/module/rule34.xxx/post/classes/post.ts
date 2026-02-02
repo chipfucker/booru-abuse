@@ -1,8 +1,6 @@
 import { fetchJSON } from "../../../../util/functions/fetch-json.ts";
-import { fetchXMLPosts } from "../functions/fetch-xml-post.ts";
+import { fetchPostsXML } from "../functions/fetch-posts.ts";
 import * as api from "../../util/functions/api-url.ts";
-import type { RawPostJSON } from "../interfaces/raw-post-json.ts";
-import type { RawPostXML } from "../interfaces/raw-post-xml.ts";
 import type { Authentication } from "../../client/interfaces/authentication.ts";
 
 export class Post {
@@ -13,10 +11,10 @@ export class Post {
     static async fromURL(url: { id: number; }, auth: Authentication): Promise<Post> {
         const urls = api.post(url, auth);
         const response = await Promise.all([
-            fetchJSON(urls.json), fetchXMLPosts(urls.xml)
+            fetchJSON(urls.json), fetchPostsXML(urls.xml)
         ]).then(promises => ({
-            json: promises[0] as RawPostJSON,
-            xml: <any> promises[1].posts[0]
+            json: promises[0],
+            xml: promises[1].posts[0]
         }));
 
         return Post.fromObject(response, auth);
