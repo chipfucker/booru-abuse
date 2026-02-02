@@ -33,5 +33,17 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+  },
+  "typedocOptions": {
+    "name": "Booru Abuse",
+    "readme": "./src/typedoc.readme.md",
+    "entryPoints": [ "./src/index.ts" ],
+    "sort": [
+      "visibility",
+      "static-first",
+      "kind",
+      "alphabetical",
+      "enum-value-ascending"
+    ]
   }
 }
