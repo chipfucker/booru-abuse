@@ -9,6 +9,7 @@
 
         "rootDir": "./src/",
         "outDir": "./dist/",
+        "sourceMap": true,
 
         "rewriteRelativeImportExtensions": true,
         "allowImportingTsExtensions": true

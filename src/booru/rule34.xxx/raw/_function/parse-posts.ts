@@ -1,14 +1,14 @@
-import { parseXML, type XMLDocument, type XMLNode } from "../../../../util/_function/parse-xml.ts";
-import type { RawPostsXML, RawPostXML } from "../_interface/raw-xml-post.ts";
+import { parseXML, type XMLDocument, type XMLNode } from "../../../../util/_function/xml.ts";
+import type { RawSearchXML, RawPostXML } from "../_interface/raw-xml-post.ts";
 
-export function parsePosts(xml: string): RawPostsXML {
+export function parsePosts(xml: string): RawSearchXML {
     const document = parseXML(xml);
     return parseDocument(document);
 }
 
-function parseDocument(xml: XMLDocument): RawPostsXML {
-    const result = <RawPostsXML> {
-        posts: [] as RawPostsXML["posts"]
+function parseDocument(xml: XMLDocument): RawSearchXML {
+    const result = <RawSearchXML> {
+        posts: [] as RawSearchXML["posts"]
     };
 
     let getAttribute = (attr: string) => xml.getAttribute(attr);
@@ -20,7 +20,7 @@ function parseDocument(xml: XMLDocument): RawPostsXML {
     return result;
 }
 
-const documentAttributes: (keyof Omit<RawPostsXML, "posts">)[] = [
+const documentAttributes: (keyof Omit<RawSearchXML, "posts">)[] = [
     "count", "offset"
 ];
 

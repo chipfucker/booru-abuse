@@ -7,9 +7,10 @@ import { Id } from "../../../../util/_type/id.ts";
 import { Post } from "../../site/post/_class/post.ts";
 import { Posts } from "../../site/post/_class/posts.ts";
 import { parsePosts } from "../../raw/_function/parse-posts.ts";
+import { parseInt } from "../../../../util/_function/integer.ts";
 import * as URL from "../../site/url/_function/url.ts";
 import type { RawPostJSON } from "../../raw/_interface/raw-json-post.ts";
-import type { RawPostsXML } from "../../raw/_interface/raw-xml-post.ts";
+import type { RawSearchXML } from "../../raw/_interface/raw-xml-post.ts";
 
 /** A client to retrieve Rule34 data. */
 export class Client {
@@ -56,20 +57,9 @@ export class Client {
      * @param id The Id of the post.
      */
     async getPost(id: IdParameter): Promise<Post> {
-        const URLs = URL.post(parseInt(id as string));
-
-        const response = await Promise.all([
-            fetch(URLs.json).then(r => r.json()),
-            fetch(URLs.xml).then(r => r.text()).then(parsePosts)
-        ]).then(promises => ({
-            json: promises[0] as RawPostJSON[],
-            xml: promises[1] as RawPostsXML
-        }));
-
-        return new Post({ post: {
-            json: response.json[0],
-            xml: response.xml.posts[0]
-        }});
+        return await Post.fromURL({
+            id: parseInt(id)
+        });
     }
 
     /**
@@ -77,25 +67,10 @@ export class Client {
      * @param query The query to use when searching for posts.
      */
     async search(query: string, options: { perPage: number; page: number; }): Promise<Posts> {
-        const URLs = URL.search({
+        return await Posts.fromURL({
             query: query,
             limit: options.perPage,
             page: options.page
-        });
-
-        const response = await Promise.all([
-            fetch(URLs.json).then(r => r.json()),
-            fetch(URLs.xml).then(r => r.text()).then(parsePosts)
-        ]).then(promises => ({
-            json: promises[0] as RawPostJSON[],
-            xml: promises[1] as RawPostsXML
-        }));
-
-        return new Posts({
-            count: parseInt(response.xml.count),
-            offset: parseInt(response.xml.offset),
-            json: response.json,
-            xml: response.xml.posts
         });
     }
 }

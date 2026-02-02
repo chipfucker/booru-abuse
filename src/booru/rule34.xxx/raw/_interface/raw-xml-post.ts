@@ -1,4 +1,4 @@
-export interface RawPostsXML {
+export interface RawSearchXML {
     count: string;
     offset: string;
     posts: RawPostXML[];

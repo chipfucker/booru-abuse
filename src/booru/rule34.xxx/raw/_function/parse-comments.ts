@@ -1,4 +1,4 @@
-import { parseXML, type XMLDocument, type XMLNode } from "../../../../util/_function/parse-xml.ts";
+import { parseXML, type XMLDocument, type XMLNode } from "../../../../util/_function/xml.ts";
 import type { RawComment } from "../_interface/raw-comment.ts";
 
 export function parseComments(xml: string): RawComment[] {

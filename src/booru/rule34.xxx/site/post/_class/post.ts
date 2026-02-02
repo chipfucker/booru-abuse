@@ -1,5 +1,5 @@
+import { Posts } from "./posts.ts";
 import { PostFiles } from "../file/_class/post-file.ts";
-import { ClientConfiguration } from "../../../client/_interface/client-configuration.ts";
 import { PostAuthor } from "../_class/post-author.ts";
 import { PostRating } from "../_enum/post-rating.ts";
 import { PostStatus } from "../_enum/post-status.ts";
@@ -8,9 +8,11 @@ import { PostTags } from "../../tag/_class/post-tags.ts";
 import { Comment } from "../../_class/comment.ts";
 import { getURL } from "../../url/get-url/_function/post.ts";
 import { parsePosts } from "../../../raw/_function/parse-posts.ts";
+import { parseComments } from "../../../raw/_function/parse-comments.ts";
+import { parseInt } from "../../../../../util/_function/integer.ts";
 import * as URL from "../../url/_function/url.ts";
 import type { RawPostJSON } from "../../../raw/_interface/raw-json-post.ts";
-import type { RawPostXML, RawPostsXML } from "../../../raw/_interface/raw-xml-post.ts";
+import type { RawPostXML } from "../../../raw/_interface/raw-xml-post.ts";
 
 /** A post from rule34.xxx. */
 export class Post {
@@ -47,7 +49,24 @@ export class Post {
     /** The tags associated with the post. */
     tags: PostTags;
 
-    constructor ({ config, post: { xml, json }}: ConstructorOptions) {
+    static async fromURL(url: { id: number; }) {
+        const URLs = URL.post(url.id);
+        const response = await Promise.all([
+            fetch(URLs.json).then(r => r.json()),
+            fetch(URLs.xml).then(r => r.text()).then(parsePosts)
+        ]).then(promises => ({
+            json: promises[0] as RawPostJSON,
+            xml: promises[1].posts[0] as RawPostXML
+        }));
+
+        return Post.fromObject(response);
+    }
+
+    static fromObject(objects: { xml: RawPostXML; json: RawPostJSON; }): Post {
+        return new Post(objects);
+    }
+
+    constructor ({ xml, json }: { xml: RawPostXML; json: RawPostJSON; }) {
         this.hasChildren = xml.has_children === "true";
         this.commentCount = json.comment_count;
 
@@ -84,43 +103,22 @@ export class Post {
     /** Returns all children of this post. */
     async getChildren(): Promise<Post[]> {
         if (!this.hasChildren) return [];
-        else {
-            const URLs = URL.search({
-                query: `parent:${this.id}`,
-                limit: 100,
-                page: 0
-            });
-
-            const response = await Promise.all([
-                fetch(URLs.json).then(r => r.json()),
-                fetch(URLs.xml).then(r => r.text()).then(parsePosts)
-            ]).then(promises => ({
-                json: promises[0] as RawPostJSON[],
-                xml: promises[1] as RawPostsXML
-            }));
-
-            const merged: { json: RawPostJSON, xml: RawPostXML }[] = [];
-            for (const i in response.json) {
-                merged.push({ json: response.json[i], xml: response.xml.posts[i] });
-            }
-    
-            const posts: Post[] = [];
-            merged.forEach(item => posts.push(
-                new Post({ post: {
-                    json: item.json,
-                    xml: item.xml
-                }})
-            ));
-
-            return posts;
-        }
+        else return Array.from(await Posts.fromURL({
+            query: `paremt:${this.id}`,
+            limit: 100,
+            page: 0
+        }));
     }
 
     /** Returns the commments under the post. */
     async getComments(): Promise<Comment[]> {
-        // TODO
-        const butt: unknown = null;
-        return butt as Comment[];
+        if (!this.commentCount) return [];
+        else {
+            const url = URL.comments(this.id);
+            const raw = await fetch(url).then(r => r.text()).then(parseComments);
+            const comments = raw.map(i => new Comment(i));
+            return comments;
+        }
     }
 
     /**
@@ -128,12 +126,4 @@ export class Post {
      * @param query The search to apply to the URL.
      */
     toURL = (query?: string) => getURL(this.id, query);
-}
-
-interface ConstructorOptions {
-    config?: ClientConfiguration;
-    post: {
-        json: RawPostJSON;
-        xml: RawPostXML;
-    };
 }

@@ -1,4 +1,5 @@
 import { PostFileType } from "../_enum/post-file-type.ts";
+import { parseInt } from "../../../../../../util/_function/integer.ts";
 import type { RawPostJSON } from "../../../../raw/_interface/raw-json-post.ts";
 import type { RawPostXML } from "../../../../raw/_interface/raw-xml-post.ts";
 
@@ -39,7 +40,7 @@ export class PostFiles implements PostFile {
     /** The hash name of the post's files. */
     hash: string;
 
-    constructor ({ json, xml }: ConstructorOptions) {
+    constructor ({ json, xml }: { json: RawPostJSON; xml: RawPostXML; }) {
         this.url = appendId(json.file_url, json.id);
         this.size = {
             width: json.width,
@@ -82,11 +83,6 @@ export interface PostFile {
     url: string;
     /** The dimensions of the media. */
     size: { width: number; height: number };
-}
-
-interface ConstructorOptions {
-    json: RawPostJSON;
-    xml: RawPostXML;
 }
 
 const appendId = <url extends string, id extends number>(url: url, id: id): `${url}?${id}` => `${url}?${id}`;
