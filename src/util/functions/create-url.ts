@@ -1,5 +1,6 @@
 export function createURL({ base, path = [], params = {} }: URLObject): string {
     let url = new URL(path.join("/"), base).toString();
+    
     if (Object.keys(params).length) {
         type Parameters = NonNullable<URLObject["params"]>;
         type ParameterEntries = [keyof Parameters, Parameters[keyof Parameters]];
@@ -11,6 +12,7 @@ export function createURL({ base, path = [], params = {} }: URLObject): string {
 
         url += "?" + new URLSearchParams(object).toString();
     }
+
     return url;
 }
 
