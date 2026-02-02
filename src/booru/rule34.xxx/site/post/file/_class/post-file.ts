@@ -1,5 +1,4 @@
 import { PostFileType } from "../_enum/post-file-type.ts";
-import { parseInt } from "../../../../../../util/_function/integer.ts";
 import type { RawPostJSON } from "../../../../raw/_interface/raw-json-post.ts";
 import type { RawPostXML } from "../../../../raw/_interface/raw-xml-post.ts";
 

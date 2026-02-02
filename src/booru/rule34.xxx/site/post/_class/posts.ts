@@ -1,6 +1,5 @@
 import { Post } from "./post.ts";
 import { parsePosts } from "../../../raw/_function/parse-posts.ts";
-import { parseInt } from "../../../../../util/_function/integer.ts";
 import * as URL from "../../url/_function/url.ts";
 import type { RawPostJSON } from "../../../raw/_interface/raw-json-post.ts";
 import type { RawPostXML, RawSearchXML } from "../../../raw/_interface/raw-xml-post.ts";

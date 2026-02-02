@@ -2,15 +2,10 @@ import { ClientOptions } from "../_interface/client-options.ts";
 import { setCredentials } from "../_function/credentials.ts";
 import { ClientUser } from "./client-user.ts";
 import { AutocompleteTag } from "../../site/tag/_class/autocomplete-tag.ts";
-import { IdParameter } from "../../../../util/_type/id-parameter.ts";
 import { Id } from "../../../../util/_type/id.ts";
 import { Post } from "../../site/post/_class/post.ts";
 import { Posts } from "../../site/post/_class/posts.ts";
-import { parsePosts } from "../../raw/_function/parse-posts.ts";
-import { parseInt } from "../../../../util/_function/integer.ts";
 import * as URL from "../../site/url/_function/url.ts";
-import type { RawPostJSON } from "../../raw/_interface/raw-json-post.ts";
-import type { RawSearchXML } from "../../raw/_interface/raw-xml-post.ts";
 
 /** A client to retrieve Rule34 data. */
 export class Client {
@@ -21,7 +16,7 @@ export class Client {
     self: ClientUser;
 
     constructor (options: ClientOptions) {
-        options.auth.user_id = parseInt(options.auth.user_id as string);
+        options.auth.user_id = options.auth.user_id;
         this.#api_key = options.auth.api_key;
         this.#user_id = options.auth.user_id;
 
@@ -56,10 +51,8 @@ export class Client {
      * Returns the post at a given Id.
      * @param id The Id of the post.
      */
-    async getPost(id: IdParameter): Promise<Post> {
-        return await Post.fromURL({
-            id: parseInt(id)
-        });
+    async getPost(id: number): Promise<Post> {
+        return await Post.fromURL({ id });
     }
 
     /**

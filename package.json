@@ -8,17 +8,16 @@
         "url": "https://github.com/chipfucker/booru-abuse/issues",
         "email": "tipchumor@gmail.com"
     },
-
     "type": "module",
     "files": [
         "./dist/**/*"
     ],
-
     "dependencies": {
         "@types/xmldom": "^0.1.34",
         "xmldom": "^0.6.0"
     },
     "devDependencies": {
+        "typedoc": "^0.28.16",
         "typescript": "^5.9.3"
     }
 }

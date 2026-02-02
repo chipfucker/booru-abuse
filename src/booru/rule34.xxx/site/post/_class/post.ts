@@ -9,7 +9,6 @@ import { Comment } from "../../_class/comment.ts";
 import { getURL } from "../../url/get-url/_function/post.ts";
 import { parsePosts } from "../../../raw/_function/parse-posts.ts";
 import { parseComments } from "../../../raw/_function/parse-comments.ts";
-import { parseInt } from "../../../../../util/_function/integer.ts";
 import * as URL from "../../url/_function/url.ts";
 import type { RawPostJSON } from "../../../raw/_interface/raw-json-post.ts";
 import type { RawPostXML } from "../../../raw/_interface/raw-xml-post.ts";

@@ -1,6 +1,5 @@
 import { User } from "./user.ts";
 import { getURL } from "../url/get-url/_function/comment.ts";
-import { parseInt } from "../../../../util/_function/integer.ts";
 import type { Id } from "../../../../util/_type/id.ts";
 import type { RawComment } from "../../raw/_interface/raw-comment.ts";
 
@@ -23,11 +22,11 @@ export class Comment {
     created: Date;
 
     constructor (options: ConstructorOptions) {
-        this.postId = parseInt(options.post_id as string);
-        this.id = parseInt(options.id as string);
+        this.postId = parseInt(options.post_id);
+        this.id = parseInt(options.id);
         this.author = new User({
             name: options.creator,
-            id: parseInt(options.creator_id as string)
+            id: parseInt(options.creator_id)
         });
         this.content = options.body;
         this.created = new Date(options.created_at);
