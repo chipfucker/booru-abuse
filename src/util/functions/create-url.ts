@@ -15,6 +15,6 @@ export function createURL({ base, path = [], params = {} }: URLObject): string {
 
 interface URLObject {
     base: string;
-    path?: [],
+    path?: string[],
     params?: { [key: string]: any }
 }
