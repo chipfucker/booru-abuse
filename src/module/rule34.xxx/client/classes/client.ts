@@ -1,12 +1,10 @@
 import { ClientUser } from "./client-user.ts";
+import type { Authentication } from "../interfaces/authentication.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
 
 /** A client to retrieve date from rule34.xxx. */
 export class Client {
-    #auth: {
-        api_key: string;
-        user_id: number;
-    };
+    #auth: Authentication;
     
     /** Info regarding the user tied to the client. */
     self: ClientUser;
