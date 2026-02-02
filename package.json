@@ -1,0 +1,17 @@
+{
+  "name": "booru-abuse",
+  "version": "0.0.1",
+  "description": "An expansive API class for imageboards",
+  "homepage": "https://github.com/chipfucker/booru-abuse#readme",
+  "bugs": {
+    "url": "https://github.com/chipfucker/booru-abuse/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chipfucker/booru-abuse.git"
+  },
+  "license": "ISC",
+  "author": "chiptumor",
+  "type": "commonjs",
+  "main": "./dist/index.js"
+}
