@@ -14,5 +14,5 @@ export class Client {
     constructor (options: ClientOptions) {
         this.#auth = options.auth;
         this.self = ClientUser.fromAuth(options.auth);
-    } 
+    }
 }
