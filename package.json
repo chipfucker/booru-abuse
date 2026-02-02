@@ -13,5 +13,9 @@
   "license": "ISC",
   "author": "chiptumor",
   "type": "commonjs",
-  "main": "./dist/index.js"
+  "main": "./dist/index.js",
+  "devDependencies": {
+    "typedoc": "^0.28.16",
+    "typescript": "^5.9.3"
+  }
 }
