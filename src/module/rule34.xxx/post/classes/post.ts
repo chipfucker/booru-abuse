@@ -13,7 +13,7 @@ import type { RawPostXML } from "../interfaces/raw-post-xml.ts";
 import type { Authentication } from "../../client/interfaces/authentication.ts";
 import type { RawComment } from "../../misc/interfaces/raw-comment.ts";
 
-/** A post from rule34.xxx. */
+/** A post. */
 export class Post {
     #auth: Authentication;
     private hasChildren: boolean;

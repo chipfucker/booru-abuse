@@ -5,7 +5,7 @@ import type { RawPostJSON } from "../interfaces/raw-post-json.ts";
 import type { RawPostXML, RawSearchXML } from "../interfaces/raw-post-xml.ts";
 import type { Authentication } from "../../client/index.ts";
 
-// TODO: https://reddit.com/r/typescript/comments/bfkncu/when_using_arrayreduce_and_the_initial_value_is/
+/** An array of posts. */
 export class Posts extends Array<Post> {
     // @ts-ignore TS6133
     #auth: Authentication;

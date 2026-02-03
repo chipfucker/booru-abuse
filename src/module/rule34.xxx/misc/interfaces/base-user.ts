@@ -1,4 +1,4 @@
-/** The base interface for users on Rule34. */
+/** The base interface for user types. */
 export interface BaseUser {
     /** The username of the user. */
     name: string;

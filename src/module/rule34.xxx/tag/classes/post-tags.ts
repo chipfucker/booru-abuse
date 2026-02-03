@@ -1,6 +1,7 @@
 import { PostTag } from "./post-tag.ts";
 import { TagType } from "../enums/tag-type.ts";
 
+/** Array of tags found under a post. */
 export class PostTags extends Array<PostTag> {
     private string: string;
 

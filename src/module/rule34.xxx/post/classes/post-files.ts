@@ -31,7 +31,7 @@ export class PostFiles implements PostFile {
     thumbnail: PostFile;
 
     /** The file's type. */
-    type: PostFileType = <any> undefined;
+    type: PostFileType;
     /** The directory of the post's files. */
     directory: number;
     /** The hash name of the post's files. */
@@ -63,6 +63,7 @@ export class PostFiles implements PostFile {
             ]
         };
 
+        this.type = <any> undefined;
         this.directory = json.directory;
         this.hash = json.hash;
 
@@ -76,6 +77,7 @@ export class PostFiles implements PostFile {
     }
 }
 
+/** A portion of the media files of a post. */
 export interface PostFile {
     /** The media URL. */
     url: string;

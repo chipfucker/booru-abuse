@@ -2,18 +2,19 @@ import { User } from "./user.ts";
 import { comment as getURL } from "../../util/functions/site-url.ts";
 import type { RawComment } from "../interfaces/raw-comment.ts";
 
+/** A comment under a post. */
 export class Comment {
     // TODO: better property name for 'postId'?
     /** The Id of the post over this comment. */
     postId: number;
     /** The comment's unique Id. */
     id: number;
-    /** The author of the comment. */
+    /** The creator of the comment. */
     author: User;
-    /** The comment's content. */
+    /** The comment's body. */
     content: string;
     /**
-     * The date this post was created.
+     * The date this comment was created.
      * @deprecated
      * This value is almost guaranteed to be inaccurate.  
      * This always, presumably by mistake, returns the date (specific to the timezone

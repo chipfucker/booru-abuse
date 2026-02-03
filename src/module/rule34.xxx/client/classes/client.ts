@@ -9,7 +9,7 @@ import type { ClientOptions } from "../interfaces/client-options.ts";
 export class Client {
     #auth: Authentication;
     
-    /** Info regarding the user tied to the client. */
+    /** The user tied to the client. */
     self: ClientUser;
 
     constructor (options: ClientOptions) {
@@ -27,7 +27,7 @@ export class Client {
     
     /**
      * Returns the post at a given Id.
-     * @param id The Id of the post.
+     * @param id The unique Id of the post.
      * @apiRequests 2: Requests a JSON and XML search.
      */
     async getPost(id: number): Promise<Post> {
@@ -38,7 +38,6 @@ export class Client {
     /**
      * Returns posts resulting from a search query.
      * @param query The query to use when searching for posts.
-     * @param options Options to modify the returned results.
      * @apiRequests 2: Requests a JSON and XML search.
      */
     async search(query: string, options: { perPage: number; page: number; }): Promise<Posts> {
