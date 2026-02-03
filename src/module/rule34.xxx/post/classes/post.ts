@@ -114,7 +114,10 @@ export class Post {
         .then(posts => posts.toArray())
     }
 
-    /** Returns all comments under this post. */
+    /**
+     * Returns all comments under this post.
+     * @apirequests 1: comment
+     */
     async getComments(): Promise<Comment[]> {
         if (!this.commentCount) return [];
         else {
