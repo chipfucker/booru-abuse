@@ -5,3 +5,4 @@ export { PostStatus } from "./enums/post-status.ts";
 export type { PostAuthor } from "./classes/post-author.ts";
 export type { PostFiles } from "./classes/post-files.ts";
 export type { Post } from "./classes/post.ts";
+export type { Posts } from "./classes/posts.ts";
