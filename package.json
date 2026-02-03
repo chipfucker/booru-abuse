@@ -15,6 +15,7 @@
   "type": "module",
   "main": "./dist/index.js",
   "scripts": {
+    "build": "npx tsc",
     "docs": "npx typedoc"
   },
   "devDependencies": {
