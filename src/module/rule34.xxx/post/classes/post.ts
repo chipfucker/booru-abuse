@@ -52,7 +52,10 @@ export class Post {
     static async fromId(id: number, auth: Authentication): Promise<Post> {
         const urls = api.post({ id }, auth);
         const response = await Promise.all([
-            fetchPostsJSON(urls.json), fetchPostsXML(urls.xml)
+            // API REQUEST (post)
+            fetchPostsJSON(urls.json),
+            // API REQUEST (post)
+            fetchPostsXML(urls.xml)
         ]).then(promises => ({
             json: promises[0][0]!,
             xml: promises[1].posts[0]!
@@ -118,6 +121,7 @@ export class Post {
             const url = api.comments({
                 post_id: this.id
             }, this.#auth);
+            // API REQUEST (comment)
             const raw = await fetchXML(url);
             const comments = raw.children.map(i => Comment.fromRaw(<any> i.attr as RawComment));
             return comments;

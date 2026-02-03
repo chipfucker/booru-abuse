@@ -30,6 +30,7 @@ export class Client {
      * @param id The Id of the post.
      */
     async getPost(id: number): Promise<Post> {
+        // API REQUEST (post) *2
         return await Post.fromId(id, this.#auth);
     }
 
@@ -39,6 +40,7 @@ export class Client {
      * @param options Options to modify the returned results.
      */
     async search(query: string, options: { perPage: number; page: number; }): Promise<Posts> {
+        // API REQUEST (post) *2
         return await Posts.fromParams({
             query: query,
             limit: options.perPage,

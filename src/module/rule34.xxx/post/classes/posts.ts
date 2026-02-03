@@ -23,7 +23,9 @@ export class Posts extends Array<Post> {
             pid: params.page
         }, auth);
         const responses = await Promise.all([
+            // API REQUEST (post)
             fetchPostsJSON(url.json),
+            // API REQUEST (post)
             fetchPostsXML(url.xml)
         ]).then(promise => ({
             json: promise[0],
