@@ -1,12 +1,51 @@
 {
-	"name": "Booru Abuse",
-	"readme": "./src/typedoc.readme.md",
-	"entryPoints": ["./src/index.ts"],
-	"sort": [
-		"visibility",
-		"static-first",
-		"kind",
-		"enum-value-ascending",
-		"alphabetical"
-	]
+  "name": "Booru Abuse",
+  "readme": "./src/typedoc.readme.md",
+  "entryPoints": ["./src/index.ts"],
+  "kindSortOrder": [
+    // misc
+    "Reference",      // external docs and module re-exports
+
+    // top level
+    "Project",              // all docs
+    "Module",               // modules based on entry points
+    "Namespace",            // namespace / export * as
+    
+    "Class",                // class
+    "Interface",            // interface / export type class
+    "Function",             // function
+    "Enum",                 // enum
+    "Variable",             // var/let/const
+    "TypeAlias",            // type
+
+    // class
+    "Constructor",          // constructor ()
+    "Property",             // property
+    "Method",               // method()
+    "Accessor",             // get/set accessor()
+    "GetSignature",         // get accessor()
+    "SetSignature",         // set accessor()
+    
+    // interface
+    "CallSignature",        // (param): any
+    "ConstructorSignature", // new (param): interface
+    "IndexSignature",       // [key]: any
+
+    // enum
+    "EnumMember",           // Member
+    
+    // function / method
+    "Parameter",            // (param)
+    "TypeParameter",        // any<param>
+    "TypeLiteral"           // instance: literal
+  ],
+  "sort": [
+    "visibility",
+    "required-first",
+    "static-first",
+    "kind",
+    "enum-value-ascending",
+    "source-order",
+    "alphabetical"
+  ]
 }
