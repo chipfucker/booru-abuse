@@ -4,7 +4,7 @@ import { TagType } from "../enums/tag-type.ts";
 export class PostTags extends Array<PostTag> {
     private string: string;
 
-    fromRaw(raw: { string: string; tags: { tag: string; count: number; type: string; }[]; }): PostTags {
+    static fromRaw(raw: { string: string; tags: { tag: string; count: number; type: string; }[]; }): PostTags {
         const tags = raw.tags.map(tag => PostTag.fromRaw(tag));
         return new PostTags({ string: raw.string, tags: tags });
     }
