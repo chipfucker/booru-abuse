@@ -5,8 +5,11 @@ export class AutocompleteTag implements Omit<BaseTag, "id"|"type"|"ambiguous"|"t
     name: string;
     count: number;
 
-    fromObject(object: { name: string; count: number; }) {
-        return new AutocompleteTag(object);
+    static fromObject(object: { label: string; value: string; }): AutocompleteTag {
+        return new AutocompleteTag({
+            name: object.value,
+            count: parseInt(object.label.match(/(?<=\()\d+(?=\)$)/)![0])
+        });
     }
 
     constructor (options: { name: string; count: number; }) {
