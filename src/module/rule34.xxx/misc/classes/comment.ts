@@ -16,7 +16,7 @@ export class Comment {
     /**
      * The date this comment was created.
      * @deprecated
-     * This value is almost guaranteed to be inaccurate.  
+     * This value is guaranteed to be inaccurate.  
      * This always, presumably by mistake, returns the date (specific to the timezone
      * of Rule34's servers) that the comment was fetched.
      */
