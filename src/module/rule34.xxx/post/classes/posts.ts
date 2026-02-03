@@ -6,6 +6,7 @@ import type { RawPostXML, RawSearchXML } from "../interfaces/raw-post-xml.ts";
 import type { Authentication } from "../../client/index.ts";
 
 export class Posts extends Array<Post> {
+    // @ts-ignore TS6133
     #auth: Authentication;
 
     /** Query used to fetch the following posts. */
