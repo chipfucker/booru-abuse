@@ -37,7 +37,7 @@ export class PostFiles {
     /** The hash name of the post's files. */
     hash: string;
 
-    fromObject(object: { json: RawPostJSON; xml: RawPostXML; }): PostFiles {
+    static fromObject(object: { json: RawPostJSON; xml: RawPostXML; }): PostFiles {
         return new PostFiles(object);
     }
 
