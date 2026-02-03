@@ -1,4 +1,6 @@
 import { ClientUser } from "./client-user.ts";
+import { Post } from "../../post/classes/post.ts";
+import { Posts } from "../../post/classes/posts.ts";
 import { AutocompleteTags } from "../../tag/classes/autocomplete-tags.ts";
 import type { Authentication } from "../interfaces/authentication.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
@@ -21,5 +23,26 @@ export class Client {
      */
     async autocomplete(query: string): Promise<AutocompleteTags> {
         return await AutocompleteTags.fromQuery(query);
+    }
+    
+    /**
+     * Returns the post at a given Id.
+     * @param id The Id of the post.
+     */
+    async getPost(id: number): Promise<Post> {
+        return await Post.fromId(id, this.#auth);
+    }
+
+    /**
+     * Returns posts resulting from a search query.
+     * @param query The query to use when searching for posts.
+     * @param options Options to modify the returned results.
+     */
+    async search(query: string, options: { perPage: number; page: number; }): Promise<Posts> {
+        return await Posts.fromParams({
+            query: query,
+            limit: options.perPage,
+            page: options.page
+        }, this.#auth);
     }
 }
