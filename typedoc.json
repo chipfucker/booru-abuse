@@ -6,7 +6,7 @@
 		"visibility",
 		"static-first",
 		"kind",
-		"alphabetical",
-		"enum-value-ascending"
+		"enum-value-ascending",
+		"alphabetical"
 	]
 }
