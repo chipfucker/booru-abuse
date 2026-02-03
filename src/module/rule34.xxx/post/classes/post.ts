@@ -50,8 +50,8 @@ export class Post {
         return Post.fromObject(response, auth);
     }
 
-    static fromObject(objects: { json: RawPostJSON; xml: RawPostXML; }, auth: Authentication): Post {
-        return new Post(objects, auth);
+    static fromObject(object: { json: RawPostJSON; xml: RawPostXML; }, auth: Authentication): Post {
+        return new Post(object, auth);
     }
 
     constructor ({ json, xml }: { json: RawPostJSON; xml: RawPostXML; }, auth: Authentication) {
