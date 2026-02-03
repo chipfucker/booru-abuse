@@ -21,7 +21,7 @@ export class Post {
     /** The unique Id of the post. */
     id: number;
     /** The parent post's Id. */
-    parent?: number;
+    parent: number | null;
     /**
      * The source attributed to this post.  
      * Typically a URL.
@@ -63,5 +63,46 @@ export class Post {
 
     constructor ({ json, xml }: { json: RawPostJSON; xml: RawPostXML; }, auth: Authentication) {
         this.#auth = auth;
+        this.hasChildren = xml.has_children === "true";
+        this.commentCount = json.comment_count;
+
+        this.file = PostFiles.fromObject({ json, xml });
+
+        this.id = json.id;
+        this.parent = json.parent_id || null;
+        this.source = json.source;
+        this.rating = ({
+            "safe":         PostRating.Safe,
+            "questionable": PostRating.Questionable,
+            "explicit":     PostRating.Explicit
+        })[json.rating]!;
+        this.author = PostAuthor.fromObject({
+            name: json.owner,
+            id: parseInt(xml.creator_id)
+        });
+
+        this.created = new Date(xml.created_at);
+        this.lastModified = new Date(json.change * 1000);
+        this.status = ({
+            "active":  PostStatus.Active,
+            "flagged": PostStatus.Flagged,
+            "deleted": PostStatus.Deleted
+        })[json.status]!;
+
+        this.score = json.score;
+        this.tags = PostTags.fromRaw({
+            string: json.tags,
+            tags: json.tag_info
+        });
+    }
+
+    /** Returns all children of this post. */
+    async getChildren(): Promise<Post[]> {
+        if (!this.hasChildren) return [];
+    }
+
+    /** Returns all comments under this post. */
+    async getComments(): Promise<Array> {
+        if (!this.commentCount) return [];
     }
 }
