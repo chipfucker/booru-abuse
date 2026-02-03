@@ -3,9 +3,9 @@ import type { RawPostJSON } from "../interfaces/raw-post-json";
 import type { RawPostXML } from "../interfaces/raw-post-xml";
 
 /** The media files of a post. */
-export class PostFiles {
+export class PostFiles implements PostFile {
     url: string;
-    size: { width: number; height: number };
+    size: [ width: number, height: number ];
     
     /**
      * If one exists, a static, downsampled version of the main file.    
@@ -43,10 +43,7 @@ export class PostFiles {
 
     constructor ({ json, xml }: { json: RawPostJSON; xml: RawPostXML; }) {
         this.url = appendId(json.file_url, json.id);
-        this.size = {
-            width: json.width,
-            height: json.height
-        };
+        this.size = [ json.width, json.height ];
 
         this.downsample = {
             url: appendId(json.sample_url, json.id),
