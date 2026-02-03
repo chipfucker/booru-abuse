@@ -51,7 +51,7 @@ export class Post {
         const response = await Promise.all([
             fetchPostsJSON(urls.json), fetchPostsXML(urls.xml)
         ]).then(promises => ({
-            json: promises[0],
+            json: promises[0][0]!,
             xml: promises[1].posts[0]!
         }));
 
