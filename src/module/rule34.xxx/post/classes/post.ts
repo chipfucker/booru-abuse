@@ -105,7 +105,7 @@ export class Post {
 
     /**
      * Returns all children of this post.
-     * @apiRequests 2?: Requests a JSON and XML search if children exist.
+     * @apiRequests `2?`: Requests a JSON and XML search if children exist.
      */
     async getChildren(): Promise<Post[]> {
         if (!this.hasChildren) return [];
@@ -119,7 +119,7 @@ export class Post {
 
     /**
      * Returns all comments under this post.
-     * @apiRequests 1?: Requests comments if they exist.
+     * @apiRequests `1?`: Requests comments if they exist.
      */
     async getComments(): Promise<Comment[]> {
         if (!this.commentCount) return [];

@@ -28,7 +28,7 @@ export class Client {
     /**
      * Returns the post at a given Id.
      * @param id The unique Id of the post.
-     * @apiRequests 2: Requests a JSON and XML search.
+     * @apiRequests `2`: Requests a JSON and XML search.
      */
     async getPost(id: number): Promise<Post> {
         // API REQUEST (post) *2
@@ -38,7 +38,7 @@ export class Client {
     /**
      * Returns posts resulting from a search query.
      * @param query The query to use when searching for posts.
-     * @apiRequests 2: Requests a JSON and XML search.
+     * @apiRequests `2`: Requests a JSON and XML search.
      */
     async search(query: string, options: { perPage: number; page: number; }): Promise<Posts> {
         // API REQUEST (post) *2
