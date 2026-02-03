@@ -3,7 +3,7 @@ import type { BaseTag } from "../interfaces/base-tag.ts";
 import type { Post } from "../../post/index.ts";
 
 /** Tag found under the {@linkcode Post.tags tags} property of a {@linkcode Post Post}. */
-export class PostTag<T extends TagType = TagType> implements Omit<BaseTag<T>, "id"|"ambiguous"|"toWikiURL"> {
+export class PostTag<T extends TagType = TagType> implements Pick<BaseTag<T>, "name"|"count"|"type"> {
     name: string;
     count: number;
     type: T;

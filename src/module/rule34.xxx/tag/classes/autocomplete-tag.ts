@@ -1,7 +1,7 @@
 import type { BaseTag } from "../interfaces/base-tag.ts";
 
 /** A tag received from an autocomplete suggestion. */
-export class AutocompleteTag implements Omit<BaseTag, "id"|"type"|"ambiguous"|"toWikiURL"> {
+export class AutocompleteTag implements Pick<BaseTag, "name"|"count"> {
     name: string;
     count: number;
 
