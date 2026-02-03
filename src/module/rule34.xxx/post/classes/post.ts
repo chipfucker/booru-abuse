@@ -105,7 +105,7 @@ export class Post {
 
     /**
      * Returns all children of this post.
-     * @apirequests 2: post(json, xml)
+     * @apirequests 2?: post(json, xml) IF "children exist"
      */
     async getChildren(): Promise<Post[]> {
         if (!this.hasChildren) return [];
@@ -119,7 +119,7 @@ export class Post {
 
     /**
      * Returns all comments under this post.
-     * @apirequests 1: comment
+     * @apirequests 1?: comment IF "comments exist"
      */
     async getComments(): Promise<Comment[]> {
         if (!this.commentCount) return [];
