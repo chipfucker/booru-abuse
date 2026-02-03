@@ -8,7 +8,7 @@ export class PostAuthor extends User {
      */
     bot: boolean;
     
-    static override fromObject(object: ConstructorParameters<typeof User>[0]): PostAuthor {
+    static override fromObject(object: Parameters<typeof User["fromObject"]>[0]): PostAuthor {
         return new PostAuthor(object);
     }
 

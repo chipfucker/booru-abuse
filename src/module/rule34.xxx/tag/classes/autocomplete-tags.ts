@@ -11,12 +11,12 @@ export class AutocompleteTags extends Array<AutocompleteTag> {
     incompleteTag: string | null;
 
     static async fromQuery(query: string): Promise<AutocompleteTags> {
-        if (!query.match(lastRegex)) return AutocompleteTags.fromObject([], query);
+        if (!query.match(lastRegex)) return AutocompleteTags.fromRaw([], query);
         const response: RawAutocompleteTag[] = await fetchJSON(api.autocomplete(query));
-        return AutocompleteTags.fromObject(response, query);
+        return AutocompleteTags.fromRaw(response, query);
     }
 
-    static fromObject(object: RawAutocompleteTag[], query: string): AutocompleteTags {
+    static fromRaw(object: RawAutocompleteTag[], query: string): AutocompleteTags {
         return new AutocompleteTags({ json: object, query });
     }
 
@@ -26,7 +26,7 @@ export class AutocompleteTags extends Array<AutocompleteTag> {
             if (tag.value.match(/\\r\\n/)) break;
             else tags.push(tag);
         }
-        super(...tags.map(tag => AutocompleteTag.fromObject(tag)));
+        super(...tags.map(tag => AutocompleteTag.fromRaw(tag)));
 
         this.query = query;
         this.incompleteTag = query.match(lastRegex)?.[0] ?? null;
