@@ -4,11 +4,14 @@ import { Posts } from "./posts.ts";
 import { PostRating } from "../enums/post-rating.ts";
 import { PostStatus } from "../enums/post-status.ts";
 import { fetchPostsJSON, fetchPostsXML } from "../functions/fetch-posts.ts";
+import { Comment } from "../../misc/classes/comment.ts";
 import { PostTags } from "../../tag/classes/post-tags.ts";
+import { fetchXML } from "../../../../util/functions/fetch-xml.ts";
 import * as api from "../../util/functions/api-url.ts";
 import type { RawPostJSON } from "../interfaces/raw-post-json.ts";
 import type { RawPostXML } from "../interfaces/raw-post-xml.ts";
 import type { Authentication } from "../../client/interfaces/authentication.ts";
+import type { RawComment } from "../../misc/interfaces/raw-comment.ts";
 
 /** A post from rule34.xxx. */
 export class Post {
@@ -109,7 +112,15 @@ export class Post {
     }
 
     /** Returns all comments under this post. */
-    async getComments(): Promise<Array> {
+    async getComments(): Promise<Comment[]> {
         if (!this.commentCount) return [];
+        else {
+            const url = api.comments({
+                post_id: this.id
+            }, this.#auth);
+            const raw = await fetchXML(url);
+            const comments = raw.children.map(i => Comment.fromRaw(<any> i.attr as RawComment));
+            return comments;
+        }
     }
 }
