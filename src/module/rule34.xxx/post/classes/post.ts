@@ -103,7 +103,10 @@ export class Post {
         });
     }
 
-    /** Returns all children of this post. */
+    /**
+     * Returns all children of this post.
+     * @apirequests 2: post(json, xml)
+     */
     async getChildren(): Promise<Post[]> {
         if (!this.hasChildren) return [];
         else return await Posts.fromParams({
