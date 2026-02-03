@@ -3,6 +3,7 @@ import { PostFiles } from "./post-files.ts";
 import { PostRating } from "../enums/post-rating.ts";
 import { PostStatus } from "../enums/post-status.ts";
 import { fetchPostsJSON, fetchPostsXML } from "../functions/fetch-posts.ts";
+import { PostTags } from "../../tag/classes/post-tags.ts";
 import * as api from "../../util/functions/api-url.ts";
 import type { RawPostJSON } from "../interfaces/raw-post-json.ts";
 import type { RawPostXML } from "../interfaces/raw-post-xml.ts";
@@ -38,6 +39,11 @@ export class Post {
     lastModified: Date;
     /** The post's display status. */
     status: PostStatus;
+
+    /** The total upvotes of this post. */
+    score: number;
+    /** The tags associated with the post. */
+    tags: PostTags;
 
     static async fromId(id: number, auth: Authentication): Promise<Post> {
         const urls = api.post({ id }, auth);
