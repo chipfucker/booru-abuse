@@ -38,8 +38,8 @@ export class Post {
     /** The post's display status. */
     status: PostStatus;
 
-    static async fromURL(url: { id: number; }, auth: Authentication): Promise<Post> {
-        const urls = api.post(url, auth);
+    static async fromId(id: number, auth: Authentication): Promise<Post> {
+        const urls = api.post({ id }, auth);
         const response = await Promise.all([
             fetchPostsJSON(urls.json), fetchPostsXML(urls.xml)
         ]).then(promises => ({
