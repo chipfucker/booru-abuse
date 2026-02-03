@@ -79,7 +79,7 @@ export class PostFiles {
     }
 }
 
-interface PostFile {
+export interface PostFile {
     /** The media URL. */
     url: string;
     /** The dimensions of the media. */
