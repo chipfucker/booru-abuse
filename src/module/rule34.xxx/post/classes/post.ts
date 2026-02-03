@@ -8,6 +8,7 @@ import type { RawPostJSON } from "../interfaces/raw-post-json.ts";
 import type { RawPostXML } from "../interfaces/raw-post-xml.ts";
 import type { Authentication } from "../../client/interfaces/authentication.ts";
 
+/** A post from rule34.xxx. */
 export class Post {
     #auth: Authentication;
     private hasChildren: boolean;

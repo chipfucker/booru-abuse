@@ -1,7 +1,7 @@
 import { user as getURL } from "../../util/functions/site-url.ts";
 import type { BaseUser } from "../interfaces/base-user.ts";
 
-/** A user on Rule34. */
+/** A user on rule34.xxx. */
 export class User implements BaseUser {
     name: string;
     id: number;

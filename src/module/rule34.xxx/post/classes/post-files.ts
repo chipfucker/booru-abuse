@@ -2,6 +2,7 @@ import { PostFileType } from "../enums/post-file-type";
 import type { RawPostJSON } from "../interfaces/raw-post-json";
 import type { RawPostXML } from "../interfaces/raw-post-xml";
 
+/** The media files of a post. */
 export class PostFiles {
     url: string;
     size: { width: number; height: number };

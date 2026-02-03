@@ -1,5 +1,6 @@
 import { User } from "../../misc/classes/user.ts";
 
+/** The creator of a post. */
 export class PostAuthor extends User {
     /**
      * Whether the post was uploaded by a bot.  
