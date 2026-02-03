@@ -14,6 +14,9 @@
   "author": "chiptumor",
   "type": "module",
   "main": "./dist/index.js",
+  "scripts": {
+    "docs": "npx typedoc"
+  },
   "devDependencies": {
     "@types/xmldom": "^0.1.34",
     "typedoc": "^0.28.16",
