@@ -86,7 +86,7 @@ interface PostFile {
     size: [ width: number, height: number ];
 }
 
-const appendId = <url extends string, id extends number>(url: url, id: id): string => `${url}?${id}`;
+const appendId = (url: string, id: number): string => `${url}?${id}`;
 
 const extensions: Record<keyof typeof PostFileType, string[]> = {
     Static: [
