@@ -1,4 +1,4 @@
-# booru-abuse
+# Booru Abuse
 
 Booru Abuse is an NPM package to make interaction with boorus and other imageboards a breeze.
 

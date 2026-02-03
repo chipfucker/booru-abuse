@@ -1,17 +1,51 @@
 {
-    "include": [
-        "./src/export.ts"
-    ],
-    "compilerOptions": {
-        "target": "es2022",
-        "moduleResolution": "nodenext",
-        "module": "nodenext",
+  "compilerOptions": {
+    // File Layout
+    "rootDir": "./src/",
+    "outDir": "./dist/",
 
-        "rootDir": "./src/",
-        "outDir": "./dist/",
-        "sourceMap": true,
+    // Environment Settings
+    "module": "es2022",
+    "target": "esnext",
+    "types": [],
 
-        "rewriteRelativeImportExtensions": true,
-        "allowImportingTsExtensions": true
-    }
+    // Other Outputs
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    // Stricter Typechecking Options
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    // Style Options
+    "noImplicitReturns": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+
+    // Recommended Options
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true,
+  },
+  "typedocOptions": {
+    "name": "Booru Abuse",
+    "readme": "./src/typedoc.readme.md",
+    "entryPoints": [ "./src/index.ts" ],
+    "sort": [
+      "visibility",
+      "static-first",
+      "kind",
+      "alphabetical",
+      "enum-value-ascending"
+    ]
+  }
 }
