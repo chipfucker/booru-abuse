@@ -1,0 +1,18 @@
+import { User } from "../../misc/classes/user.ts";
+
+export class PostAuthor extends User {
+    /**
+     * Whether the post was uploaded by a bot.  
+     * Equivalent to whether the name is equal to "bot".
+     */
+    bot: boolean;
+    
+    static override fromObject(object: ConstructorParameters<typeof User>[0]): PostAuthor {
+        return new PostAuthor(object);
+    }
+
+    constructor (options: ConstructorParameters<typeof User>[0]) {
+        super(options);
+        this.bot = this.name === "bot";
+    }
+}

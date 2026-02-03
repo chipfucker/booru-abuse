@@ -1,5 +1,7 @@
+import { PostAuthor } from "./post-author.ts";
 import { PostFiles } from "./post-files.ts";
 import { PostRating } from "../enums/post-rating.ts";
+import { PostStatus } from "../enums/post-status.ts";
 import { fetchPostsJSON, fetchPostsXML } from "../functions/fetch-posts.ts";
 import * as api from "../../util/functions/api-url.ts";
 import type { RawPostJSON } from "../interfaces/raw-post-json.ts";
@@ -26,6 +28,15 @@ export class Post {
     // TODO: better word for 'maturity?'
     /** The post's 'maturity' rating. */
     rating: PostRating;
+    /** The creator of the post. */
+    author: PostAuthor;
+    
+    /** The date this post was created. */
+    created: Date;
+    /** The date this post was last updated. */
+    lastModified: Date;
+    /** The post's display status. */
+    status: PostStatus;
 
     static async fromURL(url: { id: number; }, auth: Authentication): Promise<Post> {
         const urls = api.post(url, auth);
