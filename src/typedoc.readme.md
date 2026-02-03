@@ -5,7 +5,7 @@ other imageboards a breeze.
 
 Booru Abuse has custom block tags defining noteworthy properties of items.
 
-### `@apirequests`
+### `@apiRequests`
 
 Defines how many requests are made to the API in regards to the limitations of
 API keys.
@@ -16,7 +16,7 @@ For example:
 class Client {
   /**
    * Returns posts resulting from a search query.
-   * @apirequests 2: post(json, xml)
+   * @apiRequests 2: post(json, xml)
    */
   async search(): Promise<Posts>
 }

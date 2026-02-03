@@ -7,7 +7,7 @@
       "allowMultiple": true
     },
 		{
-			"tagName": "@apirequests",
+			"tagName": "@apiRequests",
 			"syntaxKind": "block"
 		}
 	]
