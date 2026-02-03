@@ -1,5 +1,6 @@
 import { PostAuthor } from "./post-author.ts";
 import { PostFiles } from "./post-files.ts";
+import { Posts } from "./posts.ts";
 import { PostRating } from "../enums/post-rating.ts";
 import { PostStatus } from "../enums/post-status.ts";
 import { fetchPostsJSON, fetchPostsXML } from "../functions/fetch-posts.ts";
@@ -99,6 +100,12 @@ export class Post {
     /** Returns all children of this post. */
     async getChildren(): Promise<Post[]> {
         if (!this.hasChildren) return [];
+        else return await Posts.fromParams({
+            query: `parent:${this.id}`,
+            limit: 100,
+            page: 0
+        }, this.#auth)
+        .then(posts => posts.toArray())
     }
 
     /** Returns all comments under this post. */
