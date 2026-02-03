@@ -15,6 +15,4 @@ export interface BaseTag<T extends TagType = TagType> {
 
     /** Returns a URL to this tag's wiki page on rule34.xxx. */
     toWikiURL(): string;
-    /** Returns a URL to a search with this tag on rule34.xxx. */
-    toSearchURL(): string;
 }
