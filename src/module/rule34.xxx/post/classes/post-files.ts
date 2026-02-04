@@ -1,6 +1,6 @@
-import { PostFileType } from "../enums/post-file-type";
-import type { RawPostJSON } from "../interfaces/raw-post-json";
-import type { RawPostXML } from "../interfaces/raw-post-xml";
+import { PostFileType } from "../enums/post-file-type.ts";
+import type { RawPostJSON } from "../interfaces/raw-post-json.ts";
+import type { RawPostXML } from "../interfaces/raw-post-xml.ts";
 
 /** The media files of a post. */
 export class PostFiles implements PostFile {
