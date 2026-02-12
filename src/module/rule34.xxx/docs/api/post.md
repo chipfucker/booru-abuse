@@ -35,3 +35,4 @@ All of the following parameters are optional.
   - **`json`**: Whether to return results formatted as JSON or XML
     - `1` for JSON, `0` for XML
     - Defaults to `0`
+    - Resulting data differs
