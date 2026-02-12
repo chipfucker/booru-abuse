@@ -6,7 +6,7 @@ The Rule34 API allows for accessing posts, comments, and tags from rule34.xxx.
 
 The domain for Rule34 API requests looks like this.
 
-```
+```plain text
 https://api.rule34.xxx/
 ```
 
@@ -14,7 +14,7 @@ https://api.rule34.xxx/
 > The URL can also contain the implicit `index.php` at the end of the path,
 > which is what the official API documentation suggests:
 >
-> ```
+> ```plain text
 > https://api.rule34.xxx/index.php
 > ```
 
@@ -36,7 +36,7 @@ The base parameters to add to all requests are as follows:
 
 I.e. the base URL for Rule34 API requests looks like this.
 
-```
+```plain text
 https://api.rule34.xxx/?page=dapi&q=index
 ```
 
