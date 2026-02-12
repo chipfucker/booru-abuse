@@ -3,7 +3,7 @@
 Retrieving posts from the API requires adding the parameter `s=post` to the base
 API URL.
 
-```
+```plain text
 https://api.rule34.xxx/?page=dapi&q=index&s=post
 ```
 
