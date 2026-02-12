@@ -2,7 +2,7 @@
 
 The Rule34 API allows for accessing posts, comments, and tags from rule34.xxx.
 
-## Parameters
+## URL
 
 The domain for Rule34 API requests looks like this.
 
