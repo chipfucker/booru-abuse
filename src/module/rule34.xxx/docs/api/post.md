@@ -196,6 +196,47 @@ server-side programmer errors that prevent parody between usage of the two
 formats. Each format has some of their own exclusive properties and info, and
 some values just aren't equivalently returned.
 
+#### Table
+
+Below is a collapsed, concise table representation of the parody between XML and
+JSON posts.
+
+<details><summary>Table of property comparisons</summary>
+
+|                             | XML                                    | JSON                                    |
+| --------------------------- | -------------------------------------- | --------------------------------------- |
+| Root attributes             | :white_check_mark: `count`, `offset`   | :x: No                                  |
+| `file_url`                  | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `width`                     | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `height`                    | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `sample`                    | :x: No                                 | :white_check_mark: Yes                  |
+| `sample_url`                | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `sample_width`              | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `sample_height`             | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `sample_height`             | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `preview_width`             | :white_check_mark: Yes                 | :x: No                                  |
+| `preview_height`            | :white_check_mark: Yes                 | :x: No                                  |
+| `id`                        | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `owner`                     | :x: No                                 | :white_check_mark: Yes                  |
+| `creator_id`                | :white_check_mark: Yes                 | :x: No                                  |
+| `parent_id`                 | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `has_children`              | :white_check_mark: Yes                 | :x: No                                  |
+| `has_notes`                 | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `rating`                    | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `tags`                      | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `source`                    | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `created_at`                | :white_check_mark: Yes                 | :x: No                                  |
+| `change`                    | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `md5` (XML) / `hash` (JSON) | :white_check_mark: Yes (under `"md5"`) | :white_check_mark: Yes (under `"hash"`) |
+| `directory`                 | :x: No                                 | :white_check_mark: Yes                  |
+| `image`                     | :x: No                                 | :white_check_mark: Yes                  |
+| `status`                    | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `score`                     | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `has_comments`              | :white_check_mark: Yes                 | :x: No                                  |
+| `comment_count`             | :x: No                                 | :white_check_mark: Yes                  |
+
+</details>
+
 #### Root Node vs. Array
 
 The main difference&mdash;a difference noticable even if no posts are
@@ -259,9 +300,9 @@ below.
 
   - **`parent_id`**: The id of the post set as the parent
     - Values differ when not set
-  - **`rating`**: The 'maturity' rating of the image
-    - Possible values (for "safe," "questionable," and "explicit") are
-      represented differently
+  - **`rating`**: The content rating of the image
+    - Possible values ("safe," "questionable," and "explicit") are represented
+      differently
   - **`md5`** (XML) / **`hash`** (JSON): The MD5 hash of the post
     - Always a hexadecimal string
   
@@ -345,7 +386,10 @@ When `fields` has `tag_info`, an additional property can be found.
   - **`tag_info`**: An array of the tags&mdash;and their info&mdash;associated
     with the post
     - Array of objects:
-      - **`tag`**: The name of the tag
+      - **`tag`**: The name value of the tag
       - **`type`**: The tag's category
-        <!-- CONTINUE -->
-      - **`count`**: 
+        - `"copyright"`, `"character"`, `"artist"`, `"tag"`, `"metadata"`, or
+          `null`
+      - **`count`**: The amount of posts that use this tag; the amount of posts
+        that can be found when searching this tag
+        - Integer
