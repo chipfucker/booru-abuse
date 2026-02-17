@@ -208,7 +208,7 @@ JSON posts.
 
 |                             | XML                                    | JSON                                    |
 | --------------------------- | -------------------------------------- | --------------------------------------- |
-| Root attributes             | :white_check_mark: `count`, `offset`   | :x: No                                  |
+| Root attributes             | :white_check_mark: `count`, `offset`   | :x: Literal array                       |
 | `file_url`                  | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
 | `width`                     | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
 | `height`                    | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
