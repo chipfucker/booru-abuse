@@ -23,16 +23,8 @@ All data sent to the API, even including sensitive info--such as
 
 The base parameters to add to all requests are as follows:
 
-  - **`page`**: `dapi` to access the API
+  - **`page`**: The page being accessed; `dapi` to access the API
   - **`q`**: `index` to access the 'index' page
-
-> [!IMPORTANT]
-> I'm unsure what each parameter describes; this is my best guess.
->
-> ```markdown
-> # TODO
->   - Open different pages and compare their `page` and `q` params
-> ```
 
 I.e. the base URL for Rule34 API requests looks like this.
 

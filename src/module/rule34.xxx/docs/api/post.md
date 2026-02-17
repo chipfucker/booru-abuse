@@ -18,24 +18,23 @@ All of the following parameters are optional. ("Defaults to _x_" means the retur
     - If not specified, returns all posts applicable to other parameters
     - See: [cheatsheet](../search/.given.md)
   - **`id`**: Id of a single post to return
-  - **`cid`**: "Change id"; Unix timestamp to get posts by the time of their
-    last modification
-    > [!IMPORTANT]
-    > I'm unsure if this actually works.
-    >
-    > ```markdown
-    > # TODO:
-    >   - Search using this parameter
-    > ```
+    - Integer
   - **`limit`**: The amount of posts returned
+    - Integer
     - Hard limit of 1000 per request
     - Defaults to 100
   - **`pid`**: "Page id"; the 0-index offset of returned posts based on `limit`
+    - Integer
     - Defaults to 0
   - **`json`**: Whether to return results formatted as JSON or XML
     - `1` for JSON, `0` for XML
     - Defaults to `0`
     - Resulting data differs
+
+> [!WARNING]
+> The official Rule34 API documentation suggests you may use `cid` as a
+> parameter, which represents the "change id" of a post. However, this does not
+> affect the search whatsoever.
 
 ## XML vs. JSON
 
@@ -95,7 +94,10 @@ post.
 
 ### JSON
 
-JSON data is returned as an array of objects with no further nesting (with exception of one optional property; see [additional parameters](#additional-parameters)).
+JSON data is returned as an array of objects with no further nesting (with
+exception of one optional property; see [additional parameters]).
+
+[additional parameters]: #additional-parameters
 
 <details><summary>JSON data example</summary>
 
@@ -155,6 +157,7 @@ All of the following parameters are optional.
 
   - **`fields`**: It is uncertain what this parameter describes.
     - Values may be any of the following:
+      - Absent or an empty string
       - **`tag_info`**: adds an additional `tag_info` property to each post
         object, being an array with more verbose tag objects
     > [!IMPORTANT]
@@ -164,7 +167,7 @@ All of the following parameters are optional.
     > ```markdown
     > # TODO:
     >   - Test different values with `fields` parameter:
-    >     - Empty value
+    >     - [x] `comment` and `comments`
     >   - Contact Rule34 developers
     > ```
 
@@ -329,36 +332,12 @@ Along with their descriptions, they are listed below.
     - Boolean
   - **`created_at`**: The date of the post's creation
     - [`Date`]-parsable:
-      1. Day of the week; truncated, capital
-         > [!IMPORTANT]
-         > I'm unsure whether it's truncated or always 3 letters; it may vary in
-         > cases of Tuesday or Thursday ("Tues" and "Thur" or alike).
-         >
-         > ```markdown
-         > # TODO:
-         >   - Check the creation dates of posts from each day of the week
-         > ```
+      1. Day of the week; truncated (3 letters), capital
       2. Month; truncated (3 letters), capital
-      3. Day of the month
-         > [!IMPORTANT]
-         > I'm unsure whether the number has padding zeros.
-         >
-         > ```markdown
-         > # TODO:
-         >   - Check the creation dates of posts from different days of the
-         >     month
-         > ```
+      3. Day of the month; 2 padding zeros
       4. The hour, minute, and second; separated by colons, each padded with two
          zeros
-      5. The timezone
-         > [!IMPORTANT]
-         > I'm unsure if the timezone is always `+0100`.
-         >
-         > ```markdown
-         > # TODO:
-         >   - Check the creation dates of posts from different devices and IP
-         >     addresses
-         > ```
+      5. The timezone (always `+0100`)
       6. Year
   - **`has_comments`**: Whether this post has one or more comments
     - Boolean
