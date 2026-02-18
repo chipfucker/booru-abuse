@@ -29,60 +29,79 @@ All of the following parameters are optional. ("Defaults to _x_" means the retur
   - **`json`**: Whether to return results formatted as JSON or XML
     - `1` for JSON, `0` for XML
     - Defaults to `0`
-    - Resulting data differs
+    - Resulting data differs; see [XML vs. JSON](#xml-vs-json)
 
 > [!WARNING]
 > The official Rule34 API documentation suggests you may use `cid` as a
 > parameter, which represents the "change id" of a post. However, this does not
 > affect the search whatsoever.
 
-## XML vs. JSON
+When `json` is set to `1`, an additional, optional parameter becomes available.
 
-XML and JSON, of course, return data in different formats. However, due to poor
-programming, the data they return isn't equivalent.
+  - **`fields`**: It is uncertain what this parameter describes; acceptable
+    values and their effects are labelled below
+    - Values may be any of the following:
+      - Absent (`fields&...`) or empty string (`fields=&...`): No effect
+      - **`tag_info`**: Adds an additional `tag_info` property to each post
+        object
+    > [!IMPORTANT]
+    > This parameter is entirely undocumented. The only value known to be
+    > allowed with this parameter, when specified, is `tag_info`.
+    >
+    > ```markdown
+    > # TODO:
+    >   - Test different values with `fields` parameter:
+    >     - [x] `comment` and `comments`
+    >   - Contact Rule34 developers
+    > ```
+
+## Response Format
+
+Data returned in the XML and JSON formats differs slightly, but in common,
+simpler use cases, they remain interchangable.
 
 ### XML
 
-XML data is returned as a root node (`<posts>`) with attributes specifying data
-about the search as a whole. The list of posts are given as children of the root
-node, being void elements (`<post/>`) with attributes specifying data about the
-post.
+XML data is returned as a root node with a list of child elements. The root
+element (`posts`) has attributes specifying data about the search as a whole,
+and each child element is a void `post` element with attributes regarding a
+post's data.
+
+Below is a collapsed example of XML data returned from the API.
 
 <details><summary>XML data example</summary>
 
 ```xml
-<posts
-  count = "1"
-  offset = "0" >
-  <post
-    file_url       = "https://api-cdn.rule34.xxx/images/5109/0966...81e4.jpeg"
-    width          = "1136"
-    height         = "1250"
-
-    sample_url     = "https://api-cdn.rule34.xxx/images/5109/0966...81e4.jpeg"
-    sample_width   = "1136"
-    sample_height  = "1250"
-
-    preview_url    = "https://api-cdn.rule34.xxx/thumbnails/5109/thumbnail_0966....81e4.jpg"
-    preview_width  = "136"
-    preview_height = "150"
-
-    id             = "5823623"
-    creator_id     = "1550138"
-    parent_id      = ""
-    has_children   = "false"
-    has_notes      = "false"
-    rating         = "q"
-    tags           = "1girls 2d ... white_sclera zoologist_(terraria)"
-    source         = ""
-
-    created_at     = "Fri Mar 18 03:02:02 +0100 2022"
-    change         = "1680758419"
-    md5            = "0966b7bb5f64f30010d14d5e98bb81e4"
-    status         = "active"
-
-    score          = "393"
-    has_comments   = "true" />
+<posts count  = "1"
+       offset = "0" >
+  <post file_url       = "https://api-cdn.rule34.xxx/images/5109/0966...81e4.jpeg"
+        width          = "1136"
+        height         = "1250"
+    
+        sample_url     = "https://api-cdn.rule34.xxx/images/5109/0966...81e4.jpeg"
+        sample_width   = "1136"
+        sample_height  = "1250"
+    
+        preview_url    = "https://api-cdn.rule34.xxx/thumbnails/5109/thumbnail_0966....81e4.jpg"
+        preview_width  = "136"
+        preview_height = "150"
+    
+        id             = "5823623"
+        creator_id     = "1550138"
+        parent_id      = ""
+        has_children   = "false"
+        has_notes      = "false"
+        rating         = "q"
+        tags           = "1girls 2d ... white_sclera zoologist_(terraria)"
+        source         = ""
+    
+        created_at     = "Fri Mar 18 03:02:02 +0100 2022"
+        change         = "1680758419"
+        md5            = "0966b7bb5f64f30010d14d5e98bb81e4"
+        status         = "active"
+    
+        score          = "393"
+        has_comments   = "true" />
 </posts>
 ```
 
@@ -92,12 +111,17 @@ post.
 
 </details>
 
+Each attribute is explained under [XML vs. JSON].
+
 ### JSON
 
-JSON data is returned as an array of objects with no further nesting (with
-exception of one optional property; see [additional parameters]).
+JSON data is returned as an array of key-value objects. Each object regards a
+post's data.
 
-[additional parameters]: #additional-parameters
+If the `fields` parameter is set to `tag_info`, posts will have an additional
+`tag_info` property, whose value is an array of tag objects.
+
+Below is a collapsed example of JSON data returned from the API.
 
 <details><summary>JSON data example</summary>
 
@@ -149,27 +173,14 @@ exception of one optional property; see [additional parameters]).
 
 </details>
 
-#### Additional Parameters
+Each value is explained under [XML vs. JSON].
 
-When requesting data as JSON, additional parameters become allowed, which affect the returned results.
+## XML vs. JSON
 
-All of the following parameters are optional.
+[XML vs. JSON]: #xml-vs-json
 
-  - **`fields`**: It is uncertain what this parameter describes.
-    - Values may be any of the following:
-      - Absent or an empty string
-      - **`tag_info`**: adds an additional `tag_info` property to each post
-        object, being an array with more verbose tag objects
-    > [!IMPORTANT]
-    > This parameter is entirely undocumented. The only value known to be
-    > allowed with this parameter, when specified, is `tag_info`.
-    >
-    > ```markdown
-    > # TODO:
-    >   - Test different values with `fields` parameter:
-    >     - [x] `comment` and `comments`
-    >   - Contact Rule34 developers
-    > ```
+XML and JSON, of course, return data in different formats. However, due to poor
+programming, the data they return isn't equivalent.
 
 ### Core Differences
 
@@ -192,19 +203,128 @@ represented as `"true"` or `"false"`.
 
 [the `Number` function]: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/Number>
 
-### Faulty Differences
+### Root Node vs. Array
+
+A difference noticable, even when 0 posts are returned, is that XML results have
+a root node with useful attributes, while a JSON only returns an array, which
+doesn't have any special properties.
+
+The XML root node has two attributes:
+
+  - **`count`**: The amount of _total_ posts that can be found from the search
+    query
+    - Integer
+  - **`offset`**: The offset of the returned results in _posts;_ if the `limit`
+    is 5 and the page is `2`, `offset` will be `"10"`
+    - Integer
+
+### Mutual Properties
+
+The post objects of each format have mostly mutual properties.
+
+  - **`file_url`**: The CDN URL of the main file
+  - **`width`**: The width of the main file in pixels
+    - Integer
+  - **`height`**: The height of the main file in pixels
+    - Integer
+  - **`sample_url`**: The CDN URL of the downsampled image of the main file
+  - **`sample_width`**: The width of the downsampled image in pixels
+    - Integer
+  - **`sample_height`**: The height of the downsampled image in pixels
+    - Integer
+  - **`preview_url`**: The CDN URL of a highly downsampled version of the main file
+  - **`id`**: The unique id of the post
+    - Integer
+  - **`has_notes`**: Whether the image has notes associated
+    - Always boolean
+  - **`tags`**: The list of tags on the post sorted alphabetically and separated
+    by a space
+  - **`source`**: The string set as the source of the post
+    - Can be any or empty
+  - **`change`**: The Unix timestamp, in seconds, of the date the post was last
+    updated
+    - Integer
+  - **`status`**: The visibility status of the post
+    - `"active"`, `"flagged"`, or `"deleted"`
+  - **`score`**: The amount of upvotes given to the post
+    - Integer
+
+Some properties are still equatable, but the way their values are returned are
+different and can be considered inequivalent.
+
+  - **`parent_id`**: The id of the post set as the parent
+    - Values differ when not set
+  - **`rating`**: The content rating of the image
+    - Possible values ("safe," "questionable," and "explicit") are represented
+      differently
+  - **`md5`** (XML) / **`hash`** (JSON): The MD5 hash of the post
+    - Always a hexadecimal string
+    - Property name differs between formats
+  
+|              | XML                                                                          | JSON                                                 |
+| ------------ | ---------------------------------------------------------------------------- | ---------------------------------------------------- |
+| `parent_id`  | Value is an integer, unless no parent is set, to which it is an empty string | Value is `0` if no parent is set                     |
+| `rating`     | Value is `"s"`, `"q"`, or `"e"`                                              | Value is `"safe"`, `"questionable"`, or `"explicit"` |
+| `md5`/`hash` | Attribute name is `md5`                                                      | Key is `"hash"`                                      |
+
+### Exclusive values
 
 Regardless of the core differences between XML and JSON, there are many
-server-side programmer errors that prevent parody between usage of the two
+server-side programmer errors that prevent full parody between usage of the two
 formats. Each format has some of their own exclusive properties and info, and
 some values just aren't equivalently returned.
 
-#### Table
+XML posts have notable properties not found on JSON posts:
 
-Below is a collapsed, concise table representation of the parody between XML and
-JSON posts.
+  - **`preview_width`**: The width of the preview image in pixels
+    - Integer
+  - **`preview_height`**: The height of the preview image in pixels
+    - Integer
+  - **`creator_id`**: The id of the creator of the post
+    - Integer
+  - **`has_children`**: Whether one or more posts have the post set as their
+    parent
+    - Boolean
+  - **`created_at`**: The date of the post's creation
+    - [`Date`]-parsable:
+      1. Day of the week; truncated (3 letters), capital
+      2. Month; truncated (3 letters), capital
+      3. Day of the month; 2 padding zeros
+      4. The hour, minute, and second; separated by colons, each padded with two
+         zeros
+      5. The timezone (always `+0100`)
+      6. Year
+  - **`has_comments`**: Whether this post has one or more comments
+    - Boolean
 
-<details><summary>Table of property comparisons</summary>
+[`Date`]: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date>
+
+Likewise, JSON posts have noteworthy, exclusive properties:
+
+  - **`sample`**: Whether the main file is an image, and whether there is a
+    resample for it
+    - Boolean
+  - **`owner`**: The username of the creator of the post
+  - **`directory`**: The numerical directory of the post's files
+    - Integer
+  - **`image`**: The main file's filename; equivalent to `hash` plus the file
+    extension
+  - **`comment_count`**: The amount of comments under the post
+    - Integer
+
+When the `fields` URL parameter has `tag_info`, an additional property is
+revealed.
+
+  - **`tag_info`**: An array of the info of each tag associated with the post
+    - Array of objects:
+      - **`tag`**: The name value of the tag
+      - **`type`**: The tag's category
+        - `"copyright"`, `"character"`, `"artist"`, `"tag"`, `"metadata"`, or
+          `null`
+      - **`count`**: The amount of posts that use this tag
+        - Integer
+
+### Table of Comparison
 
 |                             | XML                                    | JSON                                    |
 | --------------------------- | -------------------------------------- | --------------------------------------- |
@@ -237,138 +357,3 @@ JSON posts.
 | `score`                     | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
 | `has_comments`              | :white_check_mark: Yes                 | :x: No                                  |
 | `comment_count`             | :x: No                                 | :white_check_mark: Yes                  |
-
-</details>
-
-#### Root Node vs. Array
-
-The main difference&mdash;a difference noticable even if no posts are
-returned&mdash;is that XML returns root node, which can contain attributes as
-well as children, and JSON only returns an array, which doesn't have attributes.
-
-The XML root node has two useful attributes that can't be found when getting
-JSON results:
-
-  - **`count`**: The amount of _total_ posts that can be found from the search
-    query
-    - Integer
-  - **`offset`**: The offset of the returned results in _posts;_ if the `limit`
-    is 5 and the page is `2`, `offset` will be `"10"`
-    - Integer
-
-#### Mutual Values
-
-The post objects of each format have mostly mutual properties and attributes.
-
-_Integer_ values are presented as `number` values in JSON, and
-[`Number`]-parsable strings in XML.
-
-_Boolean_ values are presented as `boolean` values in JSON, and `"true"` or
-`"false"` in XML.
-
-Along with their descriptions, they are listed below.
-
-  - **`file_url`**: The CDN URL of the main file
-  - **`width`**: The width of the main file in pixels
-    - Integer
-  - **`height`**: The height of the main file in pixels
-    - Integer
-  - **`sample_url`**: The CDN URL of the downsampled image of the main file
-  - **`sample_width`**: The width of the downsampled image in pixels
-    - Integer
-  - **`sample_height`**: The height of the downsampled image in pixels
-    - Integer
-  - **`preview_url`**: The CDN URL of a highly downsampled version of the main file
-  - **`id`**: The unique id of the post
-    - Integer
-  - **`has_notes`**: Whether the image has notes associated
-    - Always boolean
-  - **`tags`**: The list of tags on the post sorted alphabetically and separated
-    by a space
-  - **`source`**: The string set as the source of the post
-    - Can be any or empty
-  - **`change`**: The Unix timestamp, in seconds, of the date the post was last
-    updated
-    - Integer
-  - **`status`**: The visibility status of the post
-    - `"active"`, `"flagged"`, or `"deleted"`
-  - **`score`**: The amount of upvotes given to the post
-    - Integer
-
-Some properties are still equatable, but the way their values are returned are
-different and can be considered inequivalent.
-
-Along with their descriptions, those properties and their differences are listed
-below.
-
-  - **`parent_id`**: The id of the post set as the parent
-    - Values differ when not set
-  - **`rating`**: The content rating of the image
-    - Possible values ("safe," "questionable," and "explicit") are represented
-      differently
-  - **`md5`** (XML) / **`hash`** (JSON): The MD5 hash of the post
-    - Always a hexadecimal string
-  
-|              | XML                                                                          | JSON                                                 |
-| ------------ | ---------------------------------------------------------------------------- | ---------------------------------------------------- |
-| `parent_id`  | Value is an integer, unless no parent is set, to which it is an empty string | Value is `0` if no parent is set                     |
-| `rating`     | Value is `"s"`, `"q"`, or `"e"`                                              | Value is `"safe"`, `"questionable"`, or `"explicit"` |
-| `md5`/`hash` | Attribute name is `md5`                                                      | Key is `"hash"`                                      |
-
-#### Exclusive values
-
-XML posts have some notable, exclusive properties not found on JSON posts.
-
-Along with their descriptions, they are listed below.
-
-  - **`preview_width`**: The width of the preview image in pixels
-    - Integer
-  - **`preview_height`**: The height of the preview image in pixels
-    - Integer
-  - **`creator_id`**: The id of the creator of the post
-    - Integer
-  - **`has_children`**: Whether one or more posts have the post set as their
-    parent
-    - Boolean
-  - **`created_at`**: The date of the post's creation
-    - [`Date`]-parsable:
-      1. Day of the week; truncated (3 letters), capital
-      2. Month; truncated (3 letters), capital
-      3. Day of the month; 2 padding zeros
-      4. The hour, minute, and second; separated by colons, each padded with two
-         zeros
-      5. The timezone (always `+0100`)
-      6. Year
-  - **`has_comments`**: Whether this post has one or more comments
-    - Boolean
-
-[`Date`]: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date>
-
-Likewise to XML against JSON, vice versa applies; JSON has noteworthy exclusive
-properties.
-
-Along with their descriptions, they are listed below.
-
-  - **`sample`**: Whether the main file is an image, and whether there is a
-    resample for it
-    - Boolean
-  - **`owner`**: The username of the creator of the post
-  - **`directory`**: The numerical directory of the post's files
-    - Integer
-  - **`image`**: The main file's filename; equivalent to `hash` with the file
-    extension
-  - **`comment_count`**: The amount of comments under the post
-    - Integer
-
-When `fields` has `tag_info`, an additional property can be found.
-
-  - **`tag_info`**: An array of the tags&mdash;and their info&mdash;associated
-    with the post
-    - Array of objects:
-      - **`tag`**: The name value of the tag
-      - **`type`**: The tag's category
-        - `"copyright"`, `"character"`, `"artist"`, `"tag"`, `"metadata"`, or
-          `null`
-      - **`count`**: The amount of posts that use this tag; the amount of posts
-        that can be found when searching this tag
-        - Integer
