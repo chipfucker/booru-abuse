@@ -11,7 +11,7 @@ _(including [authentication](./index.md#authentication))_
 
 ## Parameters
 
-All of the following parameters are optional. ("Defaults to _x_" means the returned results are equivalent to specifying the parameter as __x__.)
+All of the following parameters are optional. ("Defaults to _x_" means the returned results are equivalent to specifying the parameter as _x_.)
 
   - **`tags`**: The query to filter posts by; works the same as searches on the
     site
