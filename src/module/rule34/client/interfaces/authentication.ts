@@ -1,4 +1,4 @@
-/** Authentication keys for the Rule 34 API. */
+/** Authentication keys for API access. */
 export interface Authentication {
     /** The `user_id` parameter of the API key. */
     user_id: number;
