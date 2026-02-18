@@ -1,4 +1,5 @@
 import { ClientUser } from "./client-user.ts";
+import { MISSING_AUTHENTICATION } from "../constants/missing-authentication.ts";
 import { Authentication } from "../interfaces/authentication.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
 import * as api from "../../util/functions/api-url.ts";
@@ -23,8 +24,19 @@ export class Client {
     async test(): Promise<this | never> {
         if (!this.authorized) {
             const response = await fetch(api.post(this.#auth, {
-                limit: 0
+                limit: 0,
+                json: 1
             })).then(r => r.text());
+
+            if (response === MISSING_AUTHENTICATION)
+                throw Error([
+                    "Invalid authentication! Make sure you've provided the",
+                    "necessary credentials."
+                ].join(" "));
+            else if (response === "[]")
+                this.authorized = true;
         }
+
+        return this;
     }
 }
