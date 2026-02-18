@@ -51,7 +51,8 @@ response:
 > The preceding example is formatted for better readability, but the actual
 > response is a one-liner; it does not use line breaks.
 
-Because of the length of API keys, API URLs tend to look very lengthy.
+Beware that, because of the length of API keys, API URLs tend to look very
+lengthy.
 
 ## Server
 
