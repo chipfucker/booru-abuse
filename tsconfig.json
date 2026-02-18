@@ -3,17 +3,18 @@
     // File Layout
     "rootDir": "./src/",
     "outDir": "./dist/",
-
+    
     // Environment Settings
     "module": "node20",
     "target": "es2022",
     "moduleResolution": "node16",
     "types": [],
-
+    
     // Other Outputs
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
+    "declarationDir": "./docs/types/",
 
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
