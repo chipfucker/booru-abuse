@@ -1,5 +1,5 @@
-import { Authentication } from "../interfaces/authentication.ts";
 import { ClientUser } from "./client-user.ts";
+import { Authentication } from "../interfaces/authentication.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
 import * as api from "../../util/functions/api-url.ts";
 
