@@ -1,0 +1,5 @@
+export const MISSING_AUTHENTICATION =
+    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+    "<error>" +
+        "Missing authentication. Go to api.rule34.xxx for more information" +
+    "</error>";
