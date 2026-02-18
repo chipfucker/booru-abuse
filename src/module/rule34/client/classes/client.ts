@@ -10,8 +10,8 @@ export class Client {
     /** The user tied to the client. */
     self: ClientUser;
 
-    /** Returns a new client. */
-    static async create(options: ClientOptions): Client {
-        return new Client(options);
+    constructor (options: ClientOptions) {
+        this.#auth = options.auth;
+        this.self = ClientUser.fromAuth(options.auth);
     }
 }
