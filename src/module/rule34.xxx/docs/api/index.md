@@ -2,42 +2,41 @@
 
 The Rule34 API allows for accessing posts, comments, and tags from rule34.xxx.
 
+> [!TIP]
+> The only API requests excluded from the following documentation are
+> autocompletion requests.
+
 ## URL
 
-The domain for Rule34 API requests looks like this.
-
-```plain text
-https://api.rule34.xxx/
-```
-
-> [!NOTE]
-> The URL can also contain the implicit `index.php` at the end of the path,
-> which is what the official API documentation suggests:
->
-> ```plain text
-> https://api.rule34.xxx/index.php
-> ```
-
-All data sent to the API, even including sensitive info--such as
-[authentication](#authentication)--is sent as URL parameters.
-
-The base parameters to add to all requests are as follows:
-
-  - **`page`**: The page being accessed; `dapi` to access the API
-  - **`q`**: `index` to access the 'index' page
-
-I.e. the base URL for Rule34 API requests looks like this.
+The base URL for Rule34 API requests looks like the following:
 
 ```plain text
 https://api.rule34.xxx/?page=dapi&q=index
 ```
 
+> [!NOTE]
+> The URL may also contain the implicit `index.php` at the end of the path,
+> which is what the official API documentation (unconsciously) suggests:
+>
+> ```plain text
+> https://api.rule34.xxx/index.php?page=dapi&q=index
+> ```
+>
+> This is, however, not recommended practice.
+
 An additional parameter `s` usually follows describing the type of data being
 retrieved, such as `s=post` or `s=comment`.
 
+This, however, will not return results without [authentication].
+
+[authentication]: #authentication
+
 ## Authentication
 
-All requests must have two extra parameters, those being `api_key` and
+All request data sent to the API is sent as URL parameters. This includes
+authentication.
+
+Requests must have two extra parameters, those being `api_key` and
 `user_id`. If authentication is invalid, you will always get the following
 response:
 
@@ -52,6 +51,8 @@ response:
 > The preceding example is formatted for better readability, but the actual
 > response is a one-liner; it does not use line breaks.
 
+Because of the length of API keys, API URLs tend to look very lengthy.
+
 ## Server
 
 When using the API properly, you should never receive an error unless the server
@@ -62,7 +63,10 @@ a response success of "false" and a message stating something along the lines of
 > [!IMPORTANT]
 > > When the server _does_ break ... something along the lines of "search down."
 >
-> I'm not entirely sure what this means.
+> The official documentation does not provide examples of what a failed search
+> looks like.
+>
+> <details><summary>To-do</summary>
 >
 > ```markdown
 > # TODO
@@ -70,3 +74,5 @@ a response success of "false" and a message stating something along the lines of
 >     - Test broken searches with different return types
 >   - Find out what a failed response looks like
 > ```
+>
+> </details>

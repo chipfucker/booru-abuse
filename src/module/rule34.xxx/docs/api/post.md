@@ -48,12 +48,16 @@ When `json` is set to `1`, an additional, optional parameter becomes available.
     > This parameter is entirely undocumented. The only value known to be
     > allowed with this parameter, when specified, is `tag_info`.
     >
+    > <details><summary>To-do</summary>
+    >
     > ```markdown
     > # TODO:
     >   - Test different values with `fields` parameter:
     >     - [x] `comment` and `comments`
     >   - Contact Rule34 developers
     > ```
+    >
+    > </details>
 
 ## Response Format
 
