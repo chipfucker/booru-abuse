@@ -1,5 +1,6 @@
 {
   "name": "Booru Abuse",
+  "out": "./docs/typedoc/",
   "readme": "./src/typedoc.readme.md",
   "entryPoints": ["./src/index.ts"],
   "kindSortOrder": [
