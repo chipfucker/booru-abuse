@@ -24,10 +24,10 @@ https://api.rule34.xxx/?page=dapi&q=index
 >
 > This is, however, not recommended practice.
 
-An additional parameter `s` usually follows describing the type of data being
+An additional parameter `s` should follow describing the type of data being
 retrieved, such as `s=post` or `s=comment`.
 
-This, however, will not return results without [authentication].
+The API will not return results without [authentication].
 
 [authentication]: #authentication
 
