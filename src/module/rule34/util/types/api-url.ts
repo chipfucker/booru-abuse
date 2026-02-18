@@ -8,6 +8,4 @@ export type Search = {
 } & (
     | { json?: 0; }
     | { json: 1; fields?: "tag_info" | string; }
-) & {
-    auth: Authentication;
-};
+);
