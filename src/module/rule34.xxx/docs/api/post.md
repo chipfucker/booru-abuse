@@ -38,15 +38,14 @@ All of the following parameters are optional. ("Defaults to _x_" means the retur
 
 When `json` is set to `1`, an additional, optional parameter becomes available.
 
-  - **`fields`**: It is uncertain what this parameter describes; acceptable
-    values and their effects are labelled below
+  - **`fields`**: Undocumented parameter; known accepted values are listed below
     - Values may be any of the following:
-      - Absent (`fields&...`) or empty string (`fields=&...`): No effect
+      - Empty string: No effect
       - **`tag_info`**: Adds an additional `tag_info` property to each post
         object
     > [!IMPORTANT]
-    > This parameter is entirely undocumented. The only value known to be
-    > allowed with this parameter, when specified, is `tag_info`.
+    > This parameter is entirely undocumented. The only known usability of this
+    > parameter is with the value `tag_info`.
     >
     > <details><summary>To-do</summary>
     >
@@ -183,8 +182,9 @@ Each value is explained under [XML vs. JSON].
 
 [XML vs. JSON]: #xml-vs-json
 
-XML and JSON, of course, return data in different formats. However, due to poor
-programming, the data they return isn't equivalent.
+XML and JSON, of course, return data in different formats. However, due to
+many issues, the data they return should not be considered equivalent or fully
+interchangable.
 
 ### Core Differences
 
@@ -239,8 +239,17 @@ The post objects of each format have mostly mutual properties.
   - **`preview_url`**: The CDN URL of a highly downsampled version of the main file
   - **`id`**: The unique id of the post
     - Integer
+  - **`parent_id`**: The id of the post set as the parent
+    - Integer, unless unset:
+      - XML returns an empty string
+      - JSON returns `0`
   - **`has_notes`**: Whether the image has notes associated
     - Always boolean
+  - **`rating`**: The content rating of the image
+    - Possible values (for _safe,_ _questionable,_ or _explicit_ respectively)
+      are represented differently between formats:
+      - XML returns `"s"`, `"q"`, or `"e"`
+      - JSON returns `"safe"`, `"questionable"`, or `"explicit"`
   - **`tags`**: The list of tags on the post sorted alphabetically and separated
     by a space
   - **`source`**: The string set as the source of the post
@@ -248,28 +257,12 @@ The post objects of each format have mostly mutual properties.
   - **`change`**: The Unix timestamp, in seconds, of the date the post was last
     updated
     - Integer
+  - **`md5`** (XML) / **`hash`** (JSON): The MD5 hash of the post
+    - Always a hexadecimal string
   - **`status`**: The visibility status of the post
     - `"active"`, `"flagged"`, or `"deleted"`
   - **`score`**: The amount of upvotes given to the post
     - Integer
-
-Some properties are still equatable, but the way their values are returned are
-different and can be considered inequivalent.
-
-  - **`parent_id`**: The id of the post set as the parent
-    - Values differ when not set
-  - **`rating`**: The content rating of the image
-    - Possible values ("safe," "questionable," and "explicit") are represented
-      differently
-  - **`md5`** (XML) / **`hash`** (JSON): The MD5 hash of the post
-    - Always a hexadecimal string
-    - Property name differs between formats
-  
-|              | XML                                                                          | JSON                                                 |
-| ------------ | ---------------------------------------------------------------------------- | ---------------------------------------------------- |
-| `parent_id`  | Value is an integer, unless no parent is set, to which it is an empty string | Value is `0` if no parent is set                     |
-| `rating`     | Value is `"s"`, `"q"`, or `"e"`                                              | Value is `"safe"`, `"questionable"`, or `"explicit"` |
-| `md5`/`hash` | Attribute name is `md5`                                                      | Key is `"hash"`                                      |
 
 ### Exclusive values
 
@@ -290,14 +283,8 @@ XML posts have notable properties not found on JSON posts:
     parent
     - Boolean
   - **`created_at`**: The date of the post's creation
-    - [`Date`]-parsable:
-      1. Day of the week; truncated (3 letters), capital
-      2. Month; truncated (3 letters), capital
-      3. Day of the month; 2 padding zeros
-      4. The hour, minute, and second; separated by colons, each padded with two
-         zeros
-      5. The timezone (always `+0100`)
-      6. Year
+    - [`Date`]-parsable: `"Ddd Mon DD HH:MM:SS +0100 YYYY"` (`+0100` being a
+      fixed timezone)
   - **`has_comments`**: Whether this post has one or more comments
     - Boolean
 
@@ -328,36 +315,36 @@ revealed.
       - **`count`**: The amount of posts that use this tag
         - Integer
 
-### Table of Comparison
+### Property Comparison Table
 
-|                             | XML                                    | JSON                                    |
-| --------------------------- | -------------------------------------- | --------------------------------------- |
-| Root attributes             | :white_check_mark: `count`, `offset`   | :x: Literal array                       |
-| `file_url`                  | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
-| `width`                     | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
-| `height`                    | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
-| `sample`                    | :x: No                                 | :white_check_mark: Yes                  |
-| `sample_url`                | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
-| `sample_width`              | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
-| `sample_height`             | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
-| `sample_height`             | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
-| `preview_width`             | :white_check_mark: Yes                 | :x: No                                  |
-| `preview_height`            | :white_check_mark: Yes                 | :x: No                                  |
-| `id`                        | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
-| `owner`                     | :x: No                                 | :white_check_mark: Yes                  |
-| `creator_id`                | :white_check_mark: Yes                 | :x: No                                  |
-| `parent_id`                 | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
-| `has_children`              | :white_check_mark: Yes                 | :x: No                                  |
-| `has_notes`                 | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
-| `rating`                    | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
-| `tags`                      | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
-| `source`                    | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
-| `created_at`                | :white_check_mark: Yes                 | :x: No                                  |
-| `change`                    | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
-| `md5` (XML) / `hash` (JSON) | :white_check_mark: Yes (under `"md5"`) | :white_check_mark: Yes (under `"hash"`) |
-| `directory`                 | :x: No                                 | :white_check_mark: Yes                  |
-| `image`                     | :x: No                                 | :white_check_mark: Yes                  |
-| `status`                    | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
-| `score`                     | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
-| `has_comments`              | :white_check_mark: Yes                 | :x: No                                  |
-| `comment_count`             | :x: No                                 | :white_check_mark: Yes                  |
+|                  | XML                                    | JSON                                    |
+| ---------------- | -------------------------------------- | --------------------------------------- |
+| Root attributes  | :white_check_mark: `count`, `offset`   | :x: Literal array                       |
+| `file_url`       | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `width`          | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `height`         | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `sample`         | :x: No                                 | :white_check_mark: Yes                  |
+| `sample_url`     | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `sample_width`   | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `sample_height`  | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `preview_url`    | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `preview_width`  | :white_check_mark: Yes                 | :x: No                                  |
+| `preview_height` | :white_check_mark: Yes                 | :x: No                                  |
+| `id`             | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `owner`          | :x: No                                 | :white_check_mark: Yes                  |
+| `creator_id`     | :white_check_mark: Yes                 | :x: No                                  |
+| `parent_id`      | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `has_children`   | :white_check_mark: Yes                 | :x: No                                  |
+| `has_notes`      | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `rating`         | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `tags`           | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `source`         | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `created_at`     | :white_check_mark: Yes                 | :x: No                                  |
+| `change`         | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `md5` / `hash`   | :white_check_mark: Yes (under `"md5"`) | :white_check_mark: Yes (under `"hash"`) |
+| `directory`      | :x: No                                 | :white_check_mark: Yes                  |
+| `image`          | :x: No                                 | :white_check_mark: Yes                  |
+| `status`         | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `score`          | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
+| `has_comments`   | :white_check_mark: Yes                 | :x: No                                  |
+| `comment_count`  | :x: No                                 | :white_check_mark: Yes                  |
