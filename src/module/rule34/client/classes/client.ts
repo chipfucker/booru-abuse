@@ -29,12 +29,15 @@ export class Client {
                 json: 1
             })).then(r => r.text());
 
-            if (response === MISSING_AUTHENTICATION)
-                BooruAbuseError.throw("INVALID_AUTH");
-            else if (response === "[]")
-                this.authorized = true;
-            else
-                BooruAbuseError.throw("RULE34_UNEXPECTED_AUTH_RESPONSE", response);
+            switch (response) {
+                case MISSING_AUTHENTICATION:
+                    BooruAbuseError.throw("INVALID_AUTH");
+                case "[]":
+                    this.authorized = true;
+                default:
+                    BooruAbuseError.throw(
+                        "RULE34_UNEXPECTED_AUTH_RESPONSE", response);
+            }
         }
 
         return this;
