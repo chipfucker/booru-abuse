@@ -32,11 +32,15 @@ export class Client {
             switch (response) {
                 case MISSING_AUTHENTICATION:
                     BooruAbuseError.throw("INVALID_AUTH");
+                    break;
                 case "[]":
                     this.authorized = true;
+                    break;
                 default:
                     BooruAbuseError.throw(
-                        "RULE34_UNEXPECTED_AUTH_RESPONSE", response);
+                        "RULE34_UNEXPECTED_AUTH_RESPONSE", [ response ]
+                    );
+                    break;
             }
         }
 
