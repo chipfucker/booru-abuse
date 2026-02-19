@@ -2,7 +2,7 @@ let concat = (joiner: string, ...items: any[]): string => items.join(joiner);
 concat.line  = (...items: any[]): string => concat("\n", ...items);
 concat.space = (...items: any[]): string => concat(" ", ...items);
 
-export const CORE_ERROR = {
+export const ERROR_CODE = {
     _TEST_ERROR: (...args: any[]) => ({
         message: concat.line(
             "This is a test error.",

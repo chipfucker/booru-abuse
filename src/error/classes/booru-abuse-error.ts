@@ -1,3 +1,5 @@
+
+
 export class BooruAbuseError extends Error {
     /** The unique error code. */
     code: string;
