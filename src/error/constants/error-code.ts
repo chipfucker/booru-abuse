@@ -14,6 +14,7 @@ export type ErrorCodeParameters<C extends ErrorCode>
     = Parameters<typeof ERROR_CODE[C]>;
 
 export const ERROR_CODE = <const> {
+    //#region core
     _TEST_ERROR: (...args: any[]) => ({
         message: concat.line(
             "This is a test error.",
@@ -35,6 +36,24 @@ export const ERROR_CODE = <const> {
             "This means that this error case has been considered, but the",
             "message wasn't properly implemented before release. If you've",
             "come across this error, please file an issue on GitHub."
+        )
+    }),
+
+    //#region auth
+    INVALID_AUTH: () => ({
+        message: "Authentication is invalid.",
+        hint: "Be sure you've provided the correct and necessary credentials."
+    }),
+
+    //#region Rule34
+    RULE34_UNEXPECTED_AUTH_RESPONSE: (response: string) => ({
+        message: "Unexpected response returned when validating authentication.",
+        hint: concat.line(
+            concat.space(
+                "An unknown response was given when validating credentials.",
+                "Please report this in an issue on GitHub."
+            ),
+            "Response:", response
         )
     })
 } satisfies {

@@ -1,6 +1,7 @@
 import { ClientUser } from "./client-user.ts";
 import { MISSING_AUTHENTICATION } from "../constants/missing-authentication.ts";
 import { Authentication } from "../interfaces/authentication.ts";
+import { BooruAbuseError } from "../../../../error/classes/booru-abuse.error.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
 import * as api from "../../util/functions/api-url.ts";
 
@@ -29,17 +30,11 @@ export class Client {
             })).then(r => r.text());
 
             if (response === MISSING_AUTHENTICATION)
-                throw Error([
-                    "Invalid authentication! Make sure you've provided the",
-                    "necessary credentials."
-                ].join(" "));
+                BooruAbuseError.throw("INVALID_AUTH");
             else if (response === "[]")
                 this.authorized = true;
             else
-                throw Error([
-                    "Unexpected response! Please report this error and the",
-                    "following response:\n" + response
-                ].join(" "));
+                BooruAbuseError.throw("RULE34_UNEXPECTED_AUTH_RESPONSE", response);
         }
 
         return this;
