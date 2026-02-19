@@ -1,13 +1,13 @@
-import { ERROR_CODE } from "../constants/error-code.ts";
+import { ERROR_CODE, type ErrorCode } from "../constants/error-code.ts";
 
 export class BooruAbuseError extends Error {
     /** The unique error code. */
-    code: string;
+    code: ErrorCode;
     /** The hint explaining the error. */
-    hint?: string;
+    hint: string | undefined;
 
-    constructor (code: keyof typeof ERROR_CODE, ...args: any[]) {
-        const errorCode = ERROR_CODE[code](...args);
+    constructor (code: ErrorCode, ...args: any[]) {
+        const errorCode = ERROR_CODE[code]!(...args);
         super();
         
         this.name = this.constructor.name;

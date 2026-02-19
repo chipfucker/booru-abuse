@@ -1,8 +1,20 @@
-let concat = (joiner: string, ...items: any[]): string => items.join(joiner);
-concat.line  = (...items: any[]): string => concat("\n", ...items);
-concat.space = (...items: any[]): string => concat(" ", ...items);
+let concat: {
+    (joiner: string, ...items: any[]):
+        ReturnType<Array<typeof items>["join"]>;
+    line:  (...items: any[]) => ReturnType<typeof concat>;
+    space: (...items: any[]) => ReturnType<typeof concat>;
+} = ((joiner, ...items) => items.join(joiner)) as typeof concat;
+concat.line  = (...items) => concat("\n", ...items);
+concat.space = (...items) => concat(" ", ...items);
 
-export const ERROR_CODE = {
+export type ErrorCode = keyof typeof ERROR_CODE;
+
+export const ERROR_CODE: {
+    readonly [K: string]: (...args: any[]) => {
+        message: string;
+        hint?: string;
+    };
+} = {
     _TEST_ERROR: (...args: any[]) => ({
         message: concat.line(
             "This is a test error.",
@@ -26,4 +38,4 @@ export const ERROR_CODE = {
             "come across this error, please file an issue on GitHub."
         )
     })
-} as const;
+};
