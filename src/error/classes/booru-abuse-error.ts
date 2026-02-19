@@ -22,7 +22,7 @@ export class BooruAbuseError extends Error {
             message: [
                 this.message,
                 this.hint
-            ].filter(i => i).join("\n")
+            ].filter(i => !!i).join("\n")
         });
     }
 
