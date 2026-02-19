@@ -9,12 +9,20 @@ export class BooruAbuseError extends Error {
     constructor (code: ErrorCode, args: ErrorCodeParameters<typeof code>) {
                                            // @ts-expect-error TS2556
         const errorCode = ERROR_CODE[code](...args);
-        super();
-        
+
+        super(errorCode.message);
         this.name = this.constructor.name;
         this.code = code;
-        
-        this.message = errorCode.message;
         this.hint = errorCode.hint;
+    }
+
+    override toString(): string {
+        return Error.prototype.toString.call({
+            name: `${this.name}(${this.code})`,
+            message: [
+                this.message,
+                this.hint
+            ].filter(i => i).join("\n")
+        });
     }
 }
