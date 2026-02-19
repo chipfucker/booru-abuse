@@ -26,7 +26,9 @@ export class BooruAbuseError extends Error {
         });
     }
 
-    static throw(...args: ConstructorParameters<typeof BooruAbuseError>): never {
+    static throw(
+        ...args: ConstructorParameters<typeof BooruAbuseError>
+    ): never {
         throw new this(...args);
     }
 }
