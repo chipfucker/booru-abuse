@@ -35,6 +35,12 @@ export class Client {
                 ].join(" "));
             else if (response === "[]")
                 this.authorized = true;
+            else
+                throw Error([
+                    "Unexpected response! Please report this error and the",
+                    "following response:\n",
+                    response
+                ].join(" "));
         }
 
         return this;
