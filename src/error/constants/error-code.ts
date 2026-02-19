@@ -5,7 +5,7 @@ declare let concat: {
     line:  (...items: any[]) => ReturnType<typeof concat>;
     space: (...items: any[]) => ReturnType<typeof concat>;
 };
-concat = ((joiner, ...items) => items.join(joiner)) as typeof concat;
+concat = (joiner, ...items) => items.join(joiner);
 concat.line  = (...items) => concat("\n", ...items);
 concat.space = (...items) => concat(" ", ...items);
 
