@@ -1,10 +1,15 @@
-import { ERROR_CODE, type ErrorCode, type ErrorCodeParameters } from "../constants/error-code.ts";
+import {
+    ERROR_CODE, ERROR_ISSUE_MESSAGE,
+    type ErrorCode, type ErrorCodeParameters
+} from "../constants/error-code.ts";
 
 export class BooruAbuseError extends Error {
     /** The unique error code. */
     code: ErrorCode;
     /** The hint explaining the error. */
     hint: string | undefined;
+    /** Whether the error should be reported. */
+    issue: boolean;
 
     constructor (code: ErrorCode, args: ErrorCodeParameters<typeof code>) {
                                            // @ts-expect-error TS2556
@@ -14,6 +19,7 @@ export class BooruAbuseError extends Error {
         this.name = this.constructor.name;
         this.code = code;
         this.hint = errorCode.hint;
+        this.issue = errorCode.issue ?? false;
     }
 
     override toString(): string {
@@ -21,7 +27,8 @@ export class BooruAbuseError extends Error {
             name: `${this.name}(${this.code})`,
             message: [
                 this.message,
-                this.hint
+                this.hint,
+                this.issue && ERROR_ISSUE_MESSAGE
             ].filter(i => !!i).join("\n")
         });
     }

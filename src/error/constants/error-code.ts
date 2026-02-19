@@ -13,6 +13,9 @@ export type ErrorCode = keyof typeof ERROR_CODE;
 export type ErrorCodeParameters<C extends ErrorCode>
     = Parameters<typeof ERROR_CODE[C]>;
 
+export const ERROR_ISSUE_MESSAGE = <const>
+    "If you've come across this error naturally, please file an issue on GitHub with the applicable info.";
+
 export const ERROR_CODE = <const> {
     //#region core
     _TEST_ERROR: (...args: any[]) => ({
@@ -22,9 +25,9 @@ export const ERROR_CODE = <const> {
         ),
         hint: concat.space(
             "You should not see this error thrown; this error type only exists",
-            "to test the functionality of errors. If you've come across this",
-            "error naturally, file an issue on GitHub as soon as possible."
-        )
+            "to test the functionality of errors."
+        ),
+        issue: true
     }),
     _TEMP: (reason: string, args: { [K: string]: any; }) => ({
         message: concat.line(
@@ -34,9 +37,9 @@ export const ERROR_CODE = <const> {
         ),
         hint: concat.space(
             "This means that this error case has been considered, but the",
-            "message wasn't properly implemented before release. If you've",
-            "come across this error, please file an issue on GitHub."
-        )
+            "message wasn't properly implemented before release."
+        ),
+        issue: true
     }),
 
     //#region auth
@@ -47,18 +50,17 @@ export const ERROR_CODE = <const> {
 
     //#region Rule34
     RULE34_UNEXPECTED_AUTH_RESPONSE: (response: string) => ({
-        message: "Unexpected response returned when validating authentication.",
+        message: "Unexpected response when validating authentication.",
         hint: concat.line(
-            concat.space(
-                "An unknown response was given when validating credentials.",
-                "Please report this in an issue on GitHub."
-            ),
-            "Response:", response
-        )
+            "An unknown response was given when validating credentials.",
+            `Response:\n${response}`
+        ),
+        issue: true
     })
 } satisfies {
     readonly [K: string]: (...args: any[]) => {
         message: string;
         hint?: string;
+        issue?: boolean;
     };
 };
