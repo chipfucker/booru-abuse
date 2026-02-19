@@ -1,7 +1,7 @@
 import { ClientUser } from "./client-user.ts";
 import { MISSING_AUTHENTICATION } from "../constants/missing-authentication.ts";
 import { Authentication } from "../interfaces/authentication.ts";
-import { BooruAbuseError } from "../../../../error/classes/booru-abuse.error.ts";
+import { BooruAbuseError } from "../../../../error/classes/booru-abuse-error.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
 import * as api from "../../util/functions/api-url.ts";
 
@@ -32,7 +32,6 @@ export class Client {
             switch (response) {
                 case MISSING_AUTHENTICATION:
                     BooruAbuseError.throw("INVALID_AUTH");
-                    break;
                 case "[]":
                     this.authorized = true;
                     break;
@@ -40,7 +39,6 @@ export class Client {
                     BooruAbuseError.throw(
                         "RULE34_UNEXPECTED_AUTH_RESPONSE", [ response ]
                     );
-                    break;
             }
         }
 
