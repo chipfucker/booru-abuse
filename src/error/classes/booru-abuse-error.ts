@@ -25,4 +25,8 @@ export class BooruAbuseError extends Error {
             ].filter(i => i).join("\n")
         });
     }
+
+    static throw(...args: ConstructorParameters<typeof BooruAbuseError>) {
+        throw new this(...args);
+    }
 }
