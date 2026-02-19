@@ -1,20 +1,19 @@
-let concat: {
+let concat;
+declare let concat: {
     (joiner: string, ...items: any[]):
         ReturnType<Array<typeof items>["join"]>;
     line:  (...items: any[]) => ReturnType<typeof concat>;
     space: (...items: any[]) => ReturnType<typeof concat>;
-} = ((joiner, ...items) => items.join(joiner)) as typeof concat;
+};
+concat = ((joiner, ...items) => items.join(joiner)) as typeof concat;
 concat.line  = (...items) => concat("\n", ...items);
 concat.space = (...items) => concat(" ", ...items);
 
 export type ErrorCode = keyof typeof ERROR_CODE;
+export type ErrorCodeParameters<C extends ErrorCode>
+    = Parameters<typeof ERROR_CODE[C]>;
 
-export const ERROR_CODE: {
-    readonly [K: string]: (...args: any[]) => {
-        message: string;
-        hint?: string;
-    };
-} = {
+export const ERROR_CODE = <const> {
     _TEST_ERROR: (...args: any[]) => ({
         message: concat.line(
             "This is a test error.",
@@ -38,4 +37,9 @@ export const ERROR_CODE: {
             "come across this error, please file an issue on GitHub."
         )
     })
+} satisfies {
+    readonly [K: string]: (...args: any[]) => {
+        message: string;
+        hint?: string;
+    };
 };
