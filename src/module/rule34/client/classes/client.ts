@@ -38,8 +38,7 @@ export class Client {
             else
                 throw Error([
                     "Unexpected response! Please report this error and the",
-                    "following response:\n",
-                    response
+                    "following response:\n" + response
                 ].join(" "));
         }
 
