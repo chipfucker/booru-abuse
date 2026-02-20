@@ -3,7 +3,7 @@ import { MISSING_AUTHENTICATION } from "../constants/missing-authentication.ts";
 import { Authentication } from "../interfaces/authentication.ts";
 import { BooruAbuseError } from "../../../../error/classes/booru-abuse-error.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
-import * as api from "../../util/functions/api-url.ts";
+import * as api from "../../api/url/functions/api-url.ts";
 
 /** Client to retrieve data from Rule 34 at rule34.xxx. */
 export class Client {
