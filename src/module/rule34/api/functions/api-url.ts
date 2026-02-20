@@ -1,6 +1,6 @@
 import type { Authentication } from "../../client/interfaces/authentication.ts";
 import { createURL } from "../../../../util/functions/create-url.ts";
-import * as apiParameters from "../types/api-url.ts";
+import * as apiParameters from "../types/api-parameters.ts";
 
 let getURL = (
     s: string,
