@@ -2,6 +2,7 @@ import { ClientUser } from "./client-user.ts";
 import { MISSING_AUTHENTICATION } from "../constants/missing-authentication.ts";
 import { Authentication } from "../interfaces/authentication.ts";
 import { BooruAbuseError } from "../../../../error/classes/booru-abuse-error.ts";
+import { AutocompleteTags } from "../../tag/classes/autocomplete-tags.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
 import * as APIURL from "../../api/url/functions/api-url.ts";
 
@@ -43,5 +44,13 @@ export class Client {
         }
 
         return this;
+    }
+
+    /**
+     * Returns autocomplete suggestions for a given search.
+     * @param query Full search, the last tag of which to get results from.
+     */
+    async autocomplete(query: string): Promise<AutocompleteTags> {
+        return await AutocompleteTags.fromQuery(query);
     }
 }
