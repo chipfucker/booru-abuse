@@ -3,7 +3,7 @@ import { MISSING_AUTHENTICATION } from "../constants/missing-authentication.ts";
 import { Authentication } from "../interfaces/authentication.ts";
 import { BooruAbuseError } from "../../../../error/classes/booru-abuse-error.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
-import * as api from "../../api/url/functions/api-url.ts";
+import * as APIURL from "../../api/url/functions/api-url.ts";
 
 /** Client to retrieve data from Rule 34 at rule34.xxx. */
 export class Client {
@@ -24,7 +24,7 @@ export class Client {
      */
     async test(): Promise<this | never> {
         if (!this.authorized) {
-            const response = await fetch(api.post(this.#auth, {
+            const response = await fetch(APIURL.post(this.#auth, {
                 limit: 0,
                 json: 1
             })).then(r => r.text());
