@@ -1,5 +1,9 @@
 import type { Authentication } from "../../client/interfaces/authentication.ts";
 
+export interface Autocomplete {
+    q: string;
+}
+
 export type Search = {
     tags?: string;
     id?: number;

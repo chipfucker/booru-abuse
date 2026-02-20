@@ -1,5 +1,5 @@
 import type { Authentication } from "../../client/interfaces/authentication.ts";
-import { createURL } from "../../../../util/functions/create-url.ts";
+import { createURL } from "../../../../../util/misc/functions/create-url.ts";
 import * as apiParameters from "../types/api-parameters.ts";
 
 let getURL = (
@@ -16,6 +16,16 @@ let getURL = (
         ...auth
     }
 });
+
+export function autocomplete(
+    params: apiParameters.Autocomplete
+): string {
+    return createURL({
+        base: "https://api.rule34.xxx/",
+        path: "autocomplete.php",
+        params: params
+    });
+}
 
 export function post(
     auth: Authentication,
