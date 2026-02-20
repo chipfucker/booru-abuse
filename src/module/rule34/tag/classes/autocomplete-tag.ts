@@ -3,19 +3,19 @@ import type { RawAutocompleteTag } from "../../api/raw/interface/raw-autocomplet
 
 /** A tag received from an autocomplete suggestion. */
 export class AutocompleteTag implements Pick<BaseTag, "name" | "count"> {
-    name;
-    count;
+    name: string;
+    count: number;
     
-    static RAW_INVALID_REGEX = <const> /\\r\\n/;
-    static RAW_LABEL_COUNT_REGEX = <const> /(?<=\()\d+(?=\)$)/;
+    static RAW_INVALID_REGEX = /\\r\\n/;
+    static RAW_LABEL_COUNT_REGEX = /(?<=\()\d+(?=\)$)/;
 
     static fromRaw(raw: RawAutocompleteTag): typeof this {
         return new this({
             name: raw.value,
             count: parseInt(
-                raw.label.match(this.RAW_COUNT_REGEX)?.[0];
+                raw.label.match(this.RAW_COUNT_REGEX)?.[0]
             )
-        });
+        }, raw);
     }
     
     protected raw: RawAutocompleteTag;
