@@ -1,7 +1,4 @@
-import {
-    ERROR_CODE, ERROR_ISSUE_MESSAGE,
-    type ErrorCode, type ErrorCodeParameters
-} from "../constants/error-code.ts";
+import { ERROR_CODE, ERROR_ISSUE_MESSAGE, type ErrorCode } from "../constants/error-code.ts";
 
 export class BooruAbuseError extends Error {
     /** The unique error code. */
@@ -11,8 +8,7 @@ export class BooruAbuseError extends Error {
     /** Whether the error should be reported. */
     issue: boolean;
 
-    constructor (code: ErrorCode, args: ErrorCodeParameters<typeof code>) {
-                                           // @ts-expect-error TS2556
+    constructor (code: ErrorCode, args: Parameters<typeof ERROR_CODE[typeof code]>) {
         const errorCode = ERROR_CODE[code](...args);
 
         super(errorCode.message);

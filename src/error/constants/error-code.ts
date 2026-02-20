@@ -8,14 +8,19 @@ concat = ((joiner, ...items) => items.join(joiner)) as typeof concat;
 concat.line  = (...items) => concat("\n", ...items);
 concat.space = (...items) => concat(" ", ...items);
 
-export type ErrorCode = keyof typeof ERROR_CODE;
-export type ErrorCodeParameters<C extends ErrorCode>
-    = Parameters<typeof ERROR_CODE[C]>;
+type ERROR_CODE = { readonly [K in ErrorCode]: ErrorMessageFunction; };
+type ErrorMessageFunction = (...args: any[]) => {
+    message: string;
+    hint?: string;
+    issue?: boolean;
+};
+
+export type ErrorCode = keyof typeof ERROR_CODE_LITERAL;
 
 export const ERROR_ISSUE_MESSAGE = <const>
     "If you've come across this error naturally, please file an issue on GitHub with the applicable info.";
 
-export const ERROR_CODE = <const> {
+const ERROR_CODE_LITERAL = <const> {
     //#region core
     _TEST_ERROR: (...args: any[]) => ({
         message: concat.line(
@@ -63,3 +68,5 @@ export const ERROR_CODE = <const> {
         issue?: boolean;
     };
 };
+
+export const ERROR_CODE = ERROR_CODE_LITERAL as ERROR_CODE;
