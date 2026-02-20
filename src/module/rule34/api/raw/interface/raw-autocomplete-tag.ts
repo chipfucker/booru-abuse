@@ -1,4 +1,4 @@
-export interface RawAutocompleteTag {
+export type RawAutocompleteTags = {
     label: string;
     value: string;
-}
+}[];

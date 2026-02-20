@@ -1,5 +1,5 @@
 import type { BaseTag } from "../interfaces/base-tag.ts";
-import type { RawAutocompleteTag } from "../../api/raw/interface/raw-autocomplete-tag.ts";
+import type { RawAutocompleteTags } from "../../api/raw/interface/raw-autocomplete-tag.ts";
 
 /** A tag received from an autocomplete suggestion. */
 export class AutocompleteTag implements Pick<BaseTag, "name" | "count"> {
@@ -9,7 +9,7 @@ export class AutocompleteTag implements Pick<BaseTag, "name" | "count"> {
     static RAW_INVALID_REGEX = /\\r\\n/;
     static RAW_LABEL_COUNT_REGEX = /(?<=\()\d+(?=\)$)/;
 
-    static fromRaw(raw: RawAutocompleteTag): typeof this {
+    static fromRaw(raw: RawAutocompleteTags[number]): typeof this {
         return new this({
             name: raw.value,
             count: parseInt(
@@ -18,11 +18,11 @@ export class AutocompleteTag implements Pick<BaseTag, "name" | "count"> {
         }, raw);
     }
     
-    protected raw: RawAutocompleteTag;
+    protected raw: RawAutocompleteTags[number];
 
     constructor (
         options: { name: string; count: number; },
-        raw: RawAutocompleteTag
+        raw: RawAutocompleteTags[number]
     ) {
         this.name = options.name;
         this.count = options.count;
