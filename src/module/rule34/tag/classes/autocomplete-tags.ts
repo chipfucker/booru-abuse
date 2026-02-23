@@ -18,11 +18,11 @@ export class AutocompleteTags {
         const tag = query.match(this.LAST_TAG_REGEX)?.[0];
         if (!tag) return this.fromRaw([], query);
         const response: RawAutocompleteTags
-            = await fetchJSON(APIURL.autocomplete(tag));
+            = await fetchJSON(APIURL.autocomplete({ q: tag }));
         return this.fromRaw(response, tag);
     }
 
-    static fromRaw(raw: RawAutocompleteTags, tag: string): typeof this {
+    static fromRaw(raw: RawAutocompleteTags, tag: string): AutocompleteTags {
         return new this(raw.map(AutocompleteTag.fromRaw), tag);
     }
 
