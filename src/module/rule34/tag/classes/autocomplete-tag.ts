@@ -9,11 +9,11 @@ export class AutocompleteTag implements Pick<BaseTag, "name" | "count"> {
     static RAW_INVALID_REGEX = /\\r\\n/;
     static RAW_LABEL_COUNT_REGEX = /(?<=\()\d+(?=\)$)/;
 
-    static fromRaw(raw: RawAutocompleteTags[number]): typeof this {
+    static fromRaw(raw: RawAutocompleteTags[number]): AutocompleteTag {
         return new this({
             name: raw.value,
             count: parseInt(
-                raw.label.match(this.RAW_COUNT_REGEX)?.[0]
+                raw.label.match(this.RAW_LABEL_COUNT_REGEX)?.[0] ?? "0"
             )
         }, raw);
     }
