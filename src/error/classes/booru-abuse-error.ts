@@ -8,7 +8,7 @@ export class BooruAbuseError extends Error {
     /** Whether the error should be reported. */
     issue: boolean;
 
-    constructor (code: ErrorCode, args: Parameters<typeof ERROR_CODE[typeof code]>) {
+    constructor (code: ErrorCode, args: Parameters<typeof ERROR_CODE[typeof code]> = []) {
         const errorCode = ERROR_CODE[code](...args);
 
         super(errorCode.message);
