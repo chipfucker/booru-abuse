@@ -1,6 +1,6 @@
 import type { Authentication } from "../../client/interfaces/authentication.ts";
 import { createURL } from "../../../../../util/misc/functions/create-url.ts";
-import * as apiParameters from "../types/api-parameters.ts";
+import * as APIParameters from "../types/api-parameters.ts";
 
 let getURL = (
     s: string,
@@ -18,7 +18,7 @@ let getURL = (
 });
 
 export function autocomplete(
-    params: apiParameters.Autocomplete
+    params: APIParameters.Autocomplete
 ): string {
     return createURL({
         base: "https://api.rule34.xxx/",
@@ -29,24 +29,24 @@ export function autocomplete(
 
 export function post(
     auth: Authentication,
-    params: apiParameters.Search
+    params: APIParameters.Search
 ): string {
     return getURL("post", params, auth);
 }
 
 export function postBothFormats(
     auth: Authentication,
-    params: Omit<apiParameters.Search, "json">
+    params: Omit<APIParameters.Search, "json">
 ): string {
-    const xml: apiParameters.Search = params;
+    const xml: APIParameters.Search = params;
     xml.json = 0;
     delete xml.fields;
 
-    const json: apiParameters.Search = params;
+    const json: APIParameters.Search = params;
     json.json = 1;
 
     return {
-        xml: post(xml, auth),
-        json: post(json, auth)
+        xml: post(auth, xml),
+        json: post(auth, json)
     };
 }
