@@ -1,5 +1,5 @@
 import { ClientUser } from "./client-user.ts";
-import { MISSING_AUTHENTICATION } from "../constants/missing-authentication.ts";
+import { AUTHENTICATION_RESPONSE } from "../constants/authentication-response.ts";
 import { Authentication } from "../interfaces/authentication.ts";
 import { BooruAbuseError } from "../../../../error/classes/booru-abuse-error.ts";
 import { AutocompleteTags } from "../../tag/classes/autocomplete-tags.ts";
@@ -31,9 +31,9 @@ export class Client {
             })).then(r => r.text());
 
             switch (response) {
-                case MISSING_AUTHENTICATION:
+                case AUTHENTICATION_RESPONSE.MISSING_AUTHENTICATION:
                     BooruAbuseError.throw("INVALID_AUTH");
-                case "[]":
+                case AUTHENTICATION_RESPONSE.EMPTY_ARRAY:
                     this.authorized = true;
                     break;
                 default:
