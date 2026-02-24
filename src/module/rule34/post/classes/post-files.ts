@@ -7,9 +7,12 @@ export class PostFile {
     url: string;
     size: [ width: number, height: number ];
     
-    constructor (url: string, size: [ width: number, height: number ]) {
-        this.url = url;
-        this.size = size;
+    constructor (object: {
+        url: string;
+        size: [ width: number, height: number ];
+    }) {
+        this.url = object.url;
+        this.size = object.size;
     }
 }
 
@@ -31,28 +34,55 @@ export class PostFiles extends PostFile {
     hash: string;
     extension: string;
 
-    static fromObjects(objects: {
+    static fromRaw({json, xml: { attr: xml }}: {
         json: RawPostJSON;
         xml: RawPostXML;
     }): PostFile {
-        return new PostFiles(objects);
+        return this.fromObject({
+            url: json.file_url,
+            size: [ json.width, json.height ],
+            downsample: {
+                url: json.sample_url,
+                size: [ json.sample_width, json.sample_height ]
+            },
+            thumbnail: {
+                url: json.preview_url,
+                size: [
+                    parseInt(xml.preview_width),
+                    parseInt(xml.preview_height)
+                ]
+            },
+            directory: json.directory,
+            hash: json.hash,
+            image: json.image
+        });
     }
 
-    constructor ({ json, xml: { attr: xml }}: { json: RawPostJSON; xml: RawPostXML; }) {
-        super(json.file_url, [ json.width, json.height ]);
-        
-        this.downsample = <any> new PostFile(
-            json.sample_url,
-            [ json.sample_width, json.sample_height ]
-        );
+    static fromObject(object: ConstructorParameters<typeof this>[0]) {
+        return new this(object);
+    }
+
+    constructor (object: {
+        url: string;
+        size: [ width: number, height: number ];
+        downsample: {
+            url: string;
+            size: [ width: number, height: number ];
+        };
+        thumbnail: {
+            url: string;
+            size: [ width: number, height: number ];
+        };
+        directory: number;
+        hash: string;
+        image: string;
+    }) {
+        super(object);
+        this.downsample = <any> new PostFile(object.downsample);
         this.downsample.exists = this.url !== this.downsample.url;
+        this.thumbnail = new PostFile(object.thumbnail);
 
-        this.thumbnail = new PostFile(
-            json.preview_url,
-            [ parseInt(xml.preview_width), parseInt(xml.preview_height) ]
-        );
-
-        const ext = json.image.match(/(?<=\.)\w+$/)![0];
+        const ext = object.image.match(/(?<=\.)\w+$/)![0];
 
         this.type = PostFileType[
             Object.keys(PostFiles.FILE_EXTENSIONS).find(key =>
@@ -61,7 +91,7 @@ export class PostFiles extends PostFile {
         ];
         // ERROR
 
-        this.directory = json.directory;
-        this.hash = json.hash;
+        this.directory = object.directory;
+        this.hash = object.hash;
     }
 }
