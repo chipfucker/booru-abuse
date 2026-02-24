@@ -37,7 +37,7 @@ export class PostFiles extends PostFile {
     static fromRaw({json, xml: { attr: xml }}: {
         json: RawPostJSON;
         xml: RawPostXML;
-    }): PostFile {
+    }) {
         return this.fromObject({
             url: json.file_url,
             size: [ json.width, json.height ],
