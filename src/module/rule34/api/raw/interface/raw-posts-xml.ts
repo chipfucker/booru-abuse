@@ -37,3 +37,5 @@ export interface RawPostsXML {
         has_comments: BooleanString;
     }}[];
 }
+
+export type RawPostXML = RawPostsXML["children"][number];
