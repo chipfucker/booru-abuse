@@ -3,6 +3,7 @@ import { PostFiles } from "./post-files.ts";
 import { PostRating } from "../enums/post-rating.ts";
 import { PostAuthor } from "./post-author.ts";
 import { PostStatus } from "../enums/post-status.ts";
+import { PostTags } from "../../tag/classes/post-tags.ts";
 
 /** A post. */
 export class Post {
