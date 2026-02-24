@@ -1,12 +1,8 @@
-let concat: {
-    (joiner: string, ...items: any[]):
-        ReturnType<Array<typeof items>["join"]>;
-    line:  (...items: any[]) => ReturnType<typeof concat>;
-    space: (...items: any[]) => ReturnType<typeof concat>;
+let concatenate = ((joiner, ...items) => items.join(joiner));
+let concat = {
+    line: (...items) => concatenate("\n", ...items),
+    space: (...items) => concatenate(" ", ...items)
 };
-concat = ((joiner, ...items) => items.join(joiner)) as typeof concat;
-concat.line  = (...items) => concat("\n", ...items);
-concat.space = (...items) => concat(" ", ...items);
 
 type ERROR_CODE = { readonly [K in ErrorCode]: ErrorMessageFunction; };
 type ErrorMessageFunction = (...args: any[]) => {
