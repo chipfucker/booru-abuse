@@ -1,4 +1,5 @@
 import { PostTag } from "./post-tag.ts";
+import type { TagType } from "../enums/tag-type.ts";
 import type { RawPostJSON } from "../../api/raw/interface/raw-posts-json.ts";
 
 /** Array of tags found under a post. */
@@ -21,8 +22,8 @@ export class PostTags extends Array<PostTag> {
         this.string = object.string;
     }
 
-    category<T extends TagType>(category: T): PostTag<T>[] {
-        return Array.from(this).filter(tag => tag.type === category);
+    ofCategory<T extends TagType>(category: T): PostTag<T>[] {
+        return this.filter(tag => tag.type === category);
     }
 
     override toString(): string { return this.string; }
