@@ -23,7 +23,11 @@ export class AutocompleteTags {
     }
 
     static fromRaw(raw: RawAutocompleteTags, tag: string): AutocompleteTags {
-        return new this(raw.map(AutocompleteTag.fromRaw), tag);
+        return this.fromObject(raw.map(AutocompleteTag.fromRaw), tag);
+    }
+
+    static fromObject(object: ConstructorParameters<typeof this>[0]) {
+        return new this(object);
     }
 
     protected constructor (array: AutocompleteTag[], tag: string) {
