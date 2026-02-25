@@ -5,10 +5,6 @@ import type { RawPostJSON } from "../../api/raw/interface/raw-posts-json.ts";
 /** A tag attributed to  a post. */
 export class PostTag<T extends TagType = TagType>
 implements Pick<BaseTag<T>, "name" | "count" | "type"> {
-    name: string;
-    count: number;
-    type: T;
-
     static RAW_TAG_TYPE = {
         "copyright": "Copyright",
         "character": "Character",
@@ -20,7 +16,12 @@ implements Pick<BaseTag<T>, "name" | "count" | "type"> {
         [K in RawPostJSON<true>["tag_info"][number]["type"]]:
             keyof typeof TagType;
     }
+    
+    name: string;
+    count: number;
+    type: T;
 
+    //#region constructor
     static fromRaw(raw: RawPostJSON<true>["tag_info"][number]) {
         return this.fromObject({
             name: raw.tag,
@@ -43,4 +44,5 @@ implements Pick<BaseTag<T>, "name" | "count" | "type"> {
         this.count = object.count;
         this.type = object.type;
     }
+    //#endregion
 }

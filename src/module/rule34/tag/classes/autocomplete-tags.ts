@@ -12,6 +12,7 @@ export class AutocompleteTags {
     /** Resulting autocomplete suggestions. */
     tags: AutocompleteTag[];
 
+    //#region constructor
     static async fromQuery(query: string): Promise<
         ReturnType<typeof this.fromRaw>
     > {
@@ -29,9 +30,10 @@ export class AutocompleteTags {
     static fromObject(object: ConstructorParameters<typeof this>[0]) {
         return new this(object);
     }
-
+    
     protected constructor (array: AutocompleteTag[], tag: string) {
         this.incompleteTag = tag;
         this.tags = array.filter(i => i.isReal());
     }
+    //#endregion
 }

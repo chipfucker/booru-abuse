@@ -6,7 +6,7 @@ export abstract class BaseUser {
     abstract name: string;
     /** The unique id of the user. */
     abstract id: number;
-
+    
     /** Returns a URL to this user's profile on rule34.xxx. */
     toURL(): string { return getURL(this.name); }
 }

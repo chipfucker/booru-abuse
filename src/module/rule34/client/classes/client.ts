@@ -1,24 +1,25 @@
 import { ClientUser } from "./client-user.ts";
 import { AUTHENTICATION_RESPONSE } from "../constants/authentication-response.ts";
-import { BooruAbuseError } from "../../../../error/classes/booru-abuse-error.ts";
 import { AutocompleteTags } from "../../tag/classes/autocomplete-tags.ts";
+import { BooruAbuseError } from "../../../../error/classes/booru-abuse-error.ts";
+import * as APIURL from "../../api/url/functions/api-url.ts";
 import type { Authentication } from "../interfaces/authentication.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
-import * as APIURL from "../../api/url/functions/api-url.ts";
 
 /** Client to retrieve data from Rule 34 at rule34.xxx. */
 export class Client {
     #auth: Authentication;
-    private authorized: boolean = false;
 
+    protected authorized: boolean = false;
+    
     /** The user tied to the client. */
     self: ClientUser;
-
+    
     constructor (options: ClientOptions) {
         this.#auth = options.auth;
         this.self = ClientUser.fromAuth(options.auth);
-    }
-
+    }    
+    
     /**
      * Returns the client if the credentials are valid, otherwise throws an
      * error.
@@ -31,11 +32,11 @@ export class Client {
             })).then(r => r.text());
 
             switch (response) {
-                case AUTHENTICATION_RESPONSE.MISSING_AUTHENTICATION:
-                    BooruAbuseError.throw("INVALID_AUTH");
                 case AUTHENTICATION_RESPONSE.EMPTY_ARRAY:
                     this.authorized = true;
                     break;
+                case AUTHENTICATION_RESPONSE.MISSING_AUTHENTICATION:
+                    BooruAbuseError.throw("INVALID_AUTH");
                 default:
                     BooruAbuseError.throw(
                         "RULE34_UNEXPECTED_AUTH_RESPONSE", [ response ]

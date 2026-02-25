@@ -6,6 +6,7 @@ import type { RawPostJSON } from "../../api/raw/interface/raw-posts-json.ts";
 export class PostTags extends Array<PostTag> {
     protected string: string;
 
+    //#region constructor
     static fromRaw(raw: RawPostJSON<true>) {
         return this.fromObject({
             string: raw.tags,
@@ -21,7 +22,8 @@ export class PostTags extends Array<PostTag> {
         super(...object.tags);
         this.string = object.string;
     }
-
+    //#endregion
+    
     ofCategory<T extends TagType>(category: T): PostTag<T>[] {
         return this.filter(tag => tag.type === category);
     }

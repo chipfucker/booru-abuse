@@ -4,6 +4,7 @@ import { BaseUser } from "../../misc/interfaces/base-user.ts";
 export class PostAuthor extends BaseUser {
     bot: boolean;
 
+    //#region constructor
     static fromObject(object: ConstructorParameters<typeof this>[0]) {
         return new this(object);
     }
@@ -13,4 +14,5 @@ export class PostAuthor extends BaseUser {
         this.id = object.id;
         this.bot = this.name === "bot";
     }
+    //#endregion
 }

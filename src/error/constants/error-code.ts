@@ -18,17 +18,6 @@ export const ERROR_ISSUE_MESSAGE = <const>
 
 const ERROR_CODE_LITERAL = <const> {
     //#region core
-    _TEST_ERROR: (...args: any[]) => ({
-        message: concat.line(
-            "This is a test error.",
-            `Arguments: ${args.length ? args.join(", ") : "none"}`
-        ),
-        hint: concat.space(
-            "You should not see this error thrown; this error type only exists",
-            "to test the functionality of errors."
-        ),
-        issue: true
-    }),
     _TEMP: (reason: string, args: { [K: string]: any; }) => ({
         message: concat.line(
             "This is a valid error whose message hasn't been defined yet.",
@@ -38,6 +27,17 @@ const ERROR_CODE_LITERAL = <const> {
         hint: concat.space(
             "This means that this error case has been considered, but the",
             "message wasn't properly implemented before release."
+        ),
+        issue: true
+    }),
+    _TEST_ERROR: (...args: any[]) => ({
+        message: concat.line(
+            "This is a test error.",
+            `Arguments: ${args.length ? args.join(", ") : "none"}`
+        ),
+        hint: concat.space(
+            "You should not see this error thrown; this error type only exists",
+            "to test the functionality of errors."
         ),
         issue: true
     }),

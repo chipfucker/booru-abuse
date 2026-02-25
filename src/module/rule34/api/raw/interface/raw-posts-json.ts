@@ -31,8 +31,8 @@ interface RawPost {
 interface TagInfo {
     tag_info: {
         count: number;
-        type: "copyright" | "character" | "artist" | "tag" | "metadata" | null;
         tag: string;
+        type: "copyright" | "character" | "artist" | "tag" | "metadata" | null;
     }[];
 }
 

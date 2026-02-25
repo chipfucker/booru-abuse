@@ -3,14 +3,15 @@ import type { RawAutocompleteTags } from "../../api/raw/interface/raw-autocomple
 
 /** A tag received from an autocomplete suggestion. */
 export class AutocompleteTag implements Pick<BaseTag, "name" | "count"> {
+    static RAW_INVALID_REGEX = /\\r\\n/;
+    static RAW_LABEL_COUNT_REGEX = /(?<=\()\d+(?=\)$)/;
+    
+    protected raw: RawAutocompleteTags[number];
+
     name: string;
     count: number;
     
-    static RAW_INVALID_REGEX = /\\r\\n/;
-    static RAW_LABEL_COUNT_REGEX = /(?<=\()\d+(?=\)$)/;
-
-    protected raw: RawAutocompleteTags[number];
-    
+    //#region constructor
     static fromRaw(raw: RawAutocompleteTags[number]): AutocompleteTag {
         return this.fromObject({
             name: raw.value,
@@ -32,6 +33,7 @@ export class AutocompleteTag implements Pick<BaseTag, "name" | "count"> {
         this.count = options.count;
         this.raw = raw;
     }
+    //#endregion
 
     isReal(): boolean {
         return !AutocompleteTag.RAW_INVALID_REGEX.test(this.raw.value);

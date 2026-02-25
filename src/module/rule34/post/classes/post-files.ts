@@ -7,6 +7,7 @@ export class PostFile {
     url: string;
     size: [ width: number, height: number ];
 
+    //#region constructor
     static fromObject(object: ConstructorParameters<typeof this>[0]) {
         return new this(object);
     }
@@ -18,6 +19,7 @@ export class PostFile {
         this.url = object.url;
         this.size = object.size;
     }
+    //#endregion
 }
 
 /** The files of a post. */
@@ -38,6 +40,7 @@ export class PostFiles extends PostFile {
     hash: string;
     extension: string;
 
+    //#region constructor
     static fromRaw({json, xml: { attr: xml }}: {
         json: RawPostJSON;
         xml: RawPostXML;
@@ -98,4 +101,5 @@ export class PostFiles extends PostFile {
         this.directory = object.directory;
         this.hash = object.hash;
     }
+    //#endregion
 }

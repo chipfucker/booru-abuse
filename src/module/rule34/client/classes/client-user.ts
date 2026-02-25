@@ -1,10 +1,11 @@
-import type { BaseUser } from "../../misc/interfaces/base-user.ts";
 import type { Authentication } from "../interfaces/authentication.ts";
+import type { BaseUser } from "../../misc/interfaces/base-user.ts";
 
 /** A user tied to a client. */
 export class ClientUser implements Pick<BaseUser, "id"> {
     id: number;
 
+    //#region constructor
     static fromAuth(auth: Pick<Authentication, "user_id">) {
         return this.fromObject({
             id: auth.user_id
@@ -18,4 +19,5 @@ export class ClientUser implements Pick<BaseUser, "id"> {
     protected constructor (options: { id: number; }) {
         this.id = options.id;
     }
+    //#endregion
 }

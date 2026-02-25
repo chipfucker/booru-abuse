@@ -8,6 +8,13 @@ export class BooruAbuseError extends Error {
     /** Whether the error should be reported. */
     issue: boolean;
 
+    //#region constructor
+    static throw(
+        ...args: ConstructorParameters<typeof BooruAbuseError>
+    ): never {
+        throw new this(...args);
+    }
+
     constructor (code: ErrorCode, args: Parameters<typeof ERROR_CODE[typeof code]> = []) {
         const errorCode = ERROR_CODE[code](...args);
 
@@ -17,7 +24,8 @@ export class BooruAbuseError extends Error {
         this.hint = errorCode.hint;
         this.issue = errorCode.issue ?? false;
     }
-
+    //#endregion
+    
     override toString(): string {
         return Error.prototype.toString.call({
             name: `${this.name}(${this.code})`,
@@ -27,11 +35,5 @@ export class BooruAbuseError extends Error {
                 this.issue && ERROR_ISSUE_MESSAGE
             ].filter(i => !!i).join("\n")
         });
-    }
-
-    static throw(
-        ...args: ConstructorParameters<typeof BooruAbuseError>
-    ): never {
-        throw new this(...args);
     }
 }
