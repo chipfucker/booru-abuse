@@ -13,7 +13,7 @@
     "Namespace",            // namespace / export * as
     
     "Class",                // class
-    "Interface",            // interface / export type class
+    "Interface",            // interface / type class
     "Function",             // function
     "Enum",                 // enum
     "Variable",             // var/let/const
@@ -41,12 +41,12 @@
     "TypeLiteral"           // instance: literal
   ],
   "sort": [
-    "visibility",
-    "required-first",
-    "static-first",
-    "kind",
-    "enum-value-ascending",
-    "source-order",
-    "alphabetical"
+    "visibility",           // public, protected, private
+    "required-first",       // [key]: any, [key]?: any
+    "static-first",         // static [key]: any
+    "kind",                 // ref "kindSortOrder"
+    "enum-value-ascending", // Z = 0, O = 1, T = 2
+    "source-order",         //
+    "alphabetical"          // A-Z
   ]
 }
