@@ -11,7 +11,7 @@ export class ClientUser implements Pick<BaseUser, "id"> {
         });
     }
 
-    private constructor (options: { id: number; }) {
+    protected constructor (options: { id: number; }) {
         this.id = options.id;
     }
 }

@@ -9,18 +9,22 @@ export class AutocompleteTag implements Pick<BaseTag, "name" | "count"> {
     static RAW_INVALID_REGEX = /\\r\\n/;
     static RAW_LABEL_COUNT_REGEX = /(?<=\()\d+(?=\)$)/;
 
+    protected raw: RawAutocompleteTags[number];
+    
     static fromRaw(raw: RawAutocompleteTags[number]): AutocompleteTag {
-        return new this({
+        return this.fromObject({
             name: raw.value,
             count: parseInt(
                 raw.label.match(this.RAW_LABEL_COUNT_REGEX)?.[0] ?? "0"
             )
         }, raw);
     }
-    
-    protected raw: RawAutocompleteTags[number];
 
-    constructor (
+    static fromObject(object: ConstructorParameters<typeof this>[0]) {
+        return new this(object);
+    }
+    
+    protected constructor (
         options: { name: string; count: number; },
         raw: RawAutocompleteTags[number]
     ) {

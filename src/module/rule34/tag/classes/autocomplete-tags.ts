@@ -26,7 +26,7 @@ export class AutocompleteTags {
         return new this(raw.map(AutocompleteTag.fromRaw), tag);
     }
 
-    constructor (array: AutocompleteTag[], tag: string) {
+    protected constructor (array: AutocompleteTag[], tag: string) {
         this.incompleteTag = tag;
         this.tags = array.filter(i => i.isReal());
     }

@@ -8,7 +8,7 @@ export class PostAuthor extends BaseUser {
         return new this(object);
     }
 
-    constructor (object: { name: string; id: number; }) {
+    protected constructor (object: { name: string; id: number; }) {
         this.name = object.name;
         this.id = object.id;
         this.bot = this.name === "bot";

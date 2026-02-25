@@ -34,7 +34,7 @@ implements Pick<BaseTag<T>, "name" | "count" | "type"> {
         return new this(object);
     }
 
-    constructor (object: {
+    protected constructor (object: {
         name: string;
         count: number;
         type: T;

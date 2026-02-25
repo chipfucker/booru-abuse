@@ -6,8 +6,12 @@ import type { RawPostXML } from "../../api/raw/interface/raw-posts-xml.ts";
 export class PostFile {
     url: string;
     size: [ width: number, height: number ];
+
+    static fromObject(object: ConstructorParameters<typeof this>[0]) {
+        return new this(object);
+    }
     
-    constructor (object: {
+    protected constructor (object: {
         url: string;
         size: [ width: number, height: number ];
     }) {
@@ -62,7 +66,7 @@ export class PostFiles extends PostFile {
         return new this(object);
     }
 
-    constructor (object: {
+    protected constructor (object: {
         url: string;
         size: [ width: number, height: number ];
         downsample: {
@@ -78,9 +82,9 @@ export class PostFiles extends PostFile {
         image: string;
     }) {
         super(object);
-        this.downsample = <any> new PostFile(object.downsample);
+        this.downsample = <any> PostFile.fromObject(object.downsample);
         this.downsample.exists = this.url !== this.downsample.url;
-        this.thumbnail = new PostFile(object.thumbnail);
+        this.thumbnail = PostFile.fromObject(object.thumbnail);
 
         const ext = object.image.match(/(?<=\.)\w+$/)![0];
 

@@ -17,7 +17,7 @@ export class PostTags extends Array<PostTag> {
         return new this(object);
     }
 
-    constructor (object: { string: string; tags: PostTag[] }) {
+    protected constructor (object: { string: string; tags: PostTag[] }) {
         super(...object.tags);
         this.string = object.string;
     }
