@@ -1,7 +1,7 @@
-let concatenate = ((joiner, ...items) => items.join(joiner));
+let concatenate = ((joiner: string, ...items: any[]) => items.join(joiner));
 let concat = {
-    line: (...items) => concatenate("\n", ...items),
-    space: (...items) => concatenate(" ", ...items)
+    line: (...items: any[]) => concatenate("\n", ...items),
+    space: (...items: any[]) => concatenate(" ", ...items)
 };
 
 type ERROR_CODE = { readonly [K in ErrorCode]: ErrorMessageFunction; };
