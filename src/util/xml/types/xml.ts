@@ -4,6 +4,7 @@ export type XMLDocument = ReturnType<typeof parseXML>;
 export type XMLNode = XMLDocument | XMLDocument["children"][number];
 
 export interface XMLObject {
+    name: string;
     attr: { [key: string]: string | undefined; };
     children: XMLObject[]
 }

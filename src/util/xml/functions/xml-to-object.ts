@@ -5,6 +5,7 @@ export let xmlToObject = (xml: XMLNode) => {
 
     function convert(node: XMLNode) {
         const object: XMLObject = {
+            name: node.nodeName,
             attr: {},
             children: []
         };
