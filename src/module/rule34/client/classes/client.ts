@@ -1,7 +1,9 @@
 import { ClientUser } from "./client-user.ts";
 import { AUTHENTICATION_RESPONSE } from "../constants/authentication-response.ts";
-import { BooruAbuseError } from "../../../../error/classes/booru-abuse-error.ts";
 import { APIURL } from "../../api/url/functions/api-url.ts";
+import { AutocompleteTags } from "../../tag/classes/autocomplete-tags.ts";
+import { BooruAbuseError } from "../../../../error/classes/booru-abuse-error.ts";
+import { fetchJSON, fetchXML } from "../../../../util/rest.ts";
 import type { Authentication } from "../interfaces/authentication.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
 import type { APIURLParameterMap } from "../../api/url/interfaces/api-parameter-map.ts";
@@ -53,5 +55,17 @@ export class Client {
         }
 
         return this;
+    }
+
+    /**
+     * Returns autocomplete suggestions for a given tag.
+     * @param tag The incomplete tag.
+     */
+    async autocomplete(tag: string): Promise<AutocompleteTags> {
+        return await fetchJSON(this.APIURL(
+            "autocomplete",
+            { q: tag.match(AutocompleteTags.LAST_TAG_REGEX)![0] })
+            // ERROR
+        ).then(raw => AutocompleteTags.fromRaw(raw, tag));
     }
 }
