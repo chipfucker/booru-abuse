@@ -6,8 +6,8 @@ import type { RawAutocompleteTags } from "../../api/raw/interface/raw-autocomple
 export class AutocompleteTag implements Pick<BaseTag, "name" | "count"> {
     protected raw: RawAutocompleteTags[number];
 
-    name: string;
-    count: number;
+    name!: string;
+    count!: number;
 
     isReal(): boolean {
         return !AutocompleteTag.RAW_INVALID_REGEX.test(this.raw.value);

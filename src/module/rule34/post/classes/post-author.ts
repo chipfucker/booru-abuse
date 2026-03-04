@@ -3,8 +3,8 @@ import { overlayKeys } from "../../../../util/misc/functions/overlay-keys.ts";
 
 /** The creator of a post. */
 export class PostAuthor extends BaseUser {
-    name: string;
-    id: number;
+    name!: string;
+    id!: number;
 
     /** Whether the user is a bot. */
     bot: boolean;

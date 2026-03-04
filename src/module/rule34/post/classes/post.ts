@@ -10,24 +10,24 @@ import type { Client } from "../../client/classes/client.ts";
 
 /** A post. */
 export class Post {
-    protected client: Client;
-    protected hasChildren: boolean;
-    protected commentCount: boolean;
+    protected client!: Client;
+    protected hasChildren!: boolean;
+    protected commentCount!: boolean;
 
-    file: PostFiles;
+    file!: PostFiles;
 
-    id: number;
-    parent: number | null;
-    source: string;
-    rating: PostRating;
-    author: PostAuthor;
+    id!: number;
+    parent!: number | null;
+    source!: string;
+    rating!: PostRating;
+    author!: PostAuthor;
 
-    created: Date;
-    modified: Date;
-    status: PostStatus;
+    created!: Date;
+    modified!: Date;
+    status!: PostStatus;
 
-    score: number;
-    tags: PostTags;
+    score!: number;
+    tags!: PostTags;
     
     static RAW_RATING = {
         "safe": "Safe",
@@ -65,7 +65,7 @@ export class Post {
 
     static fromRaw(
         client: Client,
-        { json, xml: { attr: xml } }: { json: RawPostJSON<true>; xml: RawPostXML; }
+        { json, xml }: { json: RawPostJSON<true>; xml: RawPostXML["attr"]; }
     ) {
         return new this({
             client: client,
@@ -79,7 +79,7 @@ export class Post {
             source: json.source,
             rating: PostRating[Post.RAW_RATING[json.rating]],
             // ERROR
-            author: PostAuthor.fromObject({
+            author: new PostAuthor({
                 name: json.owner,
                 id: parseInt(xml.creator_id)
                 // ERROR

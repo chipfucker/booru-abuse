@@ -5,8 +5,8 @@ import type { RawPostXML } from "../../api/raw/interface/raw-posts-xml.ts";
 
 /** A set of the files of a post. */
 export class PostFile {
-    url: string;
-    size: [ width: number, height: number ];
+    url!: string;
+    size!: [ width: number, height: number ];
     
     constructor (object: {
         url: string;
@@ -50,9 +50,9 @@ export class PostFiles extends PostFile {
         image: string;
     }) {
         super(object);
-        this.downsample = <any> PostFile.fromObject(object.downsample);
+        this.downsample = <any> new PostFile(object.downsample);
         this.downsample.exists = this.url !== this.downsample.url;
-        this.thumbnail = PostFile.fromObject(object.thumbnail);
+        this.thumbnail = new PostFile(object.thumbnail);
 
         this.extension = object.image.match(/(?<=\.)\w+$/)![0];
 
@@ -70,9 +70,9 @@ export class PostFiles extends PostFile {
         this.hash = object.hash;
     }
 
-    static fromRaw({json, xml: { attr: xml }}: {
+    static fromRaw({json, xml}: {
         json: RawPostJSON;
-        xml: RawPostXML;
+        xml: RawPostXML["attr"];
     }) {
         return new this({
             url: json.file_url,

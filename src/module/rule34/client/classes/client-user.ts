@@ -4,7 +4,7 @@ import type { BaseUser } from "../../misc/interfaces/base-user.ts";
 
 /** A user tied to a client. */
 export class ClientUser implements Pick<BaseUser, "id"> {
-    id: number;
+    id!: number;
 
     constructor (object: { id: number; }) {
         overlayKeys(this, object);

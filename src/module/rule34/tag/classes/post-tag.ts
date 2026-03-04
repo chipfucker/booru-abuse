@@ -6,9 +6,9 @@ import type { RawPostJSON } from "../../api/raw/interface/raw-posts-json.ts";
 /** A tag attributed to  a post. */
 export class PostTag<T extends TagType = TagType>
 implements Pick<BaseTag<T>, "name" | "count" | "type"> {
-    name: string;
-    count: number;
-    type: T;
+    name!: string;
+    count!: number;
+    type!: T;
     
     static RAW_TAG_TYPE = {
         "copyright": "Copyright",
