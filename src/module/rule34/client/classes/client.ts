@@ -56,6 +56,8 @@ export class Client {
 
         return this;
     }
+    
+    static LAST_TAG_REGEX = /(?<= ?)[^ ]+$/;
 
     /**
      * Returns autocomplete suggestions for a given tag.
@@ -64,7 +66,7 @@ export class Client {
     async autocomplete(tag: string): Promise<AutocompleteTags> {
         return await fetchJSON(this.APIURL(
             "autocomplete",
-            { q: tag.match(AutocompleteTags.LAST_TAG_REGEX)![0] })
+            { q: tag.match(Client.LAST_TAG_REGEX)![0] })
             // ERROR
         ).then(raw => AutocompleteTags.fromRaw(raw, tag));
     }

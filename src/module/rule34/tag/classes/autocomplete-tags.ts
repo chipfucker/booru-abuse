@@ -1,12 +1,8 @@
 import { AutocompleteTag } from "./autocomplete-tag.ts";
-import { fetchJSON } from "../../../../util/rest.ts";
-import * as APIURL from "../../api/url/functions/api-url.ts";
 import type { RawAutocompleteTags } from "../../api/raw/interface/raw-autocomplete-tag.ts";
 
 /** Tags received as autocomplete suggestions. */
 export class AutocompleteTags {
-    static LAST_TAG_REGEX = /(?<= ?)[^ ]+$/;
-
     /** Single incomplete tag to be autocompleted. */
     incompleteTag: string | null;
     /** Resulting autocomplete suggestions. */
