@@ -4,7 +4,7 @@ import { APIURL } from "../../api/url/functions/api-url.ts";
 import { Posts } from "../../post/classes/posts.ts";
 import { AutocompleteTags } from "../../tag/classes/autocomplete-tags.ts";
 import { BooruAbuseError } from "../../../../error/classes/booru-abuse-error.ts";
-import { awaitPromisesOfObject } from "../../../../util/object/functions/await-promises-of-object.ts";
+import { resolvePromisesOfObject } from "../../../../util/object/functions/await-promises-of-object.ts";
 import { fetchJSON, fetchXML } from "../../../../util/rest.ts";
 import type { Authentication } from "../interfaces/authentication.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
@@ -87,7 +87,7 @@ export class Client {
             pid: options.page
         }, true);
 
-        return await awaitPromisesOfObject({
+        return await resolvePromisesOfObject({
             // API REQUEST
             xml: fetchXML(url.xml),
             // API REQUEST
