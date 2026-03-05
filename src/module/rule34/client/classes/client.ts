@@ -8,7 +8,6 @@ import { resolvePromisesOfObject } from "../../../../util/object/functions/await
 import { fetchJSON, fetchXML } from "../../../../util/rest.ts";
 import type { Authentication } from "../interfaces/authentication.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
-import type { APIURLParameterMap } from "../../api/url/interfaces/api-parameter-map.ts";
 
 /** Client to retrieve data from Rule 34 at rule34.xxx. */
 export class Client {
@@ -110,7 +109,8 @@ export class Client {
         const url = this.APIURL("post", {
             tags: query,
             limit: options?.perPage ?? 42,
-            pid: options?.page ?? 0
+            pid: options?.page ?? 0,
+            fields: "tag_info"
         }, true);
 
         return await resolvePromisesOfObject({
