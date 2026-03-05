@@ -1,6 +1,6 @@
 import { BASE_URL } from "../constants/base-url.ts";
 import { createURL } from "../../../../../util/misc/functions/create-url.ts";
-import type { APIURLParameterMap } from "../interfaces/api-parameter-map.ts";
+import type { ApiUrlParameterMap } from "../interfaces/api-parameter-map.ts";
 
 let getURL = (
     s: string,
@@ -15,21 +15,21 @@ let getURL = (
     }
 });
 
-export function APIURL<S extends keyof APIURLParameterMap>(
+export function apiUrl<S extends keyof ApiUrlParameterMap>(
     s: S,
-    params: APIURLParameterMap[S]["params"],
-    ...args: APIURLParameterMap[S]["args"]
+    params: ApiUrlParameterMap[S]["params"],
+    ...args: ApiUrlParameterMap[S]["args"]
 ): string;
-export function APIURL<S extends "post">(
+export function apiUrl<S extends "post">(
     s: S,
-    params: Omit<APIURLParameterMap[S]["params"], "json">,
+    params: Omit<ApiUrlParameterMap[S]["params"], "json">,
     bothFormats: true
 ): { json: string; xml: string; };
 
-export function APIURL<S extends keyof APIURLParameterMap>(
+export function apiUrl<S extends keyof ApiUrlParameterMap>(
     s: S,
-    params: APIURLParameterMap[S]["params"],
-    ...args: APIURLParameterMap[S]["args"]
+    params: ApiUrlParameterMap[S]["params"],
+    ...args: ApiUrlParameterMap[S]["args"]
 ) {
     switch (s) {
         case "autocomplete": return createURL({

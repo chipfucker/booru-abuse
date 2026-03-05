@@ -1,14 +1,14 @@
 import { ClientUser } from "./client-user.ts";
 import { AUTHENTICATION_RESPONSE } from "../constants/authentication-response.ts";
-import { APIURL } from "../../api/url/functions/api-url.ts";
+import { apiUrl } from "../../api/url/functions/api-url.ts";
 import { Posts } from "../../post/classes/posts.ts";
 import { AutocompleteTags } from "../../tag/classes/autocomplete-tags.ts";
 import { BooruAbuseError } from "../../../../error/classes/booru-abuse-error.ts";
 import { awaitPromisesOfObject } from "../../../../util/json/functions/await-promises-of-object.ts";
-import { fetchJSON, fetchXML } from "../../../../util/rest.ts";
+import { fetchJson, fetchXml } from "../../../../util/rest.ts";
 import type { Authentication } from "../interfaces/authentication.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
-import type { APIURLParameterMap } from "../../api/url/interfaces/api-parameter-map.ts";
+import type { ApiUrlParameterMap } from "../../api/url/interfaces/api-parameter-map.ts";
 
 /** Client to retrieve data from Rule 34 at rule34.xxx. */
 export class Client {
@@ -19,11 +19,11 @@ export class Client {
     /** The user tied to the client. */
     self: ClientUser;
 
-    APIURL = <S extends keyof APIURLParameterMap>(
+    apiUrl = <S extends keyof ApiUrlParameterMap>(
         s: S,
-        params: Omit<APIURLParameterMap[S]["params"], keyof Authentication>,
-        ...args: APIURLParameterMap[S]["args"]
-    ) => APIURL(s, { ...params, ...this.#auth }, ...args);
+        params: Omit<ApiUrlParameterMap[S]["params"], keyof Authentication>,
+        ...args: ApiUrlParameterMap[S]["args"]
+    ) => apiUrl(s, { ...params, ...this.#auth }, ...args);
     
     constructor (options: ClientOptions) {
         this.#auth = options.auth;
@@ -36,7 +36,7 @@ export class Client {
      */
     async test(): Promise<this | never> {
         if (!this.authorized) {
-            const response = await fetch(APIURL("post", {
+            const response = await fetch(apiUrl("post", {
                 ...this.#auth,
                 limit: 0,
                 json: 1
@@ -65,7 +65,7 @@ export class Client {
      * @param tag The incomplete tag.
      */
     async autocomplete(tag: string): Promise<AutocompleteTags> {
-        return await fetchJSON(this.APIURL(
+        return await fetchJson(this.apiUrl(
             "autocomplete",
             { q: tag.match(Client.AUTOCOMPLETE_LAST_TAG_REGEX)![0] })
             // ERROR
@@ -80,5 +80,10 @@ export class Client {
     async search(
         query: string,
         options?: { perPage?: number; page?: number; }
-    ): Promise<Posts> {}
+    ): Promise<Posts> {
+        const url = this.apiUrl("post", {
+            tags: query,
+            limit: options.perPage ?? 
+        })
+    }
 }

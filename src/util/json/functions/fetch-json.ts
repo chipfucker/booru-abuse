@@ -1,1 +1,1 @@
-export let fetchJSON = (url: string) => fetch(url).then(r => r.json());
+export let fetchJson = (url: string) => fetch(url).then(r => r.json());

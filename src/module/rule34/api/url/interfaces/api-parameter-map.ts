@@ -1,6 +1,6 @@
 import type { Authentication } from "../../../client/interfaces/authentication.ts";
 
-export interface APIURLParameterMap {
+export interface ApiUrlParameterMap {
     "autocomplete": {
         params: { q: string; };
         args: [];
