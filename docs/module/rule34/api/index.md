@@ -34,10 +34,6 @@ The API also requires that [two additional authentication parameters] follow.
 All request data sent to the API is sent as URL parameters. This includes
 authentication.
 
-> [!TIP]
-> The only exception to requiring authentication for the API is fetching
-> autocomplete results.
-
 Requests must have two extra parameters, those being `api_key` and
 `user_id`. If authentication is invalid, you will always get the following
 response:
