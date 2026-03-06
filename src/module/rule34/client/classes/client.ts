@@ -5,7 +5,7 @@ import { Post } from "../../post/classes/post.ts";
 import { Posts } from "../../post/classes/posts.ts";
 import { AutocompleteTags } from "../../tag/classes/autocomplete-tags.ts";
 import { BooruAbuseError } from "../../../../error/classes/booru-abuse-error.ts";
-import { resolvePromisesOfObject } from "../../../../util/object/functions/await-promises-of-object.ts";
+import { resolvePromisesOfObject } from "../../../../util/object/functions/resolve-promises-of-object.ts";
 import { fetchJson, fetchXml } from "../../../../util/rest.ts";
 import type { Authentication } from "../interfaces/authentication.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
