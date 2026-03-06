@@ -43,21 +43,6 @@ When `json` is set to `1`, an additional, optional parameter becomes available.
     - Empty string: No effect
     - **`tag_info`**: Adds an additional `tag_info` property to each post object
 
-> [!IMPORTANT]
-> The `fields` parameter is entirely undocumented. The only known usability of this
-> parameter is with the value `tag_info`.
->
-> <details><summary>To-do</summary>
->
-> ```markdown
-> # TODO:
->   - Test different values with `fields` parameter:
->     - [x] `comment` and `comments`
->   - Contact Rule 34 developers
-> ```
->
-> </details>
-
 ## Response Format
 
 Data returned in the XML and JSON formats differs slightly, but in common,
