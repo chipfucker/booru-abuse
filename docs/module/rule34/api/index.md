@@ -1,6 +1,6 @@
-# Rule34 API Info
+# Rule 34 API Info
 
-The Rule34 API allows for accessing posts, comments, and tags from rule34.xxx.
+The Rule 34 API allows for accessing posts, comments, and tags from rule34.xxx.
 
 > [!TIP]
 > The only API requests excluded from the following documentation are
@@ -8,7 +8,7 @@ The Rule34 API allows for accessing posts, comments, and tags from rule34.xxx.
 
 ## URL
 
-The base URL for Rule34 API requests looks like the following:
+The base URL for Rule 34 API requests looks like the following:
 
 ```plain text
 https://api.rule34.xxx/?page=dapi&q=index

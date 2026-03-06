@@ -1,4 +1,4 @@
-# Rule34 API Info: Posts
+# Rule 34 API Info: Posts
 
 Retrieving posts from the API requires adding the parameter `s=post` to the base
 API URL.
@@ -32,7 +32,7 @@ All of the following parameters are optional. ("Defaults to _x_" means the retur
   - Resulting data differs; see [XML vs. JSON](#xml-vs-json)
 
 > [!WARNING]
-> The official Rule34 API documentation suggests you may use `cid` as a
+> The official Rule 34 API documentation suggests you may use `cid` as a
 > parameter, which represents the "change id" of a post. However, this does not
 > affect the search whatsoever.
 
@@ -53,7 +53,7 @@ When `json` is set to `1`, an additional, optional parameter becomes available.
 > # TODO:
 >   - Test different values with `fields` parameter:
 >     - [x] `comment` and `comments`
->   - Contact Rule34 developers
+>   - Contact Rule 34 developers
 > ```
 >
 > </details>

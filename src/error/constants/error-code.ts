@@ -48,7 +48,7 @@ const ERROR_CODE_LITERAL = <const> {
         hint: "Be sure you've provided the correct and necessary credentials."
     }),
 
-    //#region Rule34
+    //#region RULE34
     RULE34_UNEXPECTED_AUTH_RESPONSE: (response: string) => ({
         message: "Unexpected response when validating authentication.",
         hint: concat.line(
