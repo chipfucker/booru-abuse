@@ -9,6 +9,8 @@ import { resolvePromisesOfObject } from "../../../../util/object/functions/await
 import { fetchJson, fetchXml } from "../../../../util/rest.ts";
 import type { Authentication } from "../interfaces/authentication.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
+import type { RawPostsJSON } from "../../api/raw/interface/raw-posts-json.ts";
+import type { RawPostsXML } from "../../api/raw/interface/raw-posts-xml.ts";
 
 /** Client to retrieve data from Rule 34 at rule34.xxx. */
 export class Client {
@@ -23,13 +25,17 @@ export class Client {
     /* NOTE: this is going to make me kill myself.
      * 
      * i have spent countless hours trying to type this correctly so that it
-     * acts *equivalently* to APIURL but that credentials aren't required in
+     * acts *equivalently* to apiUrl but that credentials aren't required in
      * params. typescript's (surely fully implemented) overloading feature makes
-     * this IMPOSSIBLE because generic types assume the last-defined overload of
-     * a function, meaning usage of APIURL as a generic type parameter narrows
-     * down to a grand:
+     * this IMPOSSIBLE by using apiUrl directly because generic types assume the
+     * last-defined overload of a function, meaning usage of apiUrl as a generic
+     * type parameter narrows down to a grand:
      * 
      * (s: "post", params: { ...; }, bothFormats: true) => { json; xml; }
+     * 
+     * this makes the only way to achieve what im looking for accessible via the
+     * good ol' ctrl + (c | v). which ive been advised against using as much as
+     * possible. and honestly id rather die than deal with that currently.
      * 
      * thank you microsoft for pushing an expansively typed version of a
      * (notoriously) slow enough and deeply flawed language on the programmer
@@ -116,9 +122,9 @@ export class Client {
 
         return await resolvePromisesOfObject({
             // API REQUEST
-            xml: fetchXml(url.xml),
+            xml: fetchXml(url.xml) as Promise<RawPostsXML>,
             // API REQUEST
-            json: fetchJson(url.json)
+            json: fetchJson(url.json) as Promise<RawPostsJSON>
         }).then(response => Posts.fromRaw(this, query, response));
     }
 
