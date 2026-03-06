@@ -55,7 +55,7 @@ element (`posts`) has attributes specifying data about the search as a whole,
 and each child element is a void `post` element with attributes regarding a
 post's data.
 
-Below is a collapsed example of XML data returned from the API.
+Below is a collapsed example of XML data returned from the API[^1].
 
 <details><summary>XML data example</summary>
 
@@ -70,7 +70,7 @@ Below is a collapsed example of XML data returned from the API.
         sample_width   = "1136"
         sample_height  = "1250"
     
-        preview_url    = "https://api-cdn.rule34.xxx/thumbnails/5109/thumbnail_0966....81e4.jpg"
+        preview_url    = "https://api-cdn.rule34.xxx/thumbnails/5109/thumbnail_0966...81e4.jpg"
         preview_width  = "136"
         preview_height = "150"
     
@@ -93,10 +93,6 @@ Below is a collapsed example of XML data returned from the API.
 </posts>
 ```
 
-> [!NOTE]
-> The example is formatted for better readability, but the actual result is
-> formatted differently.
-
 </details>
 
 Each attribute is explained under [XML vs. JSON].
@@ -109,7 +105,7 @@ post's data.
 If the `fields` parameter is set to `tag_info`, posts will have an additional
 `tag_info` property, whose value is an array of tag objects.
 
-Below is a collapsed example of JSON data returned from the API.
+Below is a collapsed example of JSON data returned from the API[^1].
 
 <details><summary>JSON data example</summary>
 
@@ -154,10 +150,6 @@ Below is a collapsed example of JSON data returned from the API.
   }
 ]
 ```
-
-> [!NOTE]
-> The example is formatted for better readability, but the actual result is
-> formatted differently.
 
 </details>
 
@@ -333,3 +325,5 @@ revealed.
 | `score`          | :white_check_mark: Yes                 | :white_check_mark: Yes                  |
 | `has_comments`   | :white_check_mark: Yes                 | :x: No                                  |
 | `comment_count`  | :x: No                                 | :white_check_mark: Yes                  |
+
+[^1]: The example is formatted for legibility. The actual result should differ.
