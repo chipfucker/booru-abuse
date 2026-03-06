@@ -22,38 +22,21 @@ export class Client {
     self: ClientUser;
     
     // TODO: create gh issue on func overloads as generic type params
-    /* NOTE: this is going to make me kill myself.
+    /* NOTE: this can be typed better.
      * 
-     * i have spent countless hours trying to type this correctly so that it
-     * acts *equivalently* to apiUrl but that credentials aren't required in
-     * params. typescript's (surely fully implemented) overloading feature makes
-     * this IMPOSSIBLE by using apiUrl directly because generic types assume the
-     * last-defined overload of a function, meaning usage of apiUrl as a generic
-     * type parameter narrows down to a grand:
+     * i want to type this, using (typeof) apiUrl itself, so that it acts
+     * *equivalently* to apiUrl but that credentials aren't required in params.
      * 
-     * (s: "post", params: { ...; }, bothFormats: true) => { json; xml; }
+     * typescript's (surely fully implemented) overloading feature makes this
+     * IMPOSSIBLE by using apiUrl directly because generic types assume the last
+     * defined overload of a function parameter, meaning usage of apiUrl as a
+     * generic type parameter narrows down to a grand:
+     * 
+     *     (s: "post", params: { ...; }, bothFormats: true) => { json; xml; }
      * 
      * this makes the only way to achieve what im looking for accessible via the
      * good ol' ctrl + (c | v). which ive been advised against using as much as
      * possible. and honestly id rather die than deal with that currently.
-     * 
-     * thank you microsoft for pushing an expansively typed version of a
-     * (notoriously) slow enough and deeply flawed language on the programmer
-     * market and making my life trying to engage in a hobby a living hell. i
-     * hope each and every one of the marketers of copilot and vibe coding gets
-     * analraped until their excruciated death.
-     * 
-     * to "vibe" "coders" who believe themselves to be legitimate programmers i
-     * say this to you: go learn a hobby or get a job you can actually do
-     * without the slave labour of the Ocean Boiler and Societal Development
-     * Retarder 2000. you are a margin of the reason that windows 11 is
-     * developed the way it is and that it has advertisements engrained into its
-     * software.
-     * 
-     * and to the faggots that participate in the black market/cashgrab scheme
-     * of vibe coding entire websites you get this from me: kill yourself.
-     * preferably as long and painfully as possible, but however you do it, the
-     * world needs you gone.
      */
     apiUrl = (s: string, params: any, ...args: any[]) =>
         <any> (apiUrl as any)(s, { ...params, ...this.#auth }, ...args);
