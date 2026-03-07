@@ -11,7 +11,8 @@ _(including [authentication](./index.md#authentication))_
 
 ## Parameters
 
-All of the following parameters are optional. ("Defaults to _x_" means the returned results are equivalent to specifying the parameter as _x_.)
+All of the following parameters are optional. ("Defaults to _x_" means the
+returned results are equivalent to specifying the parameter as _x_.)
 
 - **`tags`**: The query to filter posts by; works the same as searches on the
   site
@@ -55,7 +56,7 @@ element (`posts`) has attributes specifying data about the search as a whole,
 and each child element is a void `post` element with attributes regarding a
 post's data.
 
-Below is a collapsed example of XML data returned from the API[^1].
+Below is a collapsed example of XML data returned from the API[^formatted].
 
 <details><summary>XML data example</summary>
 
@@ -100,7 +101,7 @@ post's data.
 If the `fields` parameter is set to `tag_info`, posts will have an additional
 `tag_info` property, whose value is an array of tag objects.
 
-Below is a collapsed example of JSON data returned from the API[^1].
+Below is a collapsed example of JSON data returned from the API[^formatted].
 
 <details><summary>JSON data example</summary>
 
@@ -206,7 +207,8 @@ The post objects of each format have mostly mutual properties.
 - **`sample_height`**: The height of the downsampled image in pixels
   - Integer
 
-- **`preview_url`**: The CDN URL of a highly downsampled version of the main file
+- **`preview_url`**: The CDN URL of a highly downsampled version of the main
+  file
 
 #### Metadata
 
@@ -334,4 +336,5 @@ revealed.
 | `has_comments`   | :white_check_mark: Yes               | :x: No                            |
 | `comment_count`  | :x: No                               | :white_check_mark: Yes            |
 
-[^1]: The example is formatted for legibility. The actual result should differ.
+[^formatted]: The example is formatted for legibility. The actual result should
+  differ.
