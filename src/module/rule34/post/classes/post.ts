@@ -2,6 +2,7 @@ import { PostAuthor } from "./post-author.ts";
 import { PostFiles } from "./post-files.ts";
 import { PostRating } from "../enums/post-rating.ts";
 import { PostStatus } from "../enums/post-status.ts";
+import { Comments } from "../../misc/classes/comments.ts";
 import { PostTags } from "../../tag/classes/post-tags.ts";
 import { overlayKeys } from "../../../../util/object/functions/overlay-keys.ts";
 import type { RawPostJson } from "../../api/raw/interface/raw-posts-json.ts";
@@ -28,6 +29,10 @@ export class Post {
 
     score!: number;
     tags!: PostTags;
+
+    async getComments(): Promise<Comments> {
+        return await this.client.getComments(this.id);
+    }
     
     static RAW_RATING = {
         "safe": "Safe",
