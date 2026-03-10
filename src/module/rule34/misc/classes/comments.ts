@@ -1,5 +1,4 @@
 import { Comment } from "./comment.ts";
-import { overlayKeys } from "../../../../util/object/functions/overlay-keys.ts";
 import type { RawComments } from "../../api/raw/interface/raw-comments.ts";
 
 /**
@@ -13,11 +12,11 @@ export class Comments extends Array<Comment> {
         array: Comment[];
     }) {
         super(...object.array);
-        this.postId = object.postId;
+        if (object.postId) this.postId = object.postId;
     }
 
     static fromRaw(raw: RawComments, postId?: number) {
-        const array = raw.children.map(i => Comment.fromRaw(i));
+        const array = raw.children.map((v, i) => Comment.fromRaw(v, i));
         return new this(postId
             ? { postId, array }
             : { array }

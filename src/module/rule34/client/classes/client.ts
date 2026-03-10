@@ -12,6 +12,7 @@ import type { Authentication } from "../interfaces/authentication.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
 import type { RawPostsJson } from "../../api/raw/interface/raw-posts-json.ts";
 import type { RawPostsXml } from "../../api/raw/interface/raw-posts-xml.ts";
+import type { RawComments } from "../../api/raw/interface/raw-comments.ts";
 
 /** Client to retrieve data from Rule 34 at rule34.xxx. */
 export class Client {
@@ -126,6 +127,6 @@ export class Client {
     async getComments(id?: number): Promise<Comments> {
         return await fetchXml(this.apiUrl("comment", {
             post_id: id
-        })).then(i => Comments.fromRaw(i));
+        })).then(i => Comments.fromRaw(i as any as RawComments));
     }
 }
