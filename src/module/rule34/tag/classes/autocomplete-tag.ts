@@ -1,4 +1,3 @@
-import { overlayKeys } from "../../../../util/object/functions/overlay-keys.ts";
 import type { BaseTag } from "../interfaces/base-tag.ts";
 import type { RawAutocompleteTags } from "../../api/raw/interface/raw-autocomplete-tag.ts";
 
@@ -6,8 +5,8 @@ import type { RawAutocompleteTags } from "../../api/raw/interface/raw-autocomple
 export class AutocompleteTag implements Pick<BaseTag, "name" | "count"> {
     protected raw: RawAutocompleteTags[number];
 
-    name!: string;
-    count!: number;
+    name: string;
+    count: number;
 
     isReal(): boolean {
         return !AutocompleteTag.RAW_INVALID_REGEX.test(this.raw.value);
@@ -20,7 +19,8 @@ export class AutocompleteTag implements Pick<BaseTag, "name" | "count"> {
         object: { name: string; count: number; },
         raw: RawAutocompleteTags[number]
     ) {
-        overlayKeys(this, object);
+        this.name = object.name;
+        this.count = object.count;
         this.raw = raw;
     }
 

@@ -1,16 +1,15 @@
 import { CommentAuthor } from "./comment-author.ts";
-import { overlayKeys } from "../../../../util/object/functions/overlay-keys.ts";
 import type { RawComment } from "../../api/raw/interface/raw-comments.ts";
 
 /**
  * A comment under a post.
  */
 export class Comment {
-    postId!: number;
-    id!: number;
-    author!: CommentAuthor;
-    body!: string;
-    index!: number;
+    postId: number;
+    id: number;
+    author: CommentAuthor;
+    body: string;
+    index: number;
 
     constructor (object: {
         postId: number;
@@ -19,7 +18,11 @@ export class Comment {
         body: string;
         index: number;
     }) {
-        overlayKeys(this, object);
+        this.postId = object.postId;
+        this.id = object.id;
+        this.author = object.author;
+        this.body = object.body;
+        this.index = object.index;
     }
 
     static fromRaw(raw: RawComment, index: number) {

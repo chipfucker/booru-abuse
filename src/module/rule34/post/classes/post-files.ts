@@ -1,18 +1,18 @@
 import { PostFileType } from "../enums/post-file-type.ts";
-import { overlayKeys } from "../../../../util/object/functions/overlay-keys.ts";
 import type { RawPostJson } from "../../api/raw/interface/raw-posts-json.ts";
 import type { RawPostXml } from "../../api/raw/interface/raw-posts-xml.ts";
 
 /** A set of the files of a post. */
 export class PostFile {
-    url!: string;
-    size!: [ width: number, height: number ];
+    url: string;
+    size: [ width: number, height: number ];
     
     constructor (object: {
         url: string;
         size: [ width: number, height: number ];
     }) {
-        overlayKeys(this, object);
+        this.url = object.url;
+        this.size = object.size;
     }
 }
 

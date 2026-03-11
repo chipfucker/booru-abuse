@@ -1,5 +1,4 @@
 import { Post } from "./post.ts";
-import { overlayKeys } from "../../../../util/object/functions/overlay-keys.ts";
 import type { Client } from "../../client/classes/client.ts";
 import type { RawPostJson, RawPostsJson } from "../../api/raw/interface/raw-posts-json.ts";
 import type { RawPostsXml } from "../../api/raw/interface/raw-posts-xml.ts";
@@ -7,11 +6,11 @@ import type { RawPostsXml } from "../../api/raw/interface/raw-posts-xml.ts";
 /** An array of posts. */
 export class Posts extends Array<Post> {
     /** Query used to fetch the following posts. */
-    query!: string;
+    query: string;
     /** Amount of posts that can be found with the query. */
-    count!: number;
+    count: number;
     /** The offset of the returned results. */
-    offset!: number;
+    offset: number;
 
     // TODO: clean this bullshit up what the hell
     constructor (array: Post[], object: {
@@ -20,7 +19,9 @@ export class Posts extends Array<Post> {
         offset: number;
     }) {
         super(...array);
-        overlayKeys(this, object);
+        this.query = object.query;
+        this.count = object.count;
+        this.offset = object.offset;
     }
 
     static fromRaw(client: Client, query: string, raw: {

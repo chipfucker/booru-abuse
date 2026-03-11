@@ -4,31 +4,30 @@ import { PostRating } from "../enums/post-rating.ts";
 import { PostStatus } from "../enums/post-status.ts";
 import { Comments } from "../../misc/classes/comments.ts";
 import { PostTags } from "../../tag/classes/post-tags.ts";
-import { overlayKeys } from "../../../../util/object/functions/overlay-keys.ts";
 import type { RawPostJson } from "../../api/raw/interface/raw-posts-json.ts";
 import type { RawPostXml } from "../../api/raw/interface/raw-posts-xml.ts";
 import type { Client } from "../../client/classes/client.ts";
 
 /** A post. */
 export class Post {
-    protected client!: Client;
-    protected hasChildren!: boolean;
-    protected commentCount!: boolean;
+    protected client: Client;
+    protected hasChildren: boolean;
+    protected commentCount: boolean;
 
-    file!: PostFiles;
+    file: PostFiles;
 
-    id!: number;
-    parent!: number | null;
-    source!: string;
-    rating!: PostRating;
-    author!: PostAuthor;
+    id: number;
+    parent: number | null;
+    source: string;
+    rating: PostRating;
+    author: PostAuthor;
 
-    created!: Date;
-    modified!: Date;
-    status!: PostStatus;
+    created: Date;
+    modified: Date;
+    status: PostStatus;
 
-    score!: number;
-    tags!: PostTags;
+    score: number;
+    tags: PostTags;
 
     async getComments(): Promise<Comments> {
         return await this.client.getComments(this.id);
@@ -65,7 +64,20 @@ export class Post {
         score: number;
         tags: PostTags;
     }) {
-        overlayKeys(this, object);
+        this.client = object.client;
+        this.hasChildren = object.hasChildren;
+        this.commentCount = object.commentCount;
+        this.file = object.file;
+        this.id = object.id;
+        this.parent = object.parent;
+        this.source = object.source;
+        this.rating = object.rating;
+        this.author = object.author;
+        this.created = object.created;
+        this.modified = object.modified;
+        this.status = object.status;
+        this.score = object.score;
+        this.tags = object.tags;
     }
 
     static fromRaw(
