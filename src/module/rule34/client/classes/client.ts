@@ -4,12 +4,13 @@ import { apiUrl } from "../../api/url/functions/api-url.ts";
 import { Comments } from "../../misc/classes/comments.ts";
 import { Post } from "../../post/classes/post.ts";
 import { Search } from "../../post/classes/search.ts";
-import { AutocompleteTags } from "../../tag/classes/autocomplete-tags.ts";
+import { AutocompleteTag } from "../../tag/classes/autocomplete-tag.ts";
 import { BooruAbuseError } from "../../../../error/classes/booru-abuse-error.ts";
 import { resolvePromisesOfObject } from "../../../../util/object/functions/resolve-promises-of-object.ts";
 import { fetchJson, fetchXml } from "../../../../util/rest.ts";
 import type { Authentication } from "../interfaces/authentication.ts";
 import type { ClientOptions } from "../interfaces/client-options.ts";
+import type { RawAutocompleteTags } from "../../api/raw/interface/raw-autocomplete-tag.ts";
 import type { RawPostsJson } from "../../api/raw/interface/raw-posts-json.ts";
 import type { RawPostsXml } from "../../api/raw/interface/raw-posts-xml.ts";
 import type { RawComments } from "../../api/raw/interface/raw-comments.ts";
@@ -82,19 +83,24 @@ export class Client {
 
         return this;
     }
-    
-    static AUTOCOMPLETE_LAST_TAG_REGEX = /(?<= ?)[^ ]+$/;
+
+    static MALFORMED_AUTOCOMPLETE_REGEX = /\\r\\n/;
 
     /**
      * Returns autocomplete suggestions for an incomplete tag.
      */
-    async autocomplete(tag: string): Promise<AutocompleteTags> {
+    async autocomplete(tag: string): Promise<AutocompleteTag[]> {
         return await fetchJson(this.apiUrl(
             "autocomplete",
             {
                 q: tag
             }
-        )).then(raw => AutocompleteTags.fromRaw(raw, tag));
+        )).then((raw: RawAutocompleteTags) => {
+            const array = raw.map(i => AutocompleteTag.fromRaw(i));
+            return array.slice(0, array.findIndex(
+                i => !Client.MALFORMED_AUTOCOMPLETE_REGEX.test(i)
+            ));
+        });
     }
 
     /**

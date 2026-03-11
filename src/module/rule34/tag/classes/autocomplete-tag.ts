@@ -6,14 +6,6 @@ export class AutocompleteTag implements Pick<BaseTag, "name" | "count"> {
     name: string;
     count: number;
 
-    /** Returns whether this tag is legitimate and not malformed or fake. */
-    isReal(): boolean {
-        return !AutocompleteTag.RAW_INVALID_REGEX.test(this.name);
-    }
-
-    static RAW_INVALID_REGEX = /\\r\\n/;
-    static RAW_LABEL_COUNT_REGEX = /(?<=\()\d+(?=\)$)/;
-
     constructor (object: {
         name: string;
         count: number;
@@ -21,6 +13,8 @@ export class AutocompleteTag implements Pick<BaseTag, "name" | "count"> {
         this.name = object.name;
         this.count = object.count;
     }
+
+    static RAW_COUNT_REGEX = /(?<=\()\d+(?=\)$)/;
 
     static fromRaw(raw: RawAutocompleteTags[number]) {
         return new this({
