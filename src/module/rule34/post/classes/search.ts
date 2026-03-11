@@ -4,7 +4,7 @@ import type { RawPostJson, RawPostsJson } from "../../api/raw/interface/raw-post
 import type { RawPostsXml } from "../../api/raw/interface/raw-posts-xml.ts";
 
 /** An array of posts. */
-export class Posts extends Array<Post> {
+export class Search extends Array<Post> {
     /** Query used to fetch the following posts. */
     query: string;
     /** Amount of posts that can be found with the query. */

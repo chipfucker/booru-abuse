@@ -3,7 +3,7 @@ import { AUTHENTICATION_RESPONSE } from "../constants/authentication-response.ts
 import { apiUrl } from "../../api/url/functions/api-url.ts";
 import { Comments } from "../../misc/classes/comments.ts";
 import { Post } from "../../post/classes/post.ts";
-import { Posts } from "../../post/classes/posts.ts";
+import { Search } from "../../post/classes/search.ts";
 import { AutocompleteTags } from "../../tag/classes/autocomplete-tags.ts";
 import { BooruAbuseError } from "../../../../error/classes/booru-abuse-error.ts";
 import { resolvePromisesOfObject } from "../../../../util/object/functions/resolve-promises-of-object.ts";
@@ -102,7 +102,7 @@ export class Client {
     async search(
         query: string,
         options?: { perPage?: number; page?: number; }
-    ): Promise<Posts> {
+    ): Promise<Search> {
         const url = this.apiUrl("post", {
             tags: query,
             limit: options?.perPage ?? 42,
@@ -115,7 +115,7 @@ export class Client {
             xml: fetchXml(url.xml) as Promise<RawPostsXml>,
             // API REQUEST
             json: fetchJson(url.json) as Promise<RawPostsJson>
-        }).then(response => Posts.fromRaw(this, query, response));
+        }).then(response => Search.fromRaw(this, query, response));
     }
 
     /**
