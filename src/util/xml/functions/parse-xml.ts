@@ -15,7 +15,11 @@ export function parseXml(document: string) {
     
     function setChildren(node: typeof xml) {
         (<any> node.children) = Array.from(node.childNodes)
-            .filter((element: any) => element.constructor.name === "Element");
+            .filter((element: any) => window
+                // TODO
+                ? element.nodeType === Node.ELEMENT_NODE
+                : element.constructor.name === "Element"
+            );
         (<any> node.children as Array<typeof xml>)
             .forEach(setChildren);
     }
